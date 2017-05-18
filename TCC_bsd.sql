@@ -14,8 +14,8 @@ nome varchar,
 socket integer,
 portas_usb integer,
 descricao varchar,
-computador integer, 
-FOREIGN KEY (computador) REFERENTES computador(id_computador)
+computador integer,  
+FOREIGN KEY (computador) REFERENCES computador(id_computador)
 );
 CREATE TABLE disco_rigido (
 id_disco_rigido serial PRIMARY KEY,
@@ -23,8 +23,8 @@ nome varchar,
 v_cache integer,
 rpm integer,
 descricao varchar,
-computador integer, 
-FOREIGN KEY (computador) REFERENTES computador(id_computador)
+computador integer,  
+FOREIGN KEY (computador) REFERENCES computador(id_computador)
 );
 
 CREATE TABLE processador (
@@ -33,8 +33,8 @@ nome varchar,
 frequencia integer,
 socket varchar,
 descricao varchar,
-computador integer, 
-FOREIGN KEY (computador) REFERENTES computador(id_computador)
+computador integer,  
+FOREIGN KEY (computador) REFERENCES computador(id_computador)
 );
 
 CREATE TABLE placa_video (
@@ -44,15 +44,16 @@ frequencia integer,
 memoria integer,
 barramento varchar,
 descricao varchar,
-computador integer, 
-FOREIGN KEY (computador) REFERENTES computador(id_computador)
+computador integer,  
+FOREIGN KEY (computador) REFERENCES computador(id_computador)
 );
 
 CREATE TABLE barramento (
 id_barramento serial PRIMARY KEY,
 nome varchar,
 descricao varchar,
-computador integer
+computador integer, 
+FOREIGN KEY (computador) REFERENCES computador(id_computador)
 );
 
 CREATE TABLE memoria (
@@ -61,7 +62,7 @@ nome varchar,
 frequencia integer,
 descricao varchar,
 computador integer, 
-FOREIGN KEY (computador) REFERENTES computador(id_computador)
+FOREIGN KEY (computador) REFERENCES computador(id_computador)
 );
 
 CREATE TABLE fonte (
@@ -69,8 +70,8 @@ id_fonte serial PRIMARY KEY,
 nome varchar,
 potencia integer,
 descricao varchar,
-computador integer, 
-FOREIGN KEY (computador) REFERENTES computador(id_computador)
+computador integer,  
+FOREIGN KEY (computador) REFERENCES computador(id_computador)
 );
 
 CREATE TABLE barramento_placamae (
