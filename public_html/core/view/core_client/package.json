@@ -1,0 +1,17 @@
+{
+  "name": "core_client",
+  "version": "1.0.0",
+  "title": "Core Cliente do Enyalius",
+  "homepage": "http://gitlab.com/enyalius/core",
+  "license": "FREE-BSD",
+  "author":{"name":"Marcio Bigolin","email":"marcio.bigolinn@gmail.com"},
+  "repository":{"type":"git","url":"https://gitlab.com/enyalius/core/tree/master/view/core_client"},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-sass": "^0.9.2",
+    "grunt-contrib-uglify": "^0.11.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}

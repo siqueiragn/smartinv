@@ -1,0 +1,9 @@
+Versão 1 - Migração da ideia do SIA Base.
+ - Códigos totalmente reescritos
+ - Factory - escrito para poder usar variáveis list.
+ - Autoloader - Carrega arquivos independente de mapa.
+ - Acesso a banco de dados usa prepared statement e foi reescrito conforme recomenda o manual do PDO.
+ - Sistema de utilização de CDN para caregar libs
+ 
+Versão 2 - Adicionada a core_cliente dentro da pasta view 
+ - necessário usar o grunt para poder compilar e gerar os javaScripts corretos.

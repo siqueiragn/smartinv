@@ -1,0 +1,64 @@
+#!/bin/bash
+#
+# Versão 1.0.0: Pede quais funcionalidades quer fazer e adicionado texto de ajuda
+#
+# Marcio Bigolin, Setembro de 2014
+#
+MENSAGEM_USO="
+Uso: $(basename "$0") [-h | -V | -i ]
+
+
+  -h		Mostra esta tela de ajuda e sai.
+  -i		Instala um projeto recem clonado.
+  --make_tools  Cria no projeto corrente a funcionalidade de tools. 
+"
+function init(){
+    cd ..
+
+    git submodule init
+    git submodule update
+    mkdir z_data
+    mkdir z_data/templates_c
+    chmod 777 z_data
+    composer update
+    
+}
+
+#function make_tools(){
+#}
+
+# Tratamento das opções de linha de comando
+while test -n "$1"
+do
+case "$1" in
+	-h | --help)
+		echo "$MENSAGEM_USO"
+		exit 0
+	;;
+
+	-v | -V | --version)
+		echo -n $(basename "$0")
+		# Extrai a versão diretamente dos cabeçalhos do programa
+		grep '^# Versão ' "$0" | tail -1 | cut -d : -f 1 | tr -d \#
+		exit 0
+	;;
+
+	-i | -I | --install)
+                init
+    		exit 0
+	;;
+
+
+	*)
+		
+	  if test -n "$1"
+	    then
+             echo Opção inválida: $1
+	     exit 1
+	    fi
+	;;
+esac
+	# Opção $1 já processada, a fila deve andar
+	shift
+done
+

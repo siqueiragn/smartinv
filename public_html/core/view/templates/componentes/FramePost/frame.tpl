@@ -1,0 +1,1 @@
+<iframe name="iframe{$_frame->getID()}" id="iframe{$_frame->getID()}"  src="{$_frame->getUrl()}"></iframe>
