@@ -1,5 +1,5 @@
 <?php
-require 'db/DB.class.php';
+require '../php/db/DB.class.php';
 $db = new DB();
 ?>
 
