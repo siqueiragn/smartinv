@@ -29,10 +29,6 @@ body {
 }
 #lnk {
 	color: black;
-}
-
-#lnk:hover {
 	text-decoration: none;
-	color: blue;
 }
 

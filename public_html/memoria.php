@@ -29,7 +29,10 @@ if(isset($del)){
     </nav>
     <div class="jumbotron">
       <div class="container">
-      <h3> <a href="#" id="lnk"> Componentes </a> > <a href="#" id="lnk"> Memorias </a> >  <a href="#" id="lnk"> <span class="glyphicon glyphicon-plus" </span> </a> </h3>
+      <h3 class="navbar-left"> <a href="#" id="lnk"> Componentes </a> > <a href="#" id="lnk"> Memorias </a> >  <a href="#" id="lnk"> <span class="glyphicon glyphicon-plus" </span> </a> </h3>
+      <div class="navbar-right">
+      <input type="text" name="searchbox"> <a href<span class="glyphicon glyphicon-search"></span></a>
+      </div>
       </div>
     </div>
 
@@ -49,9 +52,9 @@ foreach ($result as $element) {
 ?>
 <tr>
   <td class="active"><?= $element['id_memoria']?></td>
-  <td class="active"><?= $element['nome']?></td>
-  <td class="active"><?= $element['frequencia']?></td>
-  <td class="active"><?= $element['descricao']?></td>
+  <td contenteditable="true" class="active"><?= $element['nome']?></td>
+  <td contenteditable="true" class="active"><?= $element['frequencia']?></td>
+  <td contenteditable="true" class="active"><?= $element['descricao']?></td>
   <td class="active"><a id="lnk" href="#"><span class="glyphicon glyphicon-pencil wrapper"></span></a></td> 
   <td class="active"><a id="lnk" onclick="window.confirm('Confirmar a exclusão final?')" href="?del=<?=$element['id_memoria']?>"><span class="glyphicon glyphicon-remove wrapper"></span></a></td>
 </tr>

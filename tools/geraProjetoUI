@@ -1,0 +1,302 @@
+#!/bin/bash
+
+
+##Ver http://linuxgazette.net/101/sunil.html
+DIALOG=${DIALOG=dialog}
+PROGRAM_ROOT=`pwd`
+
+#função que verifica se um programa existe
+_programExists(){
+    _PROGRAMA=$1
+    if [ ${#_PROGRAMA} -gt 2 ]
+    then
+        which ${_PROGRAMA} >> /dev/null
+        return $?
+    else
+        return 2
+    fi
+}
+
+
+# Função que realiza um teste para verificar se o usuário escolhe sim ou não
+_ask() {
+    $DIALOG --backtitle "$2" --yesno "$1"  10 0
+    if [ $? = 0 ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+sair(){
+    $DIALOG                                          \
+   --title 'Você tem certeza que deseja sair?'                              \
+   --yesno '\nSe você confirmar a saida o conteúdo da pasta será apagado\n\n'    \
+   0 0
+#cuidar com esse comando pode sacanear se entrar um valor indevido aheuahuea
+   rm -rf $NOVODIR
+   exit;
+}
+
+show(){
+   $DIALOG --backtitle '== Geração de Projeto ==' --msgbox "$1" 9 200   	
+}
+
+clear
+
+#verificar qual interface gráfica usar. A principio o Gdialog esta disponivel
+#mas pelo visto não funciona exatamente igual ao dailog
+    if gdialog 2>/dev/null; then
+        echo 'Loading...'
+    else
+	echo 'Interface gráfica indisponível.'
+	if dialog 2>/dev/null; then
+            echo 'Dialog disponível vou usar a interface simples'	   
+        else
+            sudo apt-get install dialog
+        fi
+ 	DIALOG=${DIALOG=dialog}
+    fi
+clear  
+
+NOVODIR=$( $DIALOG  --backtitle '== Geração de Projeto ==' --stdout --inputbox 'Digite o diretorio para onde sera feita a copia dos dados' 0 200 "$HOME/Dropbox/SITES/"  )
+
+if [ -d $NOVODIR ]; then
+    show 'Diretório existe pressione enter para prosseguir'
+else
+    if _ask "Diretório não existe! Criar um diretório?" "Configurando o Diretório";  then
+        mkdir $NOVODIR
+    else
+        show  'Não posso prosseguir infelizmente... =[' 
+        sair
+    fi
+fi
+
+if [ -d $NOVODIR ]; 
+   then
+
+	cd $NOVODIR
+
+	echo ""
+	echo "Criando diretórios"
+	mkdir www
+	mkdir www/css
+	mkdir www/js
+	mkdir www/imagens
+        mkdir www/media
+        mkdir www/media/public
+
+	mkdir app
+	mkdir confs
+	mkdir z_data
+	mkdir z_data/templates_c
+	mkdir z_data/cache
+        mkdir app/view
+        mkdir app/view/template
+        mkdir doc
+
+        PROJETO=$( dialog  --backtitle '== Geração de Projeto =>  Criando os arquivos de configuração ==' --stdout  \
+                                --inputbox 'Digite o nome do sistema/projeto' 8 100  )
+
+        if _ask "Usar VirtualHost";  then
+            HOST=$PROJETO
+            VIRTUALHOST="1"
+            ALIAS=""
+        else
+            VIRTUALHOST="0"
+            ALIAS=$PROJETO
+	fi
+
+#pedindo dados de conexao com o banco
+        SERVER_BANCO=$( dialog --stdout --inputbox 'Digite o servidor de banco de dados padrão' 8 100 "webacademico.canoas.ifrs.edu.br" )
+	BANCO=$( dialog --stdout --inputbox 'Digite o nome do banco de dados padrão' 0 100 "$PROJETO" )
+	USUARIOBANCO=$( dialog --stdout --inputbox 'Digite o usuário do banco de dados padrão' 0 100 "$PROJETO" )
+	SENHABANCO=$( dialog --stdout --inputbox 'Digite a senha do banco de dados padrão' 0 100 "" )
+  
+#Configurando o GIT.
+  if _ask "Criar um repositório GIT?";  then 
+    GIT=1       
+  else
+    GIT=0
+  fi
+
+#  echo "Iniciando cópia de arquivos"
+#        USUARIOGIT=$( dialog --stdout --inputbox ' Digite o usuário do GITLAB ' 0 100  )
+#        SENHAGIT=$( dialog --stdout --passwordbox ' Digite a senha do GITLAB ' 0 100 )
+	show  "Os próximos passos dependem: \n de você ser um super usuário; \n e da conexão com a internet \n \n Digite a senha de super usuário quando solicitado e aguarde o bip de encerramento." 
+clear
+echo "Vou solicitar a senha! \n\n"    
+sudo ls
+
+ 
+  _programExists git && echo 'O GIT está instalado no seu sistema' || sudo apt-get update && sudo apt-get install git git-man -y
+
+  if [$GIT eq 1]; then #git instalado vamos clonar os projetos
+    git init
+    git submodule add https://gitlab.com/enyalius/core.git         
+  else
+    git clone https://gitlab.com/enyalius/core.git 
+  fi
+
+    git clone https://gitlab.com/enyalius/base.git /tmp/gerador.adicionais
+    cp -r /tmp/gerador.adicionais/www .
+    cp -r /tmp/gerador.adicionais/app .    
+
+    echo 'Baixando as dependências'
+    sudo apt-get install -y apache2 libapache2-mod-php php-mbstring php-pgsql php-mcrypt php-ldap php-gd php-mysql php-json -y 
+    _programExists composer && echo 'O Composer está instalado no seu sistema' || sudo apt-get install composer -y
+  
+
+#Criando index.php
+	echo "<?php
+\$contentType = strpos(\$_SERVER['HTTP_ACCEPT'], 'application/html') === false ? 'text/html' : 'application/html';
+header('Content-Type: ' . \$contentType . '; charset=utf-8');
+session_start();
+require_once('../confs/config.php');
+require_once(CORE . 'controller/errorTracker/controle_erros.php');
+
+require_once(CORE. 'Factory.class.php');
+    
+\$fabricaAcao = new Factory();
+\$fabricaAcao->start();
+?>" > $NOVODIR/www/index.php
+
+echo ''
+echo "=== Grunt tasks!!! ===="
+_programExists npm && echo 'O node está instalado em seu computador' || sudo apt-get install npm -y 
+echo '';
+_programExists ruby && echo 'O ruby está instalado em seu computador' || sudo apt-get install ruby -y
+echo '';
+sudo ln -s /usr/local/lib/node/bin/node /usr/local/bin/node
+_programExists grunt && echo 'O grunt está instalado em seu computador' || sudo npm install -g grunt-cli -y
+echo '';
+_programExists gruntStart && echo 'O gruntStart está instalado em seu computador' || sudo cp "$PROGRAM_ROOT/extras/gruntStart" /bin/gruntStart
+
+
+
+#Criando config.php 
+
+cd $NOVODIR/core/view/core_client/
+
+sudo npm install
+grunt i
+
+senha=`date | md5sum`
+
+        echo "<?php
+/**
+ * Arquivo com as configurações do sistema nesse arquivo fica as constantes
+ * responsáveis pelo funcionamento correto do sistema. Configurações de usuário
+ * e senha de Banco de dados por padrão não ficam nesse arquivo.
+ *
+ * @author Marcio Bigolin <marcio.bigolinn@gmail.com>
+ */
+
+\$base =  str_replace('confs/config.php','',__FILE__);
+
+
+//Constante que define o caminho onde fica o diretorio dos módulos do sistema
+define('ROOT', \$base. 'app/');
+
+//Constante que define o caminho onde fica o framework servidor do Enyalius
+define('CORE', \$base . 'core/');
+
+//Constante que define onde ficará os templates do sistema
+define('TEMPLATES', ROOT . 'view/templates/');
+
+//Constante para o Framework Smarty utilizar como cache, e outros frameworks usarem
+//para armazenar arquivos de cache.
+define('CACHE', \$base . 'z_data/');
+
+//Constante para o diretorio de logs
+define('LOGS', CACHE . 'logs');
+
+//Constante para a definição se o sistema esta em produção ou teste
+define('DEBUG', true);
+
+//define a chave de critpografia
+define('LOGIN_CHAVE', '$senha');
+
+//Configurações de hora
+date_default_timezone_set('America/Sao_Paulo');
+
+//Configuração de formato
+setlocale(LC_ALL, 'pt_BR');
+
+//Demais configurações
+require __DIR__ . '/conf_bd.php';
+require __DIR__ . '/conf_mail.php';
+" > $NOVODIR/confs/config.php
+
+        echo "<?php
+
+/**
+ * Arquivo que apresenta as configurações de banco de dados.
+ *
+ * @author Marcio Bigolin <marcio.bigolinn@gmail.com>
+ * @version 1.0
+ * @package
+ */
+
+//Constante que define o servidor
+define('DB_SERVER', '$SERVER_BANCO');
+
+//Constante que define a porta do banco de dados
+define('DB_PORT', '5433');
+
+//Constante que define o usuário do banco de dados
+define('DB_USER', '$USUARIOBANCO');
+
+//Constante que define o usuário do banco de dados
+define('DB_PASSWORD', '$SENHABANCO');
+
+//Constante que define o usuário do banco de dados
+define('DB_NAME', '$BANCO');
+
+define('DB_TYPE', 'pgsql');
+
+
+" > $NOVODIR/confs/conf_bd.php
+
+        echo "<?php
+
+/**
+ * Arquivo que apresenta as configurações para o envio de e-mails .
+ *
+ * @author Marcio Bigolin <marcio.bigolinn@gmail.com>
+ * @version 1.0
+ * @package
+ */
+
+define('MAIL_SERVER', 'smtpi.kinghost.net');
+define('MAIL_PORT', '587');
+define('MAIL_USER', '$USUARIOBANCO@$BANCO');
+define('MAIL_PASS', '$SENHABANCO');
+" > $NOVODIR/confs/conf_mail.php
+
+    cd "$NOVODIR"
+
+    composer require smarty/smarty
+
+    #ações que precisa do sudo
+    sudo chmod 777 $NOVODIR/z_data/templates_c
+    sudo chmod 777 $NOVODIR/www/media/public
+    sudo a2enmod rewrite
+    echo "trocando para o diretório $PROGRAM_ROOT"
+    cd "$PROGRAM_ROOT"
+    ./geraNetBeansProj $NOVODIR $PROJETO
+    if [ "$VIRTUALHOST"="1" ]; then
+        ./geraVirtualSite $NOVODIR $PROJETO
+    fi
+    
+
+    aplay "$PROGRAM_ROOT/extras/ping.wav"
+    clear 
+    
+    dialog  --backtitle '== Geração de Projeto ==' --msgbox  'PROJETO GERADO COM SUCESSO \\0//' 0 200
+else
+    show "Não foi possível criar o diretório $NOVODIR, \n - verifique permissões e se o caminho existe"
+    exit
+fi
+#limpando dados temporarios
+rm -rf /tmp/gerador.adicionais

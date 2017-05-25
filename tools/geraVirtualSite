@@ -1,0 +1,50 @@
+#!/bin/bash
+
+clear
+$HOME = `pwd`
+
+if [ -z "$1" -a -z "$2" ]; #checa se foi passado 2 argumentos
+  then
+  
+    DIRETORIO=$( dialog  --backtitle '== Geração de Virtual Host ==' --stdout --inputbox "Digite o diretorio do site \nCuidado com os espaços use aspas duplas caso isso ocorra  " 0 200 "$HOME"  )
+    SITE=$( dialog  --backtitle '== Geração de Virtual Host ==' --stdout --inputbox 'Digite o nome do site (Nao pode conter espacos e acentos e nem .local)' 0 200 ""  )
+
+else
+    DIRETORIO=$1
+    SITE=$2
+fi
+
+
+sudo ln -s $DIRETORIO /var/www/$SITE
+sudo echo "<VirtualHost *:80>
+    ServerName $SITE.local
+    DocumentRoot /var/www/$SITE/www
+
+    # Other directives here
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride None
+    </Directory>
+    <Directory /var/www/$SITE/www>
+	Require all granted        
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride all
+        Order allow,deny
+        allow from all
+    </Directory>
+</VirtualHost>" > /tmp/cool_$SITE
+
+sudo cp /tmp/cool_$SITE /etc/apache2/sites-enabled/$SITE.conf 
+
+sudo cp /etc/hosts /tmp
+sudo chmod 777 /tmp/hosts
+
+sudo echo "127.0.1.1	$SITE.local" >> /tmp/hosts
+
+sudo cp /tmp/hosts /etc/hosts
+clear
+sudo service apache2 restart
+
+echo -e "----- OK Tudo Feito.----- "
+echo -e "Para acessar use $SITE.local "
+echo -e "----- [ATENCAO] Lembre de alterar o navegador para ignorar o proxy para esse virtual host-----"

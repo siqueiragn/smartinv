@@ -1,0 +1,74 @@
+Changelog Enyalius
+1.0
+
+
+Changelog Para o gerador de crud do SIABASE
+#########
+1.1.3 27/10/2014
+ - Configurado para aceitar autores diferentes
+
+#######
+1.1.4 03/11/2014
+ - Adicionado o protótipo de geração de arquivos através de classes.
+
+#######
+1.2.0 06/11/2014
+ - Adicionado função getLista no modelo (retorna uma lista de objetos do tipo DTO)
+ - Adicionada função setDados no modelo (permite setar os dados em um único método, 
+   facilitando adicionar ou remover propriedades, e diminuindo o tamanho dos arquivos de modelo).
+
+#######
+1.2.1 13/11/2014
+ - Removido temporiamente a geracao de Data Transfer
+ - Movido a geração de Data Transfer para modelo Orientado a Objetos
+ - Removido algumas funções que tornaram-se desnecessárias
+
+#######
+1.2.2 13/11/2014
+ - Geração do controlador através de classes.
+ - Permite a geração de apenas algumas tabelas informadas em nome dos DTOS 
+
+####### 
+1.3.1 21/06/2105
+  - Migrado a geração de templates e do modelo para classes. 
+  - Corrigido alguns bugs para trabalhar com o controle de erro ativo.
+  - Migrado algumas funções para dentro do objeto.
+  - Removido os comandos renderizar do controlador (desnecessários a partir dos destrutores no visualizador)
+  - Modificado o método construtor para __construct na classe DTO
+  - Adicionado interface mais intuitiva com opção para internacionalização
+  - Assinatura de versão nos templates
+
+
+####### [MAJOR VERSION]
+2.0.0 30/06/2105
+  - Geração de templates com internacionalização completa.
+  - Geração de formulários com padrões do HTML 5 
+  - Adicionado a possibilidade de configurar campos que devem ser ignorados pelo gerador
+    tanto na consulta como na inserção de dados. 
+  - Adicionado arquivo INI dados que possui as informações padrões do gerador
+  - Passado a geração dos arquivos para classes com as responsabilidades especificas
+
+######
+2.0.1
+  - BUG com tabelas que possuia esquemas
+  - BUG em windows por causa do comentários dentro do SQL
+  - BUG de gerar duas entradas em relação n:n
+  - Melhoras no GerarModelo, diminuindo a dependencia de funções genéricas
+  - Melhorias na Interface para ficar mais intuitiva quando está gerando banco ou não
+  - BUG com esquemas no gerarSIA
+  - Removido macrosistema (inutil no SIA 2.0)
+
+######
+2.0.2 21/07/2105
+  - Removido definitivamente macrosistemas e funções geraCampoTabela e geraNomeCampo 
+  - BUG de campos replicados corrigido
+#######
+2.0.3 
+  - Bug que não gerava as pastas de acordo com o esquema (pré-definido)
+  - Adicionada funcionalidade de valor default
+2.0.4 
+  - arrumado a documentação e adicionado o método getModulo (na classe ArquivoGerador) 
+que permite verificar se existe um módulo associado ao esquema e caso não haja criar um novo módulo.
+  - Arrumado alguns detalhes de documentação em ControleGerador
+2.1.0 
+  - Modificado para suportar tipagem correta de dados geográficos no Postigis 2.0 >
