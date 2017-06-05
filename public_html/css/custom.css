@@ -32,3 +32,10 @@ body {
 	text-decoration: none;
 }
 
+#lnk:hover {
+	color: blue;
+}
+
+.spacerform {
+	 padding: 10px;	
+}

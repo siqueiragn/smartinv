@@ -1,90 +1,51 @@
+<?php
+require '../php/db/DB.class.php';
+//$db = new DB();
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>Jumbotron Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="../css/custom.css" rel="stylesheet">
-
+    <title>SmartInv</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  	<link href="/css/custom.css" rel="stylesheet">
+  	<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
   </head>
 
   <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        
-        <div class="navbar-header">
-        <a id="logotitle"  href="#"> SmartInv </a>
-        </div>        
-<ul class="nav nav-tabs navbar-right" style="border: none; padding-top: 10px;">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Componentes</a></li>
-  <li role="presentation"><a href="#">Alguma coisa</a></li>
-  <li role="presentation"><a href="#">Outra coisa</a></li>
-  <li role="presentation"><a href="#">Ajuda</a></li>
-  <li role="presentation"><a href="#">Mais coisa</a></li>
-</ul>
-         
-		 
-       
-		
+      <a id="logotitle" class="wrapper" href="#"> SmartInv </a> 
       </div>
     </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
-    </div>
-
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-      </div>
-
-      <hr>
-
+   
+<div class="container">
+        <div class="col-md-4 col-xs-4"></div>
+ 		<div class="col-md-4 col-xs-4" style="margin-top: 15%">
+ 		<form class="form" method="POST" action="main.php">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Senha" class="form-control">
+            </div>
+           
+            <div class="wrapper">
+            <button type="submit" class="btn btn-success">Entrar</button>
+          	</div>
+          </form>
+ 		</div>
+		<div class="col-md-4 col-xs-4"></div> 
+</div>
+      
+<div class = "col-md-4 navbar-fixed-bottom">
       <footer>
-        <p>&copy; 2016 Company, Inc.</p>
+        <p>&copy; Gabriel Nunes de Siqueira - SMARTINV, 2017.</p>
       </footer>
     </div> <!-- /container -->
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

@@ -7,6 +7,7 @@ if(isset($del)){
 	$dados[0] = $del;
 	$db->execute("DELETE FROM memoria WHERE id_memoria=?",$dados);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +30,8 @@ if(isset($del)){
         <a id="logotitle"  href="#"> SmartInv </a>
         </div>        
 <ul class="nav nav-tabs navbar-right" style="border: none; padding-top: 10px;">
-  <li role="presentation"><a href="#">Home</a></li>
-  <li role="presentation" class="active"><a href="/memoria.php">Componentes</a></li>
+  <li role="presentation" class="active"><a href="#">Home</a></li>
+  <li role="presentation"><a href="/memoria.php">Componentes</a></li>
   <li role="presentation"><a href="#">Alguma coisa</a></li>
   <li role="presentation"><a href="#">Outra coisa</a></li>
   <li role="presentation"><a href="#">Ajuda</a></li>
@@ -40,46 +41,59 @@ if(isset($del)){
     </nav>
     <div class="jumbotron">
       <div class="container">
-      <h3 class="navbar-left"> <a href="#" id="lnk"> Componentes </a> > <a href="#" id="lnk"> Memorias </a> >  <a href="#" id="lnk"> <span class="glyphicon glyphicon-plus" </span> </a> </h3>
-      <div class="navbar-right">
-      <input type="text" name="searchbox"> <a href<span class="glyphicon glyphicon-search"></span></a>
-      </div>
+      <h3 class="navbar-left"> <a href="#" id="lnk"> Componentes </a> > <a href="#" id="lnk"> Memorias </a> >  <a href="#" id="lnk"> <?php echo "20"?> </a> </h3>
       </div>
     </div>
 
     <div class="container">
-        <div class="col-md-12">
-     
-		 <table class="table table-striped">
-		 <th class="warning">ID</th>
-		 <th class="warning">Nome</th>
-		 <th class="warning">Frequência</th>
-		 <th class="warning">Descrição</th>
-		 <th class="warning">Editar</th>
-		 <th class="warning wrapper">Remover</th>
-<?php 
-$result = $db->query("SELECT * FROM memoria");
-foreach ($result as $element) {
-?>
-<tr>
-  <td class="active"><?= $element['id_memoria']?></td>
-  <td class="active"><?= $element['nome']?></td>
-  <td class="active"><?= $element['frequencia']?></td>
-  <td class="active"><?= $element['descricao']?></td>
-  <td class="active"><a id="lnk" href="?edit=<?=$element['id_memoria']?>"><span class="glyphicon glyphicon-pencil wrapper"></span></a></td> 
-  <td class="active"><a id="lnk" onclick="window.confirm('Confirmar a exclusão final?')" href="?del=<?=$element['id_memoria']?>"><span class="glyphicon glyphicon-remove wrapper"></span></a></td>
-</tr>
-<?php } ?>
-</table>
+  
 
-        </div>
+<?php 
+//$result = $db->query("SELECT * FROM memoria WHERE id_memoria = ", ); // ARRUMAR AQUI
+//foreach ($result as $element) {
+?>
+<div class="col-md-4 col-xs-4"></div>
+<div class="col-md-4 col-xs-4">
+<form method="POST" action=#">
+
+
+<div class="input-group spacerform">
+  <span class="input-group-addon">Nome</span>
+  <input type="text" class="form-control" name="nome">
+</div>
+
+<div class="input-group spacerform">
+   <span class="input-group-addon">Frequência</span>
+  <input type="text" class="form-control" name="frequencia">
+ 
+</div>
+
+<div class="input-group spacerform">
+  <span class="input-group-addon">Descrição</span>
+  <input type="text" class="form-control" name="descricao">
+</div>
+
+<div class="wrapper" style="padding-top: 10px">
+<button class="btn btn-primary"  type="button">
+  Editar
+</button>
+</div>
+</form>
+</div>
+<div class="col-md-4 col-xs-4"></div>
+<?php// } ?>
+</div>
+       
               
 
-      <hr>
+     
 
+    <div class = "col-md-4 navbar-fixed-bottom">
       <footer>
-        <p>&copy;  Gabriel Nunes de Siqueira - SMARTINV, 2017.</p>
+        <p>&copy; Gabriel Nunes de Siqueira - SMARTINV, 2017.</p>
       </footer>
+    </div> <!-- /container -->
+
     </div> <!-- /container -->
 
 
