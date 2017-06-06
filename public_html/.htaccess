@@ -1,0 +1,8 @@
+RewriteEngine on
+
+RewriteRule !\.(gif|jpg|png|css|js|swf|)|!consulta.php|!imprimir.php$ index.php
+RewriteRule ^/projetos/sia/(.*) /$1 [R]
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE application/x-javascript text/css text/javascript
+</IfModule>
+

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAKA,mCAAoC,CAChC,KAAK,CAAE,IAAI,CAEf,0CAA2C,CACvC,YAAY,CAAE,GAAG,CACjB,WAAW,CAAE,GAAG,CAEpB,MAAM,CACF,YAAY,CAAE,IAAI",
+"sources": ["../../../core/view/core_client/css/componentes/forms.css"],
+"names": [],
+"file": "forms.css"
+}
