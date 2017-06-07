@@ -5,7 +5,7 @@
  * a manutenção dos dados no sistema 
  *
  * @package app.control
- * @author Marcio Bigolin <marcio.bigolinn@gmail.com>
+ * @author Gabriel Nunes de Siqueira - <gabrielndesiqueira@hotmail.com>
  * @version 1.0.0 - 06-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
@@ -57,18 +57,18 @@ class ControladorComputador extends ControladorGeral
         '/computador/deletarFim');
 
          //Colunas da tabela
-        $tabelaColuna = new TabelaColuna('Id computador', 'id_computador');
-        $tabelaColuna->setLargura(40);
+        $tabelaColuna = new TabelaColuna('ID', 'id_computador');
+        $tabelaColuna->setLargura(33);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Nome', 'nome');
-        $tabelaColuna->setLargura(60);
+        $tabelaColuna->setLargura(33);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
-        $tabelaColuna->setLargura(60);
+        $tabelaColuna->setLargura(33);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 

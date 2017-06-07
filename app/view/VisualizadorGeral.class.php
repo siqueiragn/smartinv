@@ -3,7 +3,7 @@
 /**
  * Description of VisualizadorGeral
  *
- * @author Marcio Bigolin <marcio.bigolinn@gmail.com>
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
  * @version 1.0
  * @package 
  */

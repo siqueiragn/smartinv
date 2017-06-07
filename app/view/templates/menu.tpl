@@ -2,7 +2,7 @@
       <div class="container">
         
         <div class="navbar-header">
-        <a id="logotitle"  href="#"> SmartInv </a>
+        <a id="logotitle" style="padding-left: 15px;"  href="#"> SmartInv </a>
         </div>        
 <ul class="nav nav-tabs navbar-right" style="border: none; padding-top: 10px;">
   <li role="presentation"><a href="#">Home</a></li>
@@ -15,14 +15,6 @@
       </div>
       
     </nav>
-        <div class="jumbotron">
-      <div class="container">
-      <h3 class="navbar-left"> <a href="#" id="lnk"> Componentes </a> > <a href="#" id="lnk"> Memorias </a> >  <a href="#" id="lnk"> <span class="glyphicon glyphicon-plus" </span> </a> </h3>
-      <div class="navbar-right">
-      <input type="text" name="searchbox"> <a href<span class="glyphicon glyphicon-search"></span></a>
-      </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="col-md-12">
+    
+    <div style="padding-top: 20px">
+      <div class="col-md-12 col-xs-12 col-lg-12">

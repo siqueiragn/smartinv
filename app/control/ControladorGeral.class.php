@@ -4,7 +4,7 @@ use core\libs\login\LoginBanco;
  * Classe principal do sistema responsável por criar a interface padrão assim como verificar 
  * a sessão e permissões do usuário.
  * 
- * @author Marcio Bigolin - <marcio.bigolinn@gmail.com>
+ * @author Gabriel Nunes de Siqueira - <gabrielndesiqueira@hotmail.com>
  * @version 1.0.0
  */
 class ControladorGeral extends AbstractController
@@ -34,13 +34,20 @@ class ControladorGeral extends AbstractController
 
     public function paginaNaoEncontrada()
     {
-        $this->view->setTitle('Não Encontrada');
+        $this->view->setTitle('N�o encontrada');
     }
 
     public function index()
     {
-        $this->view->setTitle('Welcome');
-        $this->view->addTemplate("cadastrar");
+    	//$this->view = null;
+    	$this->view = new VisualizadorRegistro();
+    	/*
+        $this->view->setTitle('SMARTINV - 2017');
+        $this->view->addTemplate("menuLogin");
+        
+*/
+    
+    	
         
     }
 
@@ -82,9 +89,13 @@ class ControladorGeral extends AbstractController
 
     public function __destruct()
     {
-        $this->view->addTemplate('rodape');
-        parent::__destruct();
+    	if(get_class($this->view)=='VisualizadorRegistro')
+    		$this->view->addTemplate('rodapeLogin');
+    	else
+    	$this->view->addTemplate('rodape');
+    	parent::__destruct();
     }
+    
     
       private function verificaLogado()
     {
