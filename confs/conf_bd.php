@@ -12,14 +12,14 @@
 define('DB_SERVER', 'webacademico-old.canoas.ifrs.edu.br');
 
 //Constante que define a porta do banco de dados
-define('DB_PORT', '5433');
+define('DB_PORT', '5432');
 
 //Constante que define o usuário do banco de dados
 define('DB_USER', 'gabriel_nunes');
-
+//define('DB_USER', 'ifrs_admin');
 //Constante que define o usuário do banco de dados
 define('DB_PASSWORD', '98187625');
-
+//define('DB_PASSWORD','pmfb4gxgqw');
 //Constante que define o usuário do banco de dados
 define('DB_NAME', 'smartinv');
 
