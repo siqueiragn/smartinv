@@ -15,15 +15,15 @@
               </div>
          </div>
          <div class="form-group">
-              <label class="control-label col-sm-2" for="memoria">Memoria</label>
-              <div class="col-sm-8">
-                 <input type="text" id="memoria" name="memoria" value="{$placaVideo->getMemoria()}" class="validaInteiro form-control"  />
-              </div>
-         </div>
-         <div class="form-group">
               <label class="control-label col-sm-2" for="barramento">Barramento</label>
               <div class="col-sm-8">
                  <input type="text" id="barramento" name="barramento" value="{$placaVideo->getBarramento()}" class=" form-control"  />
+              </div>
+         </div>
+         <div class="form-group">
+              <label class="control-label col-sm-2" for="memoria">Memoria</label>
+              <div class="col-sm-8">
+                 <input type="text" id="memoria" name="memoria" value="{$placaVideo->getMemoria()}" class="validaInteiro form-control"  />
               </div>
          </div>
          <div class="form-group">
@@ -37,6 +37,15 @@
               <div class="col-sm-8">
                  <select id="computador" name="computador" class="form-control">
     		{html_options options=$listaComputador selected=$placaVideo->getComputador()}
+             </select>
+
+              </div>
+         </div>
+         <div class="form-group">
+              <label class="control-label col-sm-2" for="idBarramento">Id barramento</label>
+              <div class="col-sm-8">
+                 <select id="idBarramento" name="idBarramento" class="form-control">
+    		{html_options options=$listaBarramento selected=$placaVideo->getIdBarramento()}
              </select>
 
               </div>

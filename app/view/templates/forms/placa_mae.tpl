@@ -15,12 +15,6 @@
               </div>
          </div>
          <div class="form-group">
-              <label class="control-label col-sm-2" for="portasUsb">Portas usb</label>
-              <div class="col-sm-8">
-                 <input type="text" id="portasUsb" name="portasUsb" value="{$placaMae->getPortasUsb()}" class="validaInteiro form-control"  />
-              </div>
-         </div>
-         <div class="form-group">
               <label class="control-label col-sm-2" for="descricao">Descrição</label>
               <div class="col-sm-8">
                  <textarea id="descricao" name="descricao" class=" form-control" >{$placaMae->getDescricao()}</textarea>

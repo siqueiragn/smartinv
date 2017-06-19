@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe para a transferencia de dados de Fonte entre as 
+ * Classe para a transferencia de dados de Driver entre as 
  * camadas do sistema 
  *
  * @package app.model.dto
@@ -8,15 +8,16 @@
  * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
- class Fonte implements DTOInterface
+ class Driver implements DTOInterface
  {
     use core\model\DTOTrait;
 
-    private $idFonte;
+    private $idDriver;
     private $nome;
-    private $potencia;
     private $descricao;
     private $computador;
+    private $idBarramento;
+    private $idComputador;
     private $isValid;
     private $table;
 
@@ -26,38 +27,38 @@
      *
      * @param String $table -  Nome da tabela no banco de dados
      */
-    public function __construct($table = 'public.fonte')
+    public function __construct($table = 'public.driver')
     {
         $this->table = $table;
     }
 
     /**
-     * Método que retorna o valor da variável idFonte
+     * Método que retorna o valor da variável idDriver
      *
-     * @return Inteiro - Valor da variável idFonte
+     * @return Inteiro - Valor da variável idDriver
      */
-    public function getIdFonte()
+    public function getIdDriver()
      {
-        return $this->idFonte;
+        return $this->idDriver;
     }
 
     /**
-     * Método que seta o valor da variável idFonte
+     * Método que seta o valor da variável idDriver
      *
-     * @param Inteiro $idFonte - Valor da variável idFonte
+     * @param Inteiro $idDriver - Valor da variável idDriver
      */
-    public function setIdFonte($idFonte)
+    public function setIdDriver($idDriver)
     {
-         $idFonte = trim($idFonte);
-          if(empty($idFonte)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Id fonte não pode ser nulo!';
+         $idDriver = trim($idDriver);
+          if(empty($idDriver)){
+                $GLOBALS['ERROS'][] = 'O valor informado em Id driver não pode ser nulo!';
                 return false;
           }
-          if(!(is_numeric($idFonte) && is_int($idFonte + 0))){
-                $GLOBALS['ERROS'][] = 'O valor informado em Id fonte é um número inteiro inválido!';
+          if(!(is_numeric($idDriver) && is_int($idDriver + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Id driver é um número inteiro inválido!';
                 return false;
           }
-          $this->idFonte = $idFonte;
+          $this->idDriver = $idDriver;
           return true;
     }
 
@@ -81,32 +82,6 @@
          $nome = trim($nome);
          $this->nome = $nome;
          return true;
-    }
-
-    /**
-     * Método que retorna o valor da variável potencia
-     *
-     * @return Inteiro - Valor da variável potencia
-     */
-    public function getPotencia()
-     {
-        return $this->potencia;
-    }
-
-    /**
-     * Método que seta o valor da variável potencia
-     *
-     * @param Inteiro $potencia - Valor da variável potencia
-     */
-    public function setPotencia($potencia)
-    {
-         $potencia = trim($potencia);
-          if(!(is_numeric($potencia) && is_int($potencia + 0))){
-                $GLOBALS['ERROS'][] = 'O valor informado em Potencia é um número inteiro inválido!';
-                return false;
-          }
-          $this->potencia = $potencia;
-          return true;
     }
 
     /**
@@ -162,6 +137,62 @@
     }
 
     /**
+     * Método que retorna o valor da variável idBarramento
+     *
+     * @return Inteiro - Valor da variável idBarramento
+     */
+    public function getIdBarramento()
+     {
+        return $this->idBarramento;
+    }
+
+    /**
+     * Método que seta o valor da variável idBarramento
+     *
+     * @param Inteiro $idBarramento - Valor da variável idBarramento
+     */
+    public function setIdBarramento($idBarramento)
+    {
+         $idBarramento = trim($idBarramento);
+          if(empty($idBarramento)){
+                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento não pode ser nulo!';
+                return false;
+          }
+          if(!(is_numeric($idBarramento) && is_int($idBarramento + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento é um número inteiro inválido!';
+                return false;
+          }
+          $this->idBarramento = $idBarramento;
+          return true;
+    }
+
+    /**
+     * Método que retorna o valor da variável idComputador
+     *
+     * @return Inteiro - Valor da variável idComputador
+     */
+    public function getIdComputador()
+     {
+        return $this->idComputador;
+    }
+
+    /**
+     * Método que seta o valor da variável idComputador
+     *
+     * @param Inteiro $idComputador - Valor da variável idComputador
+     */
+    public function setIdComputador($idComputador)
+    {
+         $idComputador = trim($idComputador);
+          if(!(is_numeric($idComputador) && is_int($idComputador + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Id computador é um número inteiro inválido!';
+                return false;
+          }
+          $this->idComputador = $idComputador;
+          return true;
+    }
+
+    /**
      * Método que retorna o valor da variável $tabela 
      *
      * @return String - Tabela do SGBD
@@ -185,11 +216,12 @@
      public function getArrayJSON()
      {
         return array(
-             $this->idFonte,
+             $this->idDriver,
              $this->nome,
-             $this->potencia,
              $this->descricao,
-             $this->computador
+             $this->computador,
+             $this->idBarramento,
+             $this->idComputador
         );
      }
 
@@ -200,7 +232,7 @@
      * @return String - Condição para selecionar um dado unico na tabela
      */
      public function getID(){
-        return $this->idFonte;
+        return $this->idDriver;
      }
 
     /**
@@ -210,6 +242,6 @@
      */
     public function getCondition()
     {
-        return 'id_fonte = ' . $this->idFonte;
+        return 'id_driver = ' . $this->idDriver;
      }
 }

@@ -46,16 +46,13 @@ class ControladorGeral extends AbstractController
         $this->view->addTemplate("menuLogin");
         
 */
-    
-    	
-        
     }
 
-    public function requisitaAdmin()
+    public function home()
     {
-        $this->view = null;
-        $controlador = new ControladorAdmin();
-        $this->view = $controlador->getView();
+        $this->view = new VisualizadorGeral();
+        /* $controlador = new ControladorGeral();
+        $this->view = $controlador->getView(); */
     }
 
     public function contato()
@@ -85,11 +82,16 @@ class ControladorGeral extends AbstractController
         }
     }
     
+    public function componentes(){
+    	$this->view->setTitle('Componentes');
+    	$this->view->addTemplate('componentes');
+    }
+    
  
 
     public function __destruct()
     {
-    	if(get_class($this->view)=='VisualizadorRegistro')
+    	if(get_class($this->view)=='VisualizadorRegistro' || $this->view->getTitle() == 'Componentes')
     		$this->view->addTemplate('rodapeLogin');
     	else
     	$this->view->addTemplate('rodape');

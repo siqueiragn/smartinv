@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Marcio Bigolin <marcio.bigolinn@gmail.com>
- * @version 1.0.0 - 06-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class PlacaMaeDAO extends AbstractDAO 
@@ -36,7 +36,6 @@ class PlacaMaeDAO extends AbstractDAO
                                          'id_placa_mae as principal ,
                                           nome,
                                           socket,
-                                          portas_usb,
                                           descricao,
                                           computador'
                                        );
@@ -69,7 +68,6 @@ class PlacaMaeDAO extends AbstractDAO
                                          'id_placa_mae as principal ,
                                           nome,
                                           socket,
-                                          portas_usb,
                                           descricao,
                                           computador',
                         'id_placa_mae ='. $id );
@@ -94,7 +92,6 @@ class PlacaMaeDAO extends AbstractDAO
                                          'id_placa_mae as principal ,
                                           nome,
                                           socket,
-                                          portas_usb,
                                           descricao,
                                           computador',
             $condicao);
@@ -118,7 +115,6 @@ class PlacaMaeDAO extends AbstractDAO
         $placaMae->setIdPlacaMae($dados['principal']);
         $placaMae->setNome($dados['nome']);
         $placaMae->setSocket($dados['socket']);
-        $placaMae->setPortasUsb($dados['portas_usb']);
         $placaMae->setDescricao($dados['descricao']);
         $placaMae->setComputador($dados['computador']);
         return $placaMae;

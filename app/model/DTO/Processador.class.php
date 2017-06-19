@@ -4,19 +4,19 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Marcio Bigolin <marcio.bigolinn@gmail.com> 
- * @version 1.0.0 - 06-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class Processador implements DTOInterface
  {
     use core\model\DTOTrait;
 
-    private $idProcessador;
     private $nome;
+    private $idProcessador;
     private $frequencia;
-    private $socket;
     private $descricao;
+    private $socket;
     private $computador;
     private $isValid;
     private $table;
@@ -30,6 +30,28 @@
     public function __construct($table = 'public.processador')
     {
         $this->table = $table;
+    }
+
+    /**
+     * Método que retorna o valor da variável nome
+     *
+     * @return String - Valor da variável nome
+     */
+    public function getNome()
+     {
+        return $this->nome;
+    }
+
+    /**
+     * Método que seta o valor da variável nome
+     *
+     * @param String $nome - Valor da variável nome
+     */
+    public function setNome($nome)
+    {
+         $nome = trim($nome);
+         $this->nome = $nome;
+         return true;
     }
 
     /**
@@ -63,28 +85,6 @@
     }
 
     /**
-     * Método que retorna o valor da variável nome
-     *
-     * @return String - Valor da variável nome
-     */
-    public function getNome()
-     {
-        return $this->nome;
-    }
-
-    /**
-     * Método que seta o valor da variável nome
-     *
-     * @param String $nome - Valor da variável nome
-     */
-    public function setNome($nome)
-    {
-         $nome = trim($nome);
-         $this->nome = $nome;
-         return true;
-    }
-
-    /**
      * Método que retorna o valor da variável frequencia
      *
      * @return Inteiro - Valor da variável frequencia
@@ -111,28 +111,6 @@
     }
 
     /**
-     * Método que retorna o valor da variável socket
-     *
-     * @return String - Valor da variável socket
-     */
-    public function getSocket()
-     {
-        return $this->socket;
-    }
-
-    /**
-     * Método que seta o valor da variável socket
-     *
-     * @param String $socket - Valor da variável socket
-     */
-    public function setSocket($socket)
-    {
-         $socket = trim($socket);
-         $this->socket = $socket;
-         return true;
-    }
-
-    /**
      * Método que retorna o valor da variável descricao
      *
      * @return String - Valor da variável descricao
@@ -155,6 +133,28 @@
     }
 
     /**
+     * Método que retorna o valor da variável socket
+     *
+     * @return String - Valor da variável socket
+     */
+    public function getSocket()
+     {
+        return $this->socket;
+    }
+
+    /**
+     * Método que seta o valor da variável socket
+     *
+     * @param String $socket - Valor da variável socket
+     */
+    public function setSocket($socket)
+    {
+         $socket = trim($socket);
+         $this->socket = $socket;
+         return true;
+    }
+
+    /**
      * Método que retorna o valor da variável computador
      *
      * @return Inteiro - Valor da variável computador
@@ -172,6 +172,10 @@
     public function setComputador($computador)
     {
          $computador = trim($computador);
+          if(empty($computador)){
+                $GLOBALS['ERROS'][] = 'O valor informado em Computador não pode ser nulo!';
+                return false;
+          }
           if(!(is_numeric($computador) && is_int($computador + 0))){
                 $GLOBALS['ERROS'][] = 'O valor informado em Computador é um número inteiro inválido!';
                 return false;
@@ -204,11 +208,11 @@
      public function getArrayJSON()
      {
         return array(
-             $this->idProcessador,
              $this->nome,
+             $this->idProcessador,
              $this->frequencia,
-             $this->socket,
              $this->descricao,
+             $this->socket,
              $this->computador
         );
      }

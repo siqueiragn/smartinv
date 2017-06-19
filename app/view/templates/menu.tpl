@@ -2,15 +2,15 @@
       <div class="container">
         
         <div class="navbar-header">
-        <a id="logotitle" style="padding-left: 15px;"  href="#"> SmartInv </a>
+        <a id="logotitle"  href="/home"> SmartInv </a>
         </div>        
 <ul class="nav nav-tabs navbar-right" style="border: none; padding-top: 10px;">
-  <li role="presentation"><a href="#">Home</a></li>
-  <li role="presentation"><a href="/componentes.php">Componentes</a></li>
-  <li role="presentation"><a href="#">Alguma coisa</a></li>
-  <li role="presentation"><a href="#">Outra coisa</a></li>
-  <li role="presentation"><a href="#">Ajuda</a></li>
-  <li role="presentation"><a href="#">Mais coisa</a></li>
+  <li role="presentation"><a id="lnk" href="/home">Home</a></li>
+  <li role="presentation"><a id="lnk" href="/componentes">Componentes</a></li>
+  <li role="presentation"><a id="lnk" href="#">Alguma coisa</a></li>
+  <li role="presentation"><a id="lnk" href="#">Outra coisa</a></li>
+  <li role="presentation"><a id="lnk" href="#">Ajuda</a></li>
+  <li role="presentation"><a id="lnk" href="#">Mais coisa</a></li>
 </ul>
       </div>
       

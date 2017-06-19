@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Marcio Bigolin <marcio.bigolinn@gmail.com> 
- * @version 1.0.0 - 06-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 19-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class Memoria implements DTOInterface
@@ -15,8 +15,10 @@
     private $idMemoria;
     private $nome;
     private $frequencia;
+    private $tipo;
     private $descricao;
     private $computador;
+    private $capacidade;
     private $isValid;
     private $table;
 
@@ -110,6 +112,28 @@
     }
 
     /**
+     * Método que retorna o valor da variável tipo
+     *
+     * @return String - Valor da variável tipo
+     */
+    public function getTipo()
+     {
+        return $this->tipo;
+    }
+
+    /**
+     * Método que seta o valor da variável tipo
+     *
+     * @param String $tipo - Valor da variável tipo
+     */
+    public function setTipo($tipo)
+    {
+         $tipo = trim($tipo);
+         $this->tipo = $tipo;
+         return true;
+    }
+
+    /**
      * Método que retorna o valor da variável descricao
      *
      * @return String - Valor da variável descricao
@@ -149,11 +173,41 @@
     public function setComputador($computador)
     {
          $computador = trim($computador);
+          if(empty($computador)){
+                $GLOBALS['ERROS'][] = 'O valor informado em Computador não pode ser nulo!';
+                return false;
+          }
           if(!(is_numeric($computador) && is_int($computador + 0))){
                 $GLOBALS['ERROS'][] = 'O valor informado em Computador é um número inteiro inválido!';
                 return false;
           }
           $this->computador = $computador;
+          return true;
+    }
+
+    /**
+     * Método que retorna o valor da variável capacidade
+     *
+     * @return Inteiro - Valor da variável capacidade
+     */
+    public function getCapacidade()
+     {
+        return $this->capacidade;
+    }
+
+    /**
+     * Método que seta o valor da variável capacidade
+     *
+     * @param Inteiro $capacidade - Valor da variável capacidade
+     */
+    public function setCapacidade($capacidade)
+    {
+         $capacidade = trim($capacidade);
+          if(!(is_numeric($capacidade) && is_int($capacidade + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Capacidade é um número inteiro inválido!';
+                return false;
+          }
+          $this->capacidade = $capacidade;
           return true;
     }
 
@@ -184,8 +238,10 @@
              $this->idMemoria,
              $this->nome,
              $this->frequencia,
+             $this->tipo,
              $this->descricao,
-             $this->computador
+             $this->computador,
+             $this->capacidade
         );
      }
 

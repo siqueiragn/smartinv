@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Marcio Bigolin <marcio.bigolinn@gmail.com> 
- * @version 1.0.0 - 06-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class Computador implements DTOInterface

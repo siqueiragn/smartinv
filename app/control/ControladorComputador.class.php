@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package app.control
- * @author Gabriel Nunes de Siqueira - <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 06-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class ControladorComputador extends ControladorGeral
@@ -67,7 +67,7 @@ class ControladorComputador extends ControladorGeral
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
+        $tabelaColuna = new TabelaColuna('Descri��o', 'descricao');
         $tabelaColuna->setLargura(33);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);

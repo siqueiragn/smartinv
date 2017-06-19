@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Marcio Bigolin <marcio.bigolinn@gmail.com> 
- * @version 1.0.0 - 06-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class PlacaVideo implements DTOInterface
@@ -15,10 +15,11 @@
     private $idPlacaVideo;
     private $nome;
     private $frequencia;
-    private $memoria;
     private $barramento;
+    private $memoria;
     private $descricao;
     private $computador;
+    private $idBarramento;
     private $isValid;
     private $table;
 
@@ -112,6 +113,28 @@
     }
 
     /**
+     * Método que retorna o valor da variável barramento
+     *
+     * @return String - Valor da variável barramento
+     */
+    public function getBarramento()
+     {
+        return $this->barramento;
+    }
+
+    /**
+     * Método que seta o valor da variável barramento
+     *
+     * @param String $barramento - Valor da variável barramento
+     */
+    public function setBarramento($barramento)
+    {
+         $barramento = trim($barramento);
+         $this->barramento = $barramento;
+         return true;
+    }
+
+    /**
      * Método que retorna o valor da variável memoria
      *
      * @return Inteiro - Valor da variável memoria
@@ -135,28 +158,6 @@
           }
           $this->memoria = $memoria;
           return true;
-    }
-
-    /**
-     * Método que retorna o valor da variável barramento
-     *
-     * @return String - Valor da variável barramento
-     */
-    public function getBarramento()
-     {
-        return $this->barramento;
-    }
-
-    /**
-     * Método que seta o valor da variável barramento
-     *
-     * @param String $barramento - Valor da variável barramento
-     */
-    public function setBarramento($barramento)
-    {
-         $barramento = trim($barramento);
-         $this->barramento = $barramento;
-         return true;
     }
 
     /**
@@ -208,6 +209,36 @@
     }
 
     /**
+     * Método que retorna o valor da variável idBarramento
+     *
+     * @return Inteiro - Valor da variável idBarramento
+     */
+    public function getIdBarramento()
+     {
+        return $this->idBarramento;
+    }
+
+    /**
+     * Método que seta o valor da variável idBarramento
+     *
+     * @param Inteiro $idBarramento - Valor da variável idBarramento
+     */
+    public function setIdBarramento($idBarramento)
+    {
+         $idBarramento = trim($idBarramento);
+          if(empty($idBarramento)){
+                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento não pode ser nulo!';
+                return false;
+          }
+          if(!(is_numeric($idBarramento) && is_int($idBarramento + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento é um número inteiro inválido!';
+                return false;
+          }
+          $this->idBarramento = $idBarramento;
+          return true;
+    }
+
+    /**
      * Método que retorna o valor da variável $tabela 
      *
      * @return String - Tabela do SGBD
@@ -234,10 +265,11 @@
              $this->idPlacaVideo,
              $this->nome,
              $this->frequencia,
-             $this->memoria,
              $this->barramento,
+             $this->memoria,
              $this->descricao,
-             $this->computador
+             $this->computador,
+             $this->idBarramento
         );
      }
 

@@ -35,5 +35,14 @@
 
               </div>
          </div>
+         <div class="form-group">
+              <label class="control-label col-sm-2" for="idBarramento">Id barramento</label>
+              <div class="col-sm-8">
+                 <select id="idBarramento" name="idBarramento" class="form-control">
+    		{html_options options=$listaBarramento selected=$discoRigido->getIdBarramento()}
+             </select>
+
+              </div>
+         </div>
 </fieldset>
 

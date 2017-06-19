@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Marcio Bigolin <marcio.bigolinn@gmail.com>
- * @version 1.0.0 - 06-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class ProcessadorDAO extends AbstractDAO 
@@ -30,14 +30,14 @@ class ProcessadorDAO extends AbstractDAO
     public function getTabela(TabelaConsulta $tabela)
     {
         $dados = array();
-        $nLinhasCon = $this->queryTable('public.processador', 'count(id_processador) as num');
+        $nLinhasCon = $this->queryTable('public.processador', 'count(nome) as num');
         $nLinhas = $nLinhasCon->fetch();
         $result = $this->queryTable(  'public.processador ' . $tabela->getcondicao(), 
-                                         'id_processador as principal ,
-                                          nome,
+                                         'nome as principal ,
+                                          id_processador,
                                           frequencia,
-                                          socket,
                                           descricao,
+                                          socket,
                                           computador'
                                        );
         $resultado = array(
@@ -48,7 +48,7 @@ class ProcessadorDAO extends AbstractDAO
         foreach ($result as $linhaBanco) {
             $row = array();
             $processador = $this->setDados($linhaBanco);
-            $row['id'] = $processador->getidProcessador();
+            $row['id'] = $processador->getnome();
             $row['cell'] = $processador->getArrayJson();
             $dados[] = $row;
        }
@@ -66,11 +66,11 @@ class ProcessadorDAO extends AbstractDAO
     public function getByID($id) {
         $processador = new Processador();
         $consulta = $this->queryTable($processador->getTable(),
-                                         'id_processador as principal ,
-                                          nome,
+                                         'nome as principal ,
+                                          id_processador,
                                           frequencia,
-                                          socket,
                                           descricao,
+                                          socket,
                                           computador',
                         'id_processador ='. $id );
         if ($consulta) {
@@ -91,11 +91,11 @@ class ProcessadorDAO extends AbstractDAO
     {
         $dados = array();
         $result = $this->queryTable(  'public.processador ', 
-                                         'id_processador as principal ,
-                                          nome,
+                                         'nome as principal ,
+                                          id_processador,
                                           frequencia,
-                                          socket,
                                           descricao,
+                                          socket,
                                           computador',
             $condicao);
         foreach ($result as $linhaBanco) {
@@ -115,11 +115,11 @@ class ProcessadorDAO extends AbstractDAO
     private function setDados($dados)
     {
         $processador = new Processador();
-        $processador->setIdProcessador($dados['principal']);
-        $processador->setNome($dados['nome']);
+        $processador->setNome($dados['principal']);
+        $processador->setIdProcessador($dados['id_processador']);
         $processador->setFrequencia($dados['frequencia']);
-        $processador->setSocket($dados['socket']);
         $processador->setDescricao($dados['descricao']);
+        $processador->setSocket($dados['socket']);
         $processador->setComputador($dados['computador']);
         return $processador;
     }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Classe controladora referente ao objeto Barramento para 
+ * Classe controladora referente ao objeto Usuario para 
  * a manutenção dos dados no sistema 
  *
  * @package app.control
@@ -9,22 +9,22 @@
  * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
-class ControladorBarramento extends ControladorGeral
+class ControladorUsuario extends ControladorGeral
  {
 
     /**
-     * @var BarramentoDAO
+     * @var UsuarioDAO
      */
     protected $model;
 
      /**
-      * Construtor da classe Barramento, esse método inicializa o  
+      * Construtor da classe Usuario, esse método inicializa o  
       * modelo de dados 
       *
       */
     public function __construct() {
         parent::__construct();
-        $this->model = new BarramentoDAO();
+        $this->model = new UsuarioDAO();
     }
 
      /**
@@ -43,31 +43,36 @@ class ControladorBarramento extends ControladorGeral
       */
     public function manter()
     {
-        $this->view->setTitle('Barramento');
+        $this->view->setTitle('Usuário');
 
         Componente::carregaComponente('TabelaManterDados'); 
         $tabela = new TabelaManterDados();
-        $tabela->setDados(BASE_URL . '/barramento/tabela');
-        $tabela->setTitulo('Barramento');
+        $tabela->setDados(BASE_URL . '/usuario/tabela');
+        $tabela->setTitulo('Usuário');
         $tabela->addAcaoAdicionar(BASE_URL . 
-        '/barramento/criarNovo');
+        '/usuario/criarNovo');
         $tabela->addAcaoEditar(BASE_URL . 
-        '/barramento/editar');
+        '/usuario/editar');
         $tabela->addAcaoDeletar(BASE_URL . 
-        '/barramento/deletarFim');
+        '/usuario/deletarFim');
 
          //Colunas da tabela
-        $tabelaColuna = new TabelaColuna('ID', 'id_barramento');
+        $tabelaColuna = new TabelaColuna('Id usuário', 'id_usuario');
         $tabelaColuna->setLargura(40);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Nome', 'nome');
+        $tabelaColuna = new TabelaColuna('Login', 'login');
         $tabelaColuna->setLargura(60);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Descri��o', 'descricao');
+        $tabelaColuna = new TabelaColuna('Password', 'password');
+        $tabelaColuna->setLargura(60);
+        $tabelaColuna->setBuscaTipo('character varying');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('Email', 'email');
         $tabelaColuna->setLargura(60);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
@@ -96,46 +101,46 @@ class ControladorBarramento extends ControladorGeral
      /**
       * Método que controla a inserção de um novo dado
       *
-      * @param Barramento $obj - Objeto DataTransfer com os dados da classe
+      * @param Usuario $obj - Objeto DataTransfer com os dados da classe
       */
-    public function criarNovo(Barramento $obj = null)
+    public function criarNovo(Usuario $obj = null)
      {
-        $barramento = $obj == null ? new Barramento() : $obj;
+        $usuario = $obj == null ? new Usuario() : $obj;
 
-        $this->view->setTitle('Novo Barramento');
+        $this->view->setTitle('Novo Usuário');
 
-        $this->view->attValue('barramento', $barramento);
+        $this->view->attValue('usuario', $usuario);
 
         //Carrega os campos de seleção;
         $this->getSelects();
-        $this->view->startForm(BASE_URL  . '/barramento/criarNovoFim');
-        $this->view->addTemplate('forms/barramento');
+        $this->view->startForm(BASE_URL  . '/usuario/criarNovoFim');
+        $this->view->addTemplate('forms/usuario');
         $this->view->endForm();
     }
 
     /**
      * Método edita os dados da tabela ou objeto em questão 
      *
-     * @param Barramento $obj - Objeto para carregar os formulários 
+     * @param Usuario $obj - Objeto para carregar os formulários 
      */
-    public function editar(Barramento $obj = null) 
+    public function editar(Usuario $obj = null) 
     {
         if($obj == null){
             $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
-            $barramento = $this->model->getById($id);
+            $usuario = $this->model->getById($id);
         }else{
-            $barramento = $obj;
+            $usuario = $obj;
         }
 
-        $this->view->setTitle('Editar Barramento');
+        $this->view->setTitle('Editar Usuário');
 
-        $this->view->attValue('barramento', $barramento);
+        $this->view->attValue('usuario', $usuario);
 
         //Carrega os campos de seleção;
         $this->getSelects();
 
-        $this->view->startForm(BASE_URL . '/barramento/editarFim');
-        $this->view->addTemplate('forms/barramento');
+        $this->view->startForm(BASE_URL . '/usuario/editarFim');
+        $this->view->addTemplate('forms/usuario');
         $this->view->endForm();
     }
 
@@ -145,13 +150,13 @@ class ControladorBarramento extends ControladorGeral
      */
     public function criarNovoFim()
      {
-        $barramento = new Barramento();
+        $usuario = new Usuario();
         try {
-            unset($_POST['idBarramento']);
-            if($barramento->setArrayDados($_POST) > 0){ 
+            unset($_POST['idUsuario']);
+            if($usuario->setArrayDados($_POST) > 0){ 
                 $this->view->addErros($GLOBALS['ERROS']);
             }else{
-                if($this->model->create($barramento)){
+                if($this->model->create($usuario)){
                     $this->view->addMensagemSucesso('Dados inseridos com sucesso!');
                     $this->manter();
                     return ;
@@ -164,7 +169,7 @@ class ControladorBarramento extends ControladorGeral
              $erro .= 'sistema e solucionado o mais breve possível.';
              $this->view->addMensagemErro($erro);
         }
-        $this->criarNovo($barramento);
+        $this->criarNovo($usuario);
     }
 
     /**
@@ -173,14 +178,14 @@ class ControladorBarramento extends ControladorGeral
      */
     public function editarFim()
      {
-        $barramento = new Barramento();
-        $id = ValidatorUtil::variavelInt($_POST['idBarramento']);
-        $barramento->setIdBarramento($id);
+        $usuario = new Usuario();
+        $id = ValidatorUtil::variavelInt($_POST['idUsuario']);
+        $usuario->setIdUsuario($id);
         try {
-             if($barramento->setArrayDados($_POST) > 0){ 
+             if($usuario->setArrayDados($_POST) > 0){ 
                  $this->view->addErros($GLOBALS['ERROS']);
              }else{
-                 if($this->model->update($barramento)){
+                 if($this->model->update($usuario)){
                      $this->view->addMensagemSucesso('Dados alterados com sucesso!');
                      $this->manter();
                      return ;
@@ -193,7 +198,7 @@ class ControladorBarramento extends ControladorGeral
              $erro .= 'sistema e solucionado o mais breve possível.';
              $this->view->addMensagemErro($erro);
         }
-        $this->editar($barramento);
+        $this->editar($usuario);
     }
 
     /**
@@ -202,11 +207,11 @@ class ControladorBarramento extends ControladorGeral
      */
     public function deletarFim()
     {
-        $barramento = new Barramento();
+        $usuario = new Usuario();
         $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
-        $barramento->setIdBarramento($id);
+        $usuario->setIdUsuario($id);
         try {
-             if($this->model->delete($barramento) !== false){
+             if($this->model->delete($usuario) !== false){
                   $this->view->addMensagemSucesso('Dado removido com sucesso!');
              }else{
                   $this->view->addMensagemErro($this->model->getErro());
@@ -226,7 +231,7 @@ class ControladorBarramento extends ControladorGeral
     private function getSelects()
      {
     }
-    private function addArquivos(Barramento $obj, $editar = false)
+    private function addArquivos(Usuario $obj, $editar = false)
     {
     }
   private function salvarImagem(ArquivoUpload $arquivo,  Noticia $noticia, $editar = false)

@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Marcio Bigolin <marcio.bigolinn@gmail.com> 
- * @version 1.0.0 - 06-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class PlacaMae implements DTOInterface
@@ -15,7 +15,6 @@
     private $idPlacaMae;
     private $nome;
     private $socket;
-    private $portasUsb;
     private $descricao;
     private $computador;
     private $isValid;
@@ -111,32 +110,6 @@
     }
 
     /**
-     * Método que retorna o valor da variável portasUsb
-     *
-     * @return Inteiro - Valor da variável portasUsb
-     */
-    public function getPortasUsb()
-     {
-        return $this->portasUsb;
-    }
-
-    /**
-     * Método que seta o valor da variável portasUsb
-     *
-     * @param Inteiro $portasUsb - Valor da variável portasUsb
-     */
-    public function setPortasUsb($portasUsb)
-    {
-         $portasUsb = trim($portasUsb);
-          if(!(is_numeric($portasUsb) && is_int($portasUsb + 0))){
-                $GLOBALS['ERROS'][] = 'O valor informado em Portas usb é um número inteiro inválido!';
-                return false;
-          }
-          $this->portasUsb = $portasUsb;
-          return true;
-    }
-
-    /**
      * Método que retorna o valor da variável descricao
      *
      * @return String - Valor da variável descricao
@@ -176,6 +149,10 @@
     public function setComputador($computador)
     {
          $computador = trim($computador);
+          if(empty($computador)){
+                $GLOBALS['ERROS'][] = 'O valor informado em Computador não pode ser nulo!';
+                return false;
+          }
           if(!(is_numeric($computador) && is_int($computador + 0))){
                 $GLOBALS['ERROS'][] = 'O valor informado em Computador é um número inteiro inválido!';
                 return false;
@@ -211,7 +188,6 @@
              $this->idPlacaMae,
              $this->nome,
              $this->socket,
-             $this->portasUsb,
              $this->descricao,
              $this->computador
         );

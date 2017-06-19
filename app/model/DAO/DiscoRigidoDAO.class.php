@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Marcio Bigolin <marcio.bigolinn@gmail.com>
- * @version 1.0.0 - 06-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class DiscoRigidoDAO extends AbstractDAO 
@@ -38,7 +38,8 @@ class DiscoRigidoDAO extends AbstractDAO
                                           v_cache,
                                           rpm,
                                           descricao,
-                                          computador'
+                                          computador,
+                                          id_barramento'
                                        );
         $resultado = array(
             'page' => $tabela->getPagina(),
@@ -71,7 +72,8 @@ class DiscoRigidoDAO extends AbstractDAO
                                           v_cache,
                                           rpm,
                                           descricao,
-                                          computador',
+                                          computador,
+                                          id_barramento',
                         'id_disco_rigido ='. $id );
         if ($consulta) {
             $discoRigido = $this->setDados($consulta->fetch());
@@ -96,7 +98,8 @@ class DiscoRigidoDAO extends AbstractDAO
                                           v_cache,
                                           rpm,
                                           descricao,
-                                          computador',
+                                          computador,
+                                          id_barramento',
             $condicao);
         foreach ($result as $linhaBanco) {
             $discoRigido = $this->setDados($linhaBanco);
@@ -121,6 +124,7 @@ class DiscoRigidoDAO extends AbstractDAO
         $discoRigido->setRpm($dados['rpm']);
         $discoRigido->setDescricao($dados['descricao']);
         $discoRigido->setComputador($dados['computador']);
+        $discoRigido->setIdBarramento($dados['id_barramento']);
         return $discoRigido;
     }
 

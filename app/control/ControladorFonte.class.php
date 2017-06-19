@@ -5,8 +5,8 @@
  * a manuten√ß√£o dos dados no sistema 
  *
  * @package app.control
- * @author Gabriel Nunes de Siqueira - <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 06-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class ControladorFonte extends ControladorGeral
@@ -67,12 +67,12 @@ class ControladorFonte extends ControladorGeral
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('PotÍncia', 'potencia');
+        $tabelaColuna = new TabelaColuna('Potencia', 'potencia');
         $tabelaColuna->setLargura(20);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Descri√ß√£o', 'descricao');
+        $tabelaColuna = new TabelaColuna('DescriÁ„o', 'descricao');
         $tabelaColuna->setLargura(20);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);

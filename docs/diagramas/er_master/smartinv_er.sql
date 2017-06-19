@@ -96,6 +96,7 @@ CREATE TABLE public.memoria
 	id_memoria serial NOT NULL,
 	nome varchar,
 	frequencia int,
+	capacidade int,
 	tipo varchar,
 	descricao varchar,
 	computador int NOT NULL,

@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Marcio Bigolin <marcio.bigolinn@gmail.com> 
- * @version 1.0.0 - 06-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class DiscoRigido implements DTOInterface
@@ -18,6 +18,7 @@
     private $rpm;
     private $descricao;
     private $computador;
+    private $idBarramento;
     private $isValid;
     private $table;
 
@@ -185,6 +186,36 @@
     }
 
     /**
+     * Método que retorna o valor da variável idBarramento
+     *
+     * @return Inteiro - Valor da variável idBarramento
+     */
+    public function getIdBarramento()
+     {
+        return $this->idBarramento;
+    }
+
+    /**
+     * Método que seta o valor da variável idBarramento
+     *
+     * @param Inteiro $idBarramento - Valor da variável idBarramento
+     */
+    public function setIdBarramento($idBarramento)
+    {
+         $idBarramento = trim($idBarramento);
+          if(empty($idBarramento)){
+                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento não pode ser nulo!';
+                return false;
+          }
+          if(!(is_numeric($idBarramento) && is_int($idBarramento + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento é um número inteiro inválido!';
+                return false;
+          }
+          $this->idBarramento = $idBarramento;
+          return true;
+    }
+
+    /**
      * Método que retorna o valor da variável $tabela 
      *
      * @return String - Tabela do SGBD
@@ -213,7 +244,8 @@
              $this->vCache,
              $this->rpm,
              $this->descricao,
-             $this->computador
+             $this->computador,
+             $this->idBarramento
         );
      }
 

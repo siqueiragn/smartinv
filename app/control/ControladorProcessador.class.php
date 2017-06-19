@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package app.control
- * @author Gabriel Nunes de Siqueira - <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 06-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class ControladorProcessador extends ControladorGeral
@@ -58,32 +58,32 @@ class ControladorProcessador extends ControladorGeral
 
          //Colunas da tabela
         $tabelaColuna = new TabelaColuna('ID', 'id_processador');
-        $tabelaColuna->setLargura(15);
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
-
+        
         $tabelaColuna = new TabelaColuna('Nome', 'nome');
-        $tabelaColuna->setLargura(15);
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Frequencia', 'frequencia');
-        $tabelaColuna->setLargura(15);
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Socket', 'socket');
-        $tabelaColuna->setLargura(15);
+        $tabelaColuna = new TabelaColuna('Descri��o', 'descricao');
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
-        $tabelaColuna->setLargura(15);
+        $tabelaColuna = new TabelaColuna('Socket', 'socket');
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Computador', 'computador');
-        $tabelaColuna->setLargura(15);
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 

@@ -3,9 +3,9 @@
 
 
 /**
- * Classe de transiÃ§Ã£o entre o siabase e enyalius core.
+ * Classe de transição entre o siabase e enyalius core.
  *
- * @author Marcio Bigolin <marcio.bigolinn@gmail.com>
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com_addref>
  * @version 1.0
  * @package 
  * @deprecated since version 1

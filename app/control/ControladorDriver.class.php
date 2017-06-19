@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Classe controladora referente ao objeto Barramento para 
+ * Classe controladora referente ao objeto Driver para 
  * a manutenção dos dados no sistema 
  *
  * @package app.control
@@ -9,22 +9,22 @@
  * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
-class ControladorBarramento extends ControladorGeral
+class ControladorDriver extends ControladorGeral
  {
 
     /**
-     * @var BarramentoDAO
+     * @var DriverDAO
      */
     protected $model;
 
      /**
-      * Construtor da classe Barramento, esse método inicializa o  
+      * Construtor da classe Driver, esse método inicializa o  
       * modelo de dados 
       *
       */
     public function __construct() {
         parent::__construct();
-        $this->model = new BarramentoDAO();
+        $this->model = new DriverDAO();
     }
 
      /**
@@ -43,33 +43,48 @@ class ControladorBarramento extends ControladorGeral
       */
     public function manter()
     {
-        $this->view->setTitle('Barramento');
+        $this->view->setTitle('Driver');
 
         Componente::carregaComponente('TabelaManterDados'); 
         $tabela = new TabelaManterDados();
-        $tabela->setDados(BASE_URL . '/barramento/tabela');
-        $tabela->setTitulo('Barramento');
+        $tabela->setDados(BASE_URL . '/driver/tabela');
+        $tabela->setTitulo('Driver');
         $tabela->addAcaoAdicionar(BASE_URL . 
-        '/barramento/criarNovo');
+        '/driver/criarNovo');
         $tabela->addAcaoEditar(BASE_URL . 
-        '/barramento/editar');
+        '/driver/editar');
         $tabela->addAcaoDeletar(BASE_URL . 
-        '/barramento/deletarFim');
+        '/driver/deletarFim');
 
          //Colunas da tabela
-        $tabelaColuna = new TabelaColuna('ID', 'id_barramento');
-        $tabelaColuna->setLargura(40);
+        $tabelaColuna = new TabelaColuna('ID', 'id_driver');
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Nome', 'nome');
-        $tabelaColuna->setLargura(60);
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Descri��o', 'descricao');
-        $tabelaColuna->setLargura(60);
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('Computador', 'computador');
+        $tabelaColuna->setLargura(16);
+        $tabelaColuna->setBuscaTipo('integer');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('Barramento', 'id_barramento');
+        $tabelaColuna->setLargura(16);
+        $tabelaColuna->setBuscaTipo('integer');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('Computador', 'id_computador');
+        $tabelaColuna->setLargura(16);
+        $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
         $this->view->addComponente($tabela);
@@ -96,46 +111,46 @@ class ControladorBarramento extends ControladorGeral
      /**
       * Método que controla a inserção de um novo dado
       *
-      * @param Barramento $obj - Objeto DataTransfer com os dados da classe
+      * @param Driver $obj - Objeto DataTransfer com os dados da classe
       */
-    public function criarNovo(Barramento $obj = null)
+    public function criarNovo(Driver $obj = null)
      {
-        $barramento = $obj == null ? new Barramento() : $obj;
+        $driver = $obj == null ? new Driver() : $obj;
 
-        $this->view->setTitle('Novo Barramento');
+        $this->view->setTitle('Novo Driver');
 
-        $this->view->attValue('barramento', $barramento);
+        $this->view->attValue('driver', $driver);
 
         //Carrega os campos de seleção;
         $this->getSelects();
-        $this->view->startForm(BASE_URL  . '/barramento/criarNovoFim');
-        $this->view->addTemplate('forms/barramento');
+        $this->view->startForm(BASE_URL  . '/driver/criarNovoFim');
+        $this->view->addTemplate('forms/driver');
         $this->view->endForm();
     }
 
     /**
      * Método edita os dados da tabela ou objeto em questão 
      *
-     * @param Barramento $obj - Objeto para carregar os formulários 
+     * @param Driver $obj - Objeto para carregar os formulários 
      */
-    public function editar(Barramento $obj = null) 
+    public function editar(Driver $obj = null) 
     {
         if($obj == null){
             $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
-            $barramento = $this->model->getById($id);
+            $driver = $this->model->getById($id);
         }else{
-            $barramento = $obj;
+            $driver = $obj;
         }
 
-        $this->view->setTitle('Editar Barramento');
+        $this->view->setTitle('Editar Driver');
 
-        $this->view->attValue('barramento', $barramento);
+        $this->view->attValue('driver', $driver);
 
         //Carrega os campos de seleção;
         $this->getSelects();
 
-        $this->view->startForm(BASE_URL . '/barramento/editarFim');
-        $this->view->addTemplate('forms/barramento');
+        $this->view->startForm(BASE_URL . '/driver/editarFim');
+        $this->view->addTemplate('forms/driver');
         $this->view->endForm();
     }
 
@@ -145,13 +160,13 @@ class ControladorBarramento extends ControladorGeral
      */
     public function criarNovoFim()
      {
-        $barramento = new Barramento();
+        $driver = new Driver();
         try {
-            unset($_POST['idBarramento']);
-            if($barramento->setArrayDados($_POST) > 0){ 
+            unset($_POST['idDriver']);
+            if($driver->setArrayDados($_POST) > 0){ 
                 $this->view->addErros($GLOBALS['ERROS']);
             }else{
-                if($this->model->create($barramento)){
+                if($this->model->create($driver)){
                     $this->view->addMensagemSucesso('Dados inseridos com sucesso!');
                     $this->manter();
                     return ;
@@ -164,7 +179,7 @@ class ControladorBarramento extends ControladorGeral
              $erro .= 'sistema e solucionado o mais breve possível.';
              $this->view->addMensagemErro($erro);
         }
-        $this->criarNovo($barramento);
+        $this->criarNovo($driver);
     }
 
     /**
@@ -173,14 +188,14 @@ class ControladorBarramento extends ControladorGeral
      */
     public function editarFim()
      {
-        $barramento = new Barramento();
-        $id = ValidatorUtil::variavelInt($_POST['idBarramento']);
-        $barramento->setIdBarramento($id);
+        $driver = new Driver();
+        $id = ValidatorUtil::variavelInt($_POST['idDriver']);
+        $driver->setIdDriver($id);
         try {
-             if($barramento->setArrayDados($_POST) > 0){ 
+             if($driver->setArrayDados($_POST) > 0){ 
                  $this->view->addErros($GLOBALS['ERROS']);
              }else{
-                 if($this->model->update($barramento)){
+                 if($this->model->update($driver)){
                      $this->view->addMensagemSucesso('Dados alterados com sucesso!');
                      $this->manter();
                      return ;
@@ -193,7 +208,7 @@ class ControladorBarramento extends ControladorGeral
              $erro .= 'sistema e solucionado o mais breve possível.';
              $this->view->addMensagemErro($erro);
         }
-        $this->editar($barramento);
+        $this->editar($driver);
     }
 
     /**
@@ -202,11 +217,11 @@ class ControladorBarramento extends ControladorGeral
      */
     public function deletarFim()
     {
-        $barramento = new Barramento();
+        $driver = new Driver();
         $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
-        $barramento->setIdBarramento($id);
+        $driver->setIdDriver($id);
         try {
-             if($this->model->delete($barramento) !== false){
+             if($this->model->delete($driver) !== false){
                   $this->view->addMensagemSucesso('Dado removido com sucesso!');
              }else{
                   $this->view->addMensagemErro($this->model->getErro());
@@ -225,8 +240,16 @@ class ControladorBarramento extends ControladorGeral
      */
     private function getSelects()
      {
+        $consulta = $this->model->queryTable('barramento', 'id_barramento, barramento');
+        $lista = $this->model->getMapaSimplesDados($consulta, 'id_barramento', 'barramento');
+        $this->view->attValue('listaBarramento', $lista);
+
+        $consulta = $this->model->queryTable('computador', 'id_computador, computador');
+        $lista = $this->model->getMapaSimplesDados($consulta, 'id_computador', 'computador');
+        $this->view->attValue('listaComputador', $lista);
+
     }
-    private function addArquivos(Barramento $obj, $editar = false)
+    private function addArquivos(Driver $obj, $editar = false)
     {
     }
   private function salvarImagem(ArquivoUpload $arquivo,  Noticia $noticia, $editar = false)
