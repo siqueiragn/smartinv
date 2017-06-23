@@ -67,7 +67,7 @@ class ControladorDriver extends ControladorGeral
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
+        $tabelaColuna = new TabelaColuna('DescriÃ§Ã£o', 'descricao');
         $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);

@@ -67,12 +67,12 @@ class ControladorFonte extends ControladorGeral
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Potencia', 'potencia');
+        $tabelaColuna = new TabelaColuna('PotÃªncia', 'potencia');
         $tabelaColuna->setLargura(20);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
+        $tabelaColuna = new TabelaColuna('DescriÃ§Ã£o', 'descricao');
         $tabelaColuna->setLargura(20);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);

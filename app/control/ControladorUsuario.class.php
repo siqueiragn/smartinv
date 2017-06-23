@@ -57,7 +57,7 @@ class ControladorUsuario extends ControladorGeral
         '/usuario/deletarFim');
 
          //Colunas da tabela
-        $tabelaColuna = new TabelaColuna('Id usuário', 'id_usuario');
+        $tabelaColuna = new TabelaColuna('ID', 'id_usuario');
         $tabelaColuna->setLargura(40);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
@@ -67,10 +67,10 @@ class ControladorUsuario extends ControladorGeral
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Password', 'password');
+      /*   $tabelaColuna = new TabelaColuna('Password', 'password');
         $tabelaColuna->setLargura(60);
         $tabelaColuna->setBuscaTipo('character varying');
-        $tabela->addColuna($tabelaColuna);
+        $tabela->addColuna($tabelaColuna); */
 
         $tabelaColuna = new TabelaColuna('Email', 'email');
         $tabelaColuna->setLargura(60);

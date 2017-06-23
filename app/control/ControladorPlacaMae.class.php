@@ -72,7 +72,7 @@ class ControladorPlacaMae extends ControladorGeral
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
+        $tabelaColuna = new TabelaColuna('DescriÃ§Ã£o', 'descricao');
         $tabelaColuna->setLargura(20);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);

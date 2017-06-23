@@ -67,12 +67,12 @@ class ControladorProcessador extends ControladorGeral
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Frequencia', 'frequencia');
+        $tabelaColuna = new TabelaColuna('FrequÃªncia', 'frequencia');
         $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
+        $tabelaColuna = new TabelaColuna('DescriÃ§Ã£o', 'descricao');
         $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
