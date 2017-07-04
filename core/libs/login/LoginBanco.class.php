@@ -75,21 +75,21 @@ class LoginBanco extends Login{
 
     public function verificaLoginSenha($login, $senha) {
         $consulta = $this->modelo->queryTable($this->tabelaLogin,
-                        'senha, '. $this->campoIdUsuario . ', id_nivel',
+                        'password, '. $this->campoIdUsuario . '',
                         $this->montaCondicao($login));
         $resultado = $consulta->fetchAll(\PDO::FETCH_ASSOC);
         $resultQtd =  count($resultado);
         if ($resultQtd == 1) {                    
-            $senhaCriptografada = $resultado[0]['senha'];
+        	$senhaCriptografada = $resultado[0]['password'];
             if ($this->verificaSenha($senha, $senhaCriptografada)) {
-                $this->geraObjSessao($login, $senha);
+            	$this->geraObjSessao($login, $senha);
                 $this->userObject->addExtra('id', $resultado[0][$this->campoIdUsuario]);
-                $this->nivel = $resultado[0]['id_nivel'];                   
+                $this->nivel = 0;                 
                 $_SESSION['user'] = serialize($this->userObject);
                 return true; //Autenticação OK
             }
         } else if ($resultQtd > 1) {
-            throw new \SQLException();
+            throw new SQLException();
         }
         return false;
     }

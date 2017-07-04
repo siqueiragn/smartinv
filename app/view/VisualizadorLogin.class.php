@@ -15,15 +15,18 @@ class VisualizadorLogin extends AbstractView
     public function __construct()
     {
         parent::__construct();
-        $this->addTemplate('menu');
+        $this->addTemplate('menuLogin');
+        $this->addTemplate('cadastrar');
         $this->CDN()->add('jquery');
         $this->CDN()->add('bootstrap');
+        $this->addCSS("custom");
         $this->attValue('navegacaoMenu', $this->mostrarNavegacao);
-        $this->addCSS('bootstrap-theme');
+        $this->addTemplate('rodapeLogin');
+       /*  $this->addCSS('bootstrap-theme');
         $this->addCSS('style-responsive');
-        $this->addCSS('login');
-        $this->addCSS('font-awesome.min');
-        $this->addCSS('elegant-icons-style');
+        $this->addCSS('login'); */
+     /*    $this->addCSS('font-awesome.min');
+        $this->addCSS('elegant-icons-style'); */
     }
 
     public function naoMostrarNavegacao()

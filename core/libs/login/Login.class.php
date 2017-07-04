@@ -63,8 +63,9 @@ abstract class Login
     public function verificaLogado()
     {
         if (array_key_exists('user', $_SESSION)) {
-            $this->userObject = unserialize($_SESSION['user']);   
-            return $this->verificaLoginSenha($this->userObject->getLogin(), $this->userObject->getPass());
+            $this->userObject = unserialize($_SESSION['user']);
+            return true;
+            //return $this->verificaLoginSenha($this->userObject->getLogin(), $this->userObject->getPass());
         } else {
             return false;
         }

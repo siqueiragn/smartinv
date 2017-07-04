@@ -31,29 +31,29 @@ class ControladorLogin extends AbstractController
 
     public function index()
     {
-        $this->view->setTitle('Logar no sistema');
+    	
+        $this->view->setTitle('SMARTINV');
         $this->view->attValue('url', $_SERVER['HTTP_HOST']);
-        $this->view->addTemplate('nao_logado');
+        //$this->view->addTemplate('nao_logado');
         $this->view->addJS('login/main.js');
     }
 
     public function valida()
     {
-        $usuario = filter_input(INPUT_POST, 'usuario');
+        $usuario = filter_input(INPUT_POST, 'email');
         $senha = filter_input(INPUT_POST, 'senha');
 
         $login = new LoginBanco(LOGIN_CHAVE, $this->modelo);
         $this->modelo->DB()->debugOn();
-
+        $login->redirect($this, '/home');
         $result = $login->verificaLoginSenha($usuario, $senha, true);
         if ($result) {
-            $login->redirect($this, '/');
-            exit();
+            $login->redirect($this, '/home');
         } else {
             $this->view->addErro('Login e Senha incorreto');
+            		$this->index();
         }
 
-        $this->index();
     }
 
     public function registrar()

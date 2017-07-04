@@ -31,7 +31,7 @@ define('LOGS', CACHE . 'logs');
 define('DEBUG', true);
 
 //define a chave de critpografia
-define('LOGIN_CHAVE', '56973d6a8dbf7cd58330565thfde2d  -');
+define('LOGIN_CHAVE', '56973d6a8dbf7cd58330565thfde2d');
 
 //Configurações de hora
 date_default_timezone_set('America/Sao_Paulo');

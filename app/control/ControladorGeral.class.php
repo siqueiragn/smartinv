@@ -25,16 +25,16 @@ class ControladorGeral extends AbstractController
         $this->view = new VisualizadorGeral();
         $this->login = new LoginBanco(LOGIN_CHAVE, $this->modelo);
 
-//         if (!$this->verificaLogado()) {
-//             $this->login->saveRedirect();
-//             $this->redirect('/login');
-//             exit();
-//         }
+         if (!$this->verificaLogado()) {
+             $this->login->saveRedirect();
+             $this->redirect('/login');
+             exit();
+         }
     }
 
     public function paginaNaoEncontrada()
     {
-        $this->view->setTitle('Não encontrada');
+        $this->view->setTitle('NÃ£o encontrada');
     }
 
     public function index()
@@ -51,6 +51,8 @@ class ControladorGeral extends AbstractController
     public function home()
     {
         $this->view = new VisualizadorGeral();
+        $this->view->setTitle('Home');
+        $this->view->addTemplate('imagens');
         /* $controlador = new ControladorGeral();
         $this->view = $controlador->getView(); */
     }
@@ -82,16 +84,10 @@ class ControladorGeral extends AbstractController
         }
     }
     
-    public function componentes(){
-    	$this->view->setTitle('Componentes');
-    	$this->view->addTemplate('componentes');
-    }
-    
- 
 
     public function __destruct()
     {
-    	if(get_class($this->view)=='VisualizadorRegistro' || $this->view->getTitle() == 'Componentes')
+    	if(get_class($this->view)=='VisualizadorRegistro' ||   $this->view->getTitle() == 'Home')
     		$this->view->addTemplate('rodapeLogin');
     	else
     	$this->view->addTemplate('rodape');

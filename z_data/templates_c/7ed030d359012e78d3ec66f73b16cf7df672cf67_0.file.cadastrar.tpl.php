@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.31, created on 2017-06-07 00:51:40
+/* Smarty version 3.1.31, created on 2017-07-04 16:36:18
   from "C:\xampp\htdocs\workspace\smartinv\app\view\templates\cadastrar.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.31',
-  'unifunc' => 'content_5937784c7bfae9_24093816',
+  'unifunc' => 'content_595bee32ce9ad1_49231548',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7ed030d359012e78d3ec66f73b16cf7df672cf67' => 
     array (
       0 => 'C:\\xampp\\htdocs\\workspace\\smartinv\\app\\view\\templates\\cadastrar.tpl',
-      1 => 1496807497,
+      1 => 1499196945,
       2 => 'file',
     ),
   ),
@@ -20,12 +20,12 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5937784c7bfae9_24093816 (Smarty_Internal_Template $_smarty_tpl) {
+function content_595bee32ce9ad1_49231548 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="col-md-4 col-xs-4" style="margin-top: 15%">
 <form id="formLogin" class="login-form" action="/login/valida" method="post" >        
     <div class="form-group">
-              <input type="text" placeholder="Usuário" name="usuario" class="form-control">
+              <input type="text" placeholder="Email" name="email" class="form-control">
             </div>
             <div class="form-group">
               <input type="password" placeholder="Senha" name="senha" class="form-control">

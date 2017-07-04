@@ -11,7 +11,7 @@
          <div class="form-group">
               <label class="control-label col-sm-2" for="password">Password</label>
               <div class="col-sm-8">
-                 <input type="hidden" id="password" name="password" value="{$usuario->getPassword()}" class=" form-control" required  />
+                 <input type="password" id="password" name="password" value="{$usuario->getPassword()}" class=" form-control" required  />
               </div>
          </div>
          <div class="form-group">
