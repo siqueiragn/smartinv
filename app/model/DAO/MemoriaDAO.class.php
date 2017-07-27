@@ -6,7 +6,7 @@
  *
  * @package modulos.
  * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 19-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 25-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class MemoriaDAO extends AbstractDAO 
@@ -36,10 +36,9 @@ class MemoriaDAO extends AbstractDAO
                                          'id_memoria as principal ,
                                           nome,
                                           frequencia,
-                                          tipo,
+                                          capacidade,
                                           descricao,
-                                          computador,
-                                          capacidade'
+                                          computador'
                                        );
         $resultado = array(
             'page' => $tabela->getPagina(),
@@ -70,10 +69,9 @@ class MemoriaDAO extends AbstractDAO
                                          'id_memoria as principal ,
                                           nome,
                                           frequencia,
-                                          tipo,
+                                          capacidade,
                                           descricao,
-                                          computador,
-                                          capacidade',
+                                          computador',
                         'id_memoria ='. $id );
         if ($consulta) {
             $memoria = $this->setDados($consulta->fetch());
@@ -96,10 +94,9 @@ class MemoriaDAO extends AbstractDAO
                                          'id_memoria as principal ,
                                           nome,
                                           frequencia,
-                                          tipo,
+                                          capacidade,
                                           descricao,
-                                          computador,
-                                          capacidade',
+                                          computador',
             $condicao);
         foreach ($result as $linhaBanco) {
             $memoria = $this->setDados($linhaBanco);
@@ -121,10 +118,9 @@ class MemoriaDAO extends AbstractDAO
         $memoria->setIdMemoria($dados['principal']);
         $memoria->setNome($dados['nome']);
         $memoria->setFrequencia($dados['frequencia']);
-        $memoria->setTipo($dados['tipo']);
+        $memoria->setCapacidade($dados['capacidade']);
         $memoria->setDescricao($dados['descricao']);
         $memoria->setComputador($dados['computador']);
-        $memoria->setCapacidade($dados['capacidade']);
         return $memoria;
     }
 

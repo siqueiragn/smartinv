@@ -11,6 +11,7 @@ class LoginBanco extends Login{
     private $modelo;
     private $email;
     private $campoIdUsuario;
+    private $usuario;
     private $camposAceitosLogin = array('email');
 
     /**
@@ -26,6 +27,7 @@ class LoginBanco extends Login{
         $this->modelo = $model;
         $this->nivel = 0;
         $this->campoIdUsuario = 'id_usuario';
+        
     }
     
     public function ativaDebug(){

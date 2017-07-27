@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 25-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class FonteDAO extends AbstractDAO 

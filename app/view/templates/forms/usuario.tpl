@@ -3,21 +3,15 @@
      <legend>Usuário</legend>
              <input type="hidden" id="idUsuario" name="idUsuario" value="{$usuario->getIdUsuario()}" class=" form-control" required  />
          <div class="form-group">
-              <label class="control-label col-sm-2" for="login">Login</label>
+              <label class="control-label col-sm-2" for="email">Email</label>
               <div class="col-sm-8">
-                 <input type="text" id="login" name="login" value="{$usuario->getLogin()}" class=" form-control" required  />
+                 <input type="text" id="email" name="email" value="{$usuario->getEmail()}" class=" form-control"  />
               </div>
          </div>
          <div class="form-group">
               <label class="control-label col-sm-2" for="password">Password</label>
               <div class="col-sm-8">
-                 <input type="password" id="password" name="password" value="{$usuario->getPassword()}" class=" form-control" required  />
-              </div>
-         </div>
-         <div class="form-group">
-              <label class="control-label col-sm-2" for="email">Email</label>
-              <div class="col-sm-8">
-                 <input type="text" id="email" name="email" value="{$usuario->getEmail()}" class=" form-control" required  />
+                 <input type="text" id="password" name="password" value="{$usuario->getPassword()}" class=" form-control"  />
               </div>
          </div>
 </fieldset>

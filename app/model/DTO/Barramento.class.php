@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 25-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class Barramento implements DTOInterface
@@ -15,6 +15,7 @@
     private $idBarramento;
     private $nome;
     private $descricao;
+    private $computador;
     private $isValid;
     private $table;
 
@@ -104,6 +105,32 @@
     }
 
     /**
+     * Método que retorna o valor da variável computador
+     *
+     * @return Inteiro - Valor da variável computador
+     */
+    public function getComputador()
+     {
+        return $this->computador;
+    }
+
+    /**
+     * Método que seta o valor da variável computador
+     *
+     * @param Inteiro $computador - Valor da variável computador
+     */
+    public function setComputador($computador)
+    {
+         $computador = trim($computador);
+          if(!(is_numeric($computador) && is_int($computador + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Computador é um número inteiro inválido!';
+                return false;
+          }
+          $this->computador = $computador;
+          return true;
+    }
+
+    /**
      * Método que retorna o valor da variável $tabela 
      *
      * @return String - Tabela do SGBD
@@ -129,7 +156,8 @@
         return array(
              $this->idBarramento,
              $this->nome,
-             $this->descricao
+             $this->descricao,
+             $this->computador
         );
      }
 

@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 25-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class PlacaMae implements DTOInterface
@@ -149,10 +149,6 @@
     public function setComputador($computador)
     {
          $computador = trim($computador);
-          if(empty($computador)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Computador não pode ser nulo!';
-                return false;
-          }
           if(!(is_numeric($computador) && is_int($computador + 0))){
                 $GLOBALS['ERROS'][] = 'O valor informado em Computador é um número inteiro inválido!';
                 return false;

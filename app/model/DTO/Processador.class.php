@@ -4,19 +4,19 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 25-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class Processador implements DTOInterface
  {
     use core\model\DTOTrait;
 
-    private $nome;
     private $idProcessador;
+    private $nome;
     private $frequencia;
-    private $descricao;
     private $socket;
+    private $descricao;
     private $computador;
     private $isValid;
     private $table;
@@ -30,28 +30,6 @@
     public function __construct($table = 'public.processador')
     {
         $this->table = $table;
-    }
-
-    /**
-     * Método que retorna o valor da variável nome
-     *
-     * @return String - Valor da variável nome
-     */
-    public function getNome()
-     {
-        return $this->nome;
-    }
-
-    /**
-     * Método que seta o valor da variável nome
-     *
-     * @param String $nome - Valor da variável nome
-     */
-    public function setNome($nome)
-    {
-         $nome = trim($nome);
-         $this->nome = $nome;
-         return true;
     }
 
     /**
@@ -85,6 +63,28 @@
     }
 
     /**
+     * Método que retorna o valor da variável nome
+     *
+     * @return String - Valor da variável nome
+     */
+    public function getNome()
+     {
+        return $this->nome;
+    }
+
+    /**
+     * Método que seta o valor da variável nome
+     *
+     * @param String $nome - Valor da variável nome
+     */
+    public function setNome($nome)
+    {
+         $nome = trim($nome);
+         $this->nome = $nome;
+         return true;
+    }
+
+    /**
      * Método que retorna o valor da variável frequencia
      *
      * @return Inteiro - Valor da variável frequencia
@@ -111,28 +111,6 @@
     }
 
     /**
-     * Método que retorna o valor da variável descricao
-     *
-     * @return String - Valor da variável descricao
-     */
-    public function getDescricao()
-     {
-        return $this->descricao;
-    }
-
-    /**
-     * Método que seta o valor da variável descricao
-     *
-     * @param String $descricao - Valor da variável descricao
-     */
-    public function setDescricao($descricao)
-    {
-         $descricao = trim($descricao);
-         $this->descricao = $descricao;
-         return true;
-    }
-
-    /**
      * Método que retorna o valor da variável socket
      *
      * @return String - Valor da variável socket
@@ -155,6 +133,28 @@
     }
 
     /**
+     * Método que retorna o valor da variável descricao
+     *
+     * @return String - Valor da variável descricao
+     */
+    public function getDescricao()
+     {
+        return $this->descricao;
+    }
+
+    /**
+     * Método que seta o valor da variável descricao
+     *
+     * @param String $descricao - Valor da variável descricao
+     */
+    public function setDescricao($descricao)
+    {
+         $descricao = trim($descricao);
+         $this->descricao = $descricao;
+         return true;
+    }
+
+    /**
      * Método que retorna o valor da variável computador
      *
      * @return Inteiro - Valor da variável computador
@@ -172,10 +172,6 @@
     public function setComputador($computador)
     {
          $computador = trim($computador);
-          if(empty($computador)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Computador não pode ser nulo!';
-                return false;
-          }
           if(!(is_numeric($computador) && is_int($computador + 0))){
                 $GLOBALS['ERROS'][] = 'O valor informado em Computador é um número inteiro inválido!';
                 return false;
@@ -208,11 +204,11 @@
      public function getArrayJSON()
      {
         return array(
-             $this->nome,
              $this->idProcessador,
+             $this->nome,
              $this->frequencia,
-             $this->descricao,
              $this->socket,
+             $this->descricao,
              $this->computador
         );
      }

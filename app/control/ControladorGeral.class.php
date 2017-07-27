@@ -24,12 +24,14 @@ class ControladorGeral extends AbstractController
         $this->modelo = new Modelo();
         $this->view = new VisualizadorGeral();
         $this->login = new LoginBanco(LOGIN_CHAVE, $this->modelo);
-
+		
+        
          if (!$this->verificaLogado()) {
              $this->login->saveRedirect();
              $this->redirect('/login');
              exit();
          }
+         $this->view->attValue('usuario', $this->login->getUsuario());
     }
 
     public function paginaNaoEncontrada()

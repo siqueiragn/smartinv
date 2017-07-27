@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 25-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class DiscoRigidoDAO extends AbstractDAO 
@@ -35,11 +35,11 @@ class DiscoRigidoDAO extends AbstractDAO
         $result = $this->queryTable(  'public.disco_rigido ' . $tabela->getcondicao(), 
                                          'id_disco_rigido as principal ,
                                           nome,
+                                          capacidade,
                                           v_cache,
                                           rpm,
                                           descricao,
-                                          computador,
-                                          id_barramento'
+                                          computador'
                                        );
         $resultado = array(
             'page' => $tabela->getPagina(),
@@ -69,11 +69,11 @@ class DiscoRigidoDAO extends AbstractDAO
         $consulta = $this->queryTable($discoRigido->getTable(),
                                          'id_disco_rigido as principal ,
                                           nome,
+                                          capacidade,
                                           v_cache,
                                           rpm,
                                           descricao,
-                                          computador,
-                                          id_barramento',
+                                          computador',
                         'id_disco_rigido ='. $id );
         if ($consulta) {
             $discoRigido = $this->setDados($consulta->fetch());
@@ -95,11 +95,11 @@ class DiscoRigidoDAO extends AbstractDAO
         $result = $this->queryTable(  'public.disco_rigido ', 
                                          'id_disco_rigido as principal ,
                                           nome,
+                                          capacidade,
                                           v_cache,
                                           rpm,
                                           descricao,
-                                          computador,
-                                          id_barramento',
+                                          computador',
             $condicao);
         foreach ($result as $linhaBanco) {
             $discoRigido = $this->setDados($linhaBanco);
@@ -120,11 +120,11 @@ class DiscoRigidoDAO extends AbstractDAO
         $discoRigido = new DiscoRigido();
         $discoRigido->setIdDiscoRigido($dados['principal']);
         $discoRigido->setNome($dados['nome']);
+        $discoRigido->setCapacidade($dados['capacidade']);
         $discoRigido->setVCache($dados['v_cache']);
         $discoRigido->setRpm($dados['rpm']);
         $discoRigido->setDescricao($dados['descricao']);
         $discoRigido->setComputador($dados['computador']);
-        $discoRigido->setIdBarramento($dados['id_barramento']);
         return $discoRigido;
     }
 

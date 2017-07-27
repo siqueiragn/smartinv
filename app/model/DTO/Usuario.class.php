@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 25-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class Usuario implements DTOInterface
@@ -13,9 +13,8 @@
     use core\model\DTOTrait;
 
     private $idUsuario;
-    private $login;
-    private $password;
     private $email;
+    private $password;
     private $isValid;
     private $table;
 
@@ -61,28 +60,24 @@
     }
 
     /**
-     * Método que retorna o valor da variável login
+     * Método que retorna o valor da variável email
      *
-     * @return String - Valor da variável login
+     * @return String - Valor da variável email
      */
-    public function getLogin()
+    public function getEmail()
      {
-        return $this->login;
+        return $this->email;
     }
 
     /**
-     * Método que seta o valor da variável login
+     * Método que seta o valor da variável email
      *
-     * @param String $login - Valor da variável login
+     * @param String $email - Valor da variável email
      */
-    public function setLogin($login)
+    public function setEmail($email)
     {
-         $login = trim($login);
-          if(empty($login)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Login não pode ser nulo!';
-                return false;
-          }
-         $this->login = $login;
+         $email = trim($email);
+         $this->email = $email;
          return true;
     }
 
@@ -104,37 +99,7 @@
     public function setPassword($password)
     {
          $password = trim($password);
-          if(empty($password)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Password não pode ser nulo!';
-                return false;
-          }
          $this->password = $password;
-         return true;
-    }
-
-    /**
-     * Método que retorna o valor da variável email
-     *
-     * @return String - Valor da variável email
-     */
-    public function getEmail()
-     {
-        return $this->email;
-    }
-
-    /**
-     * Método que seta o valor da variável email
-     *
-     * @param String $email - Valor da variável email
-     */
-    public function setEmail($email)
-    {
-         $email = trim($email);
-          if(empty($email)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Email não pode ser nulo!';
-                return false;
-          }
-         $this->email = $email;
          return true;
     }
 
@@ -163,9 +128,8 @@
      {
         return array(
              $this->idUsuario,
-             $this->login,
-             $this->password,
-             $this->email
+             $this->email,
+             $this->password
         );
      }
 

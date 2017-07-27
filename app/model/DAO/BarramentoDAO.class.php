@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 25-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class BarramentoDAO extends AbstractDAO 
@@ -35,7 +35,8 @@ class BarramentoDAO extends AbstractDAO
         $result = $this->queryTable(  'public.barramento ' . $tabela->getcondicao(), 
                                          'id_barramento as principal ,
                                           nome,
-                                          descricao'
+                                          descricao,
+                                          computador'
                                        );
         $resultado = array(
             'page' => $tabela->getPagina(),
@@ -65,7 +66,8 @@ class BarramentoDAO extends AbstractDAO
         $consulta = $this->queryTable($barramento->getTable(),
                                          'id_barramento as principal ,
                                           nome,
-                                          descricao',
+                                          descricao,
+                                          computador',
                         'id_barramento ='. $id );
         if ($consulta) {
             $barramento = $this->setDados($consulta->fetch());
@@ -87,7 +89,8 @@ class BarramentoDAO extends AbstractDAO
         $result = $this->queryTable(  'public.barramento ', 
                                          'id_barramento as principal ,
                                           nome,
-                                          descricao',
+                                          descricao,
+                                          computador',
             $condicao);
         foreach ($result as $linhaBanco) {
             $barramento = $this->setDados($linhaBanco);
@@ -109,6 +112,7 @@ class BarramentoDAO extends AbstractDAO
         $barramento->setIdBarramento($dados['principal']);
         $barramento->setNome($dados['nome']);
         $barramento->setDescricao($dados['descricao']);
+        $barramento->setComputador($dados['computador']);
         return $barramento;
     }
 

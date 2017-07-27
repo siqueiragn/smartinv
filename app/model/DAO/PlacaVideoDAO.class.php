@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 25-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class PlacaVideoDAO extends AbstractDAO 
@@ -36,11 +36,10 @@ class PlacaVideoDAO extends AbstractDAO
                                          'id_placa_video as principal ,
                                           nome,
                                           frequencia,
-                                          barramento,
                                           memoria,
+                                          barramento,
                                           descricao,
-                                          computador,
-                                          id_barramento'
+                                          computador'
                                        );
         $resultado = array(
             'page' => $tabela->getPagina(),
@@ -71,11 +70,10 @@ class PlacaVideoDAO extends AbstractDAO
                                          'id_placa_video as principal ,
                                           nome,
                                           frequencia,
-                                          barramento,
                                           memoria,
+                                          barramento,
                                           descricao,
-                                          computador,
-                                          id_barramento',
+                                          computador',
                         'id_placa_video ='. $id );
         if ($consulta) {
             $placaVideo = $this->setDados($consulta->fetch());
@@ -98,11 +96,10 @@ class PlacaVideoDAO extends AbstractDAO
                                          'id_placa_video as principal ,
                                           nome,
                                           frequencia,
-                                          barramento,
                                           memoria,
+                                          barramento,
                                           descricao,
-                                          computador,
-                                          id_barramento',
+                                          computador',
             $condicao);
         foreach ($result as $linhaBanco) {
             $placaVideo = $this->setDados($linhaBanco);
@@ -124,11 +121,10 @@ class PlacaVideoDAO extends AbstractDAO
         $placaVideo->setIdPlacaVideo($dados['principal']);
         $placaVideo->setNome($dados['nome']);
         $placaVideo->setFrequencia($dados['frequencia']);
-        $placaVideo->setBarramento($dados['barramento']);
         $placaVideo->setMemoria($dados['memoria']);
+        $placaVideo->setBarramento($dados['barramento']);
         $placaVideo->setDescricao($dados['descricao']);
         $placaVideo->setComputador($dados['computador']);
-        $placaVideo->setIdBarramento($dados['id_barramento']);
         return $placaVideo;
     }
 

@@ -154,8 +154,11 @@ class ControladorUsuario extends ControladorGeral
         try {
             unset($_POST['idUsuario']);
             if($usuario->setArrayDados($_POST) > 0){ 
+            	
                 $this->view->addErros($GLOBALS['ERROS']);
             }else{
+            	$l = $this->login;
+            	$usuario->setPassword($l->criptografaSenha($_POST['password']));
                 if($this->model->create($usuario)){
                     $this->view->addMensagemSucesso('Dados inseridos com sucesso!');
                     $this->manter();

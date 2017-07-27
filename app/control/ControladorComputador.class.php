@@ -67,7 +67,7 @@ class ControladorComputador extends ControladorGeral
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
+        $tabelaColuna = new TabelaColuna('Descriï¿½ï¿½o', 'descricao');
         $tabelaColuna->setLargura(33);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
@@ -135,6 +135,11 @@ class ControladorComputador extends ControladorGeral
         $this->getSelects();
 
         $this->view->startForm(BASE_URL . '/computador/editarFim');
+        
+        $placaMaeDAO = new PlacaMaeDAO();
+        $placaMae = $placaMaeDAO->getByComputerID($computador->getIdComputador());
+        $this->view->attValue('placaMae', $placaMae);
+        ds($placaMae);
         $this->view->addTemplate('forms/computador');
         $this->view->endForm();
     }

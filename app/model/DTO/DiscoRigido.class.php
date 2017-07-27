@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 25-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class DiscoRigido implements DTOInterface
@@ -14,11 +14,11 @@
 
     private $idDiscoRigido;
     private $nome;
+    private $capacidade;
     private $vCache;
     private $rpm;
     private $descricao;
     private $computador;
-    private $idBarramento;
     private $isValid;
     private $table;
 
@@ -83,6 +83,32 @@
          $nome = trim($nome);
          $this->nome = $nome;
          return true;
+    }
+
+    /**
+     * Método que retorna o valor da variável capacidade
+     *
+     * @return Inteiro - Valor da variável capacidade
+     */
+    public function getCapacidade()
+     {
+        return $this->capacidade;
+    }
+
+    /**
+     * Método que seta o valor da variável capacidade
+     *
+     * @param Inteiro $capacidade - Valor da variável capacidade
+     */
+    public function setCapacidade($capacidade)
+    {
+         $capacidade = trim($capacidade);
+          if(!(is_numeric($capacidade) && is_int($capacidade + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Capacidade é um número inteiro inválido!';
+                return false;
+          }
+          $this->capacidade = $capacidade;
+          return true;
     }
 
     /**
@@ -186,36 +212,6 @@
     }
 
     /**
-     * Método que retorna o valor da variável idBarramento
-     *
-     * @return Inteiro - Valor da variável idBarramento
-     */
-    public function getIdBarramento()
-     {
-        return $this->idBarramento;
-    }
-
-    /**
-     * Método que seta o valor da variável idBarramento
-     *
-     * @param Inteiro $idBarramento - Valor da variável idBarramento
-     */
-    public function setIdBarramento($idBarramento)
-    {
-         $idBarramento = trim($idBarramento);
-          if(empty($idBarramento)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento não pode ser nulo!';
-                return false;
-          }
-          if(!(is_numeric($idBarramento) && is_int($idBarramento + 0))){
-                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento é um número inteiro inválido!';
-                return false;
-          }
-          $this->idBarramento = $idBarramento;
-          return true;
-    }
-
-    /**
      * Método que retorna o valor da variável $tabela 
      *
      * @return String - Tabela do SGBD
@@ -241,11 +237,11 @@
         return array(
              $this->idDiscoRigido,
              $this->nome,
+             $this->capacidade,
              $this->vCache,
              $this->rpm,
              $this->descricao,
-             $this->computador,
-             $this->idBarramento
+             $this->computador
         );
      }
 

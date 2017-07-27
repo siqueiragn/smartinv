@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 25-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class UsuarioDAO extends AbstractDAO 
@@ -34,9 +34,8 @@ class UsuarioDAO extends AbstractDAO
         $nLinhas = $nLinhasCon->fetch();
         $result = $this->queryTable(  'public.usuario ' . $tabela->getcondicao(), 
                                          'id_usuario as principal ,
-                                          login,
-                                          password,
-                                          email'
+                                          email,
+                                          password'
                                        );
         $resultado = array(
             'page' => $tabela->getPagina(),
@@ -65,9 +64,8 @@ class UsuarioDAO extends AbstractDAO
         $usuario = new Usuario();
         $consulta = $this->queryTable($usuario->getTable(),
                                          'id_usuario as principal ,
-                                          login,
-                                          password,
-                                          email',
+                                          email,
+                                          password',
                         'id_usuario ='. $id );
         if ($consulta) {
             $usuario = $this->setDados($consulta->fetch());
@@ -88,9 +86,8 @@ class UsuarioDAO extends AbstractDAO
         $dados = array();
         $result = $this->queryTable(  'public.usuario ', 
                                          'id_usuario as principal ,
-                                          login,
-                                          password,
-                                          email',
+                                          email,
+                                          password',
             $condicao);
         foreach ($result as $linhaBanco) {
             $usuario = $this->setDados($linhaBanco);
@@ -110,9 +107,8 @@ class UsuarioDAO extends AbstractDAO
     {
         $usuario = new Usuario();
         $usuario->setIdUsuario($dados['principal']);
-        $usuario->setLogin($dados['login']);
-        $usuario->setPassword($dados['password']);
         $usuario->setEmail($dados['email']);
+        $usuario->setPassword($dados['password']);
         return $usuario;
     }
 

@@ -9,6 +9,12 @@
               </div>
          </div>
          <div class="form-group">
+              <label class="control-label col-sm-2" for="capacidade">Capacidade</label>
+              <div class="col-sm-8">
+                 <input type="text" id="capacidade" name="capacidade" value="{$discoRigido->getCapacidade()}" class="validaInteiro form-control"  />
+              </div>
+         </div>
+         <div class="form-group">
               <label class="control-label col-sm-2" for="vCache">V cache</label>
               <div class="col-sm-8">
                  <input type="text" id="vCache" name="vCache" value="{$discoRigido->getVCache()}" class="validaInteiro form-control"  />
@@ -31,15 +37,6 @@
               <div class="col-sm-8">
                  <select id="computador" name="computador" class="form-control">
     		{html_options options=$listaComputador selected=$discoRigido->getComputador()}
-             </select>
-
-              </div>
-         </div>
-         <div class="form-group">
-              <label class="control-label col-sm-2" for="idBarramento">Id barramento</label>
-              <div class="col-sm-8">
-                 <select id="idBarramento" name="idBarramento" class="form-control">
-    		{html_options options=$listaBarramento selected=$discoRigido->getIdBarramento()}
              </select>
 
               </div>

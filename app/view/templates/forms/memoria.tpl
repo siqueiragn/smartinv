@@ -15,9 +15,9 @@
               </div>
          </div>
          <div class="form-group">
-              <label class="control-label col-sm-2" for="tipo">Tipo</label>
+              <label class="control-label col-sm-2" for="capacidade">Capacidade</label>
               <div class="col-sm-8">
-                 <input type="text" id="tipo" name="tipo" value="{$memoria->getTipo()}" class=" form-control"  />
+                 <input type="text" id="capacidade" name="capacidade" value="{$memoria->getCapacidade()}" class="validaInteiro form-control"  />
               </div>
          </div>
          <div class="form-group">
@@ -33,12 +33,6 @@
     		{html_options options=$listaComputador selected=$memoria->getComputador()}
              </select>
 
-              </div>
-         </div>
-         <div class="form-group">
-              <label class="control-label col-sm-2" for="capacidade">Capacidade</label>
-              <div class="col-sm-8">
-                 <input type="text" id="capacidade" name="capacidade" value="{$memoria->getCapacidade()}" class="validaInteiro form-control"  />
               </div>
          </div>
 </fieldset>

@@ -120,6 +120,8 @@ abstract class Login
     {
         return sha1(md5($this->chave . sha1($senha) . $this->chave));
     }
+    
+    
 
     public function saveRedirect()
     {
