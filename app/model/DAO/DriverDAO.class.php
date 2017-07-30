@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 28-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class DriverDAO extends AbstractDAO 
@@ -35,10 +35,10 @@ class DriverDAO extends AbstractDAO
         $result = $this->queryTable(  'public.driver ' . $tabela->getcondicao(), 
                                          'id_driver as principal ,
                                           nome,
+                                          velocidade,
                                           descricao,
-                                          computador,
-                                          id_barramento,
-                                          id_computador'
+                                          barramento,
+                                          computador'
                                        );
         $resultado = array(
             'page' => $tabela->getPagina(),
@@ -68,10 +68,29 @@ class DriverDAO extends AbstractDAO
         $consulta = $this->queryTable($driver->getTable(),
                                          'id_driver as principal ,
                                           nome,
+                                          velocidade,
                                           descricao,
-                                          computador,
-                                          id_barramento,
-                                          id_computador',
+                                          barramento,
+                                          computador',
+                        'id_driver ='. $id );
+        if ($consulta) {
+            $driver = $this->setDados($consulta->fetch());
+            return $driver;
+        } else {
+             throw new EntradaDeDadosException();
+        }
+     }
+	 
+	 
+	 public function getByComputerID($id) {
+        $driver = new Driver();
+        $consulta = $this->queryTable($driver->getTable(),
+                                         'id_driver as principal ,
+                                          nome,
+                                          velocidade,
+                                          descricao,
+                                          barramento,
+                                          computador',
                         'id_driver ='. $id );
         if ($consulta) {
             $driver = $this->setDados($consulta->fetch());
@@ -93,10 +112,10 @@ class DriverDAO extends AbstractDAO
         $result = $this->queryTable(  'public.driver ', 
                                          'id_driver as principal ,
                                           nome,
+                                          velocidade,
                                           descricao,
-                                          computador,
-                                          id_barramento,
-                                          id_computador',
+                                          barramento,
+                                          computador',
             $condicao);
         foreach ($result as $linhaBanco) {
             $driver = $this->setDados($linhaBanco);
@@ -117,10 +136,10 @@ class DriverDAO extends AbstractDAO
         $driver = new Driver();
         $driver->setIdDriver($dados['principal']);
         $driver->setNome($dados['nome']);
+        $driver->setVelocidade($dados['velocidade']);
         $driver->setDescricao($dados['descricao']);
+        $driver->setBarramento($dados['barramento']);
         $driver->setComputador($dados['computador']);
-        $driver->setIdBarramento($dados['id_barramento']);
-        $driver->setIdComputador($dados['id_computador']);
         return $driver;
     }
 

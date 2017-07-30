@@ -33,6 +33,15 @@
               </div>
          </div>
          <div class="form-group">
+              <label class="control-label col-sm-2" for="barramento">Barramento</label>
+              <div class="col-sm-8">
+                 <select id="barramento" name="barramento" class="form-control">
+    		{html_options options=$listaBarramento selected=$discoRigido->getBarramento()}
+             </select>
+
+              </div>
+         </div>
+         <div class="form-group">
               <label class="control-label col-sm-2" for="computador">Computador</label>
               <div class="col-sm-8">
                  <select id="computador" name="computador" class="form-control">

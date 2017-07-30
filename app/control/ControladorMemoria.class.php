@@ -6,7 +6,7 @@
  *
  * @package app.control
  * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 19-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 28-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class ControladorMemoria extends ControladorGeral
@@ -58,37 +58,37 @@ class ControladorMemoria extends ControladorGeral
 
          //Colunas da tabela
         $tabelaColuna = new TabelaColuna('ID', 'id_memoria');
-        $tabelaColuna->setLargura(14);
+        $tabelaColuna->setLargura(12);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Nome', 'nome');
-        $tabelaColuna->setLargura(14);
+        $tabelaColuna->setLargura(12);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Frequência', 'frequencia');
-        $tabelaColuna->setLargura(14);
-        $tabelaColuna->setBuscaTipo('integer');
-        $tabela->addColuna($tabelaColuna);
-
-        $tabelaColuna = new TabelaColuna('Tipo', 'tipo');
-        $tabelaColuna->setLargura(14);
-        $tabelaColuna->setBuscaTipo('character varying');
-        $tabela->addColuna($tabelaColuna);
-
-        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
-        $tabelaColuna->setLargura(14);
-        $tabelaColuna->setBuscaTipo('character varying');
-        $tabela->addColuna($tabelaColuna);
-
-        $tabelaColuna = new TabelaColuna('Computador', 'computador');
-        $tabelaColuna->setLargura(14);
+        $tabelaColuna = new TabelaColuna('Frequencia', 'frequencia');
+        $tabelaColuna->setLargura(12);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Capacidade', 'capacidade');
-        $tabelaColuna->setLargura(14);
+        $tabelaColuna->setLargura(12);
+        $tabelaColuna->setBuscaTipo('integer');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('Tipo', 'tipo');
+        $tabelaColuna->setLargura(12);
+        $tabelaColuna->setBuscaTipo('character varying');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
+        $tabelaColuna->setLargura(12);
+        $tabelaColuna->setBuscaTipo('character varying');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('Computador', 'computador');
+        $tabelaColuna->setLargura(12);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
@@ -245,10 +245,17 @@ class ControladorMemoria extends ControladorGeral
      */
     private function getSelects()
      {
-        $consulta = $this->model->queryTable('computador', 'computador, computador');
-        $lista = $this->model->getMapaSimplesDados($consulta, 'computador', 'computador');
-        $this->view->attValue('listaComputador', $lista);
-
+     	//$consulta = $this->model->queryTable('computador', 'computador, computador');
+     	//$lista = $this->model->getMapaSimplesDados($consulta, 'computador', 'computador');
+     	$pcDAO = new ComputadorDAO();
+     	$dados = $pcDAO->getLista();
+     	
+     	foreach ($dados as $item){
+     		$lista[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
+     	}
+     	
+     	$this->view->attValue('listaComputador', $lista);
+     	
     }
     private function addArquivos(Memoria $obj, $editar = false)
     {

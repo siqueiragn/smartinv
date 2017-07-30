@@ -11,15 +11,16 @@
  Componentes
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a style="color: black" href="memoria"> Memórias </a></li>
-<li><a style="color: black" href="../discorigido"> Discos Rígidos </a></li>
-<li><a style="color: black" href="../processador"> Processadores </a></li>
-<li><a style="color: black" href="../driver"> Drivers </a></li>
-<li><a style="color: black" href="../fonte"> Fontes de Alimentação </a></li>
-<li><a style="color: black" href="../placamae"> Placas Mães </a></li>
-<li><a style="color: black" href="../computador"> Computadores </a></li>
+                        <li><a style="color: black" href="../../../../memoria"> Memórias </a></li>
+<li><a style="color: black" href="../../../../discorigido"> Discos Rígidos </a></li>
+<li><a style="color: black" href="../../../../processador"> Processadores </a></li>
+<li><a style="color: black" href="../../../../driver"> Drivers </a></li>
+<li><a style="color: black" href="../../../../fonte"> Fontes de Alimentação </a></li>
+<li><a style="color: black" href="../../../../placamae"> Placas Mães </a></li>
+<li><a style="color: black" href="../../../../placavideo"> Placas de Video </a></li>
+<li><a style="color: black" href="../../../../computador"> Computadores </a></li>
 <hr>
-<li><a style="color: black" href="../barramento"> Barramentos </a></li>
+<li><a style="color: black" href="../../../../barramento"> Interfaces </a></li>
                     </ul>
                 </li>
   <!-- <li role="presentation"><a id="lnk" href="#">Alguma coisa</a></li>

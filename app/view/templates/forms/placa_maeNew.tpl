@@ -29,21 +29,5 @@
 
               </div>
          </div>
-         <div class="form-group">
-              <label class="control-label col-sm-2" for="newInterface">Interfaces</label>
-              <div class="col-sm-8">
-                 <select id="interface" name="interface" class="form-control">
-    		{html_options options=$lista}
-             </select>
-             </div>
-       
-              </div>
-              
-              <div class="form-group">
-              <label class="control-label col-sm-2" for="interfaces">Lista de Interfaces</label>
-              <div class="col-sm-8">
-              {html_options options=$listaInt}
-              </div>
-              </div>
 </fieldset>
 

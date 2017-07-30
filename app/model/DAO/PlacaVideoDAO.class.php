@@ -6,7 +6,7 @@
  *
  * @package modulos.
  * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 25-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 28-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class PlacaVideoDAO extends AbstractDAO 
@@ -37,8 +37,9 @@ class PlacaVideoDAO extends AbstractDAO
                                           nome,
                                           frequencia,
                                           memoria,
-                                          barramento,
+                                          tipo,
                                           descricao,
+                                          barramento,
                                           computador'
                                        );
         $resultado = array(
@@ -71,8 +72,9 @@ class PlacaVideoDAO extends AbstractDAO
                                           nome,
                                           frequencia,
                                           memoria,
-                                          barramento,
+                                          tipo,
                                           descricao,
+                                          barramento,
                                           computador',
                         'id_placa_video ='. $id );
         if ($consulta) {
@@ -81,6 +83,26 @@ class PlacaVideoDAO extends AbstractDAO
         } else {
              throw new EntradaDeDadosException();
         }
+     }
+     
+     public function getByComputerID($id) {
+     	$placaVideo = new PlacaVideo();
+     	$consulta = $this->queryTable($placaVideo->getTable(),
+     			'id_placa_video as principal ,
+                                          nome,
+                                          frequencia,
+                                          memoria,
+                                          tipo,
+                                          descricao,
+                                          barramento,
+                                          computador',
+     			'computador ='. $id );
+     	if ($consulta) {
+     		$placaVideo = $this->setDados($consulta->fetch());
+     		return $placaVideo;
+     	} else {
+     		throw new EntradaDeDadosException();
+     	}
      }
      /**
      * Método que retorna um array de objetos PlacaVideo
@@ -97,8 +119,9 @@ class PlacaVideoDAO extends AbstractDAO
                                           nome,
                                           frequencia,
                                           memoria,
-                                          barramento,
+                                          tipo,
                                           descricao,
+                                          barramento,
                                           computador',
             $condicao);
         foreach ($result as $linhaBanco) {
@@ -122,8 +145,9 @@ class PlacaVideoDAO extends AbstractDAO
         $placaVideo->setNome($dados['nome']);
         $placaVideo->setFrequencia($dados['frequencia']);
         $placaVideo->setMemoria($dados['memoria']);
-        $placaVideo->setBarramento($dados['barramento']);
+        $placaVideo->setTipo($dados['tipo']);
         $placaVideo->setDescricao($dados['descricao']);
+        $placaVideo->setBarramento($dados['barramento']);
         $placaVideo->setComputador($dados['computador']);
         return $placaVideo;
     }

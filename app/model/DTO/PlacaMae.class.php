@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 25-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 30-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class PlacaMae implements DTOInterface
@@ -86,7 +86,7 @@
     /**
      * Método que retorna o valor da variável socket
      *
-     * @return Inteiro - Valor da variável socket
+     * @return String - Valor da variável socket
      */
     public function getSocket()
      {
@@ -96,17 +96,13 @@
     /**
      * Método que seta o valor da variável socket
      *
-     * @param Inteiro $socket - Valor da variável socket
+     * @param String $socket - Valor da variável socket
      */
     public function setSocket($socket)
     {
          $socket = trim($socket);
-          if(!(is_numeric($socket) && is_int($socket + 0))){
-                $GLOBALS['ERROS'][] = 'O valor informado em Socket é um número inteiro inválido!';
-                return false;
-          }
-          $this->socket = $socket;
-          return true;
+         $this->socket = $socket;
+         return true;
     }
 
     /**

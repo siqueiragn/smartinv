@@ -5,7 +5,7 @@
  *
  * @package app.model.dto
  * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 25-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 28-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class PlacaVideo implements DTOInterface
@@ -16,8 +16,9 @@
     private $nome;
     private $frequencia;
     private $memoria;
-    private $barramento;
+    private $tipo;
     private $descricao;
+    private $barramento;
     private $computador;
     private $isValid;
     private $table;
@@ -138,24 +139,24 @@
     }
 
     /**
-     * Método que retorna o valor da variável barramento
+     * Método que retorna o valor da variável tipo
      *
-     * @return String - Valor da variável barramento
+     * @return String - Valor da variável tipo
      */
-    public function getBarramento()
+    public function getTipo()
      {
-        return $this->barramento;
+        return $this->tipo;
     }
 
     /**
-     * Método que seta o valor da variável barramento
+     * Método que seta o valor da variável tipo
      *
-     * @param String $barramento - Valor da variável barramento
+     * @param String $tipo - Valor da variável tipo
      */
-    public function setBarramento($barramento)
+    public function setTipo($tipo)
     {
-         $barramento = trim($barramento);
-         $this->barramento = $barramento;
+         $tipo = trim($tipo);
+         $this->tipo = $tipo;
          return true;
     }
 
@@ -179,6 +180,32 @@
          $descricao = trim($descricao);
          $this->descricao = $descricao;
          return true;
+    }
+
+    /**
+     * Método que retorna o valor da variável barramento
+     *
+     * @return Inteiro - Valor da variável barramento
+     */
+    public function getBarramento()
+     {
+        return $this->barramento;
+    }
+
+    /**
+     * Método que seta o valor da variável barramento
+     *
+     * @param Inteiro $barramento - Valor da variável barramento
+     */
+    public function setBarramento($barramento)
+    {
+         $barramento = trim($barramento);
+          if(!(is_numeric($barramento) && is_int($barramento + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Barramento é um número inteiro inválido!';
+                return false;
+          }
+          $this->barramento = $barramento;
+          return true;
     }
 
     /**
@@ -235,8 +262,9 @@
              $this->nome,
              $this->frequencia,
              $this->memoria,
-             $this->barramento,
+             $this->tipo,
              $this->descricao,
+             $this->barramento,
              $this->computador
         );
      }

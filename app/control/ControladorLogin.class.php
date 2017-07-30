@@ -36,6 +36,9 @@ class ControladorLogin extends AbstractController
         $this->view->attValue('url', $_SERVER['HTTP_HOST']);
         //$this->view->addTemplate('nao_logado');
         $this->view->addJS('login/main.js');
+        $this->view->addCSS('custom');
+        $this->view->addCSS('bootstrap');
+        
     }
 
     public function valida()

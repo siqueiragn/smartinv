@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 25-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 30-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class PlacaMaeDAO extends AbstractDAO 
@@ -78,7 +78,6 @@ class PlacaMaeDAO extends AbstractDAO
              throw new EntradaDeDadosException();
         }
      }
-     
      public function getByComputerID($id) {
      	$placaMae = new PlacaMae();
      	$consulta = $this->queryTable($placaMae->getTable(),
@@ -95,8 +94,6 @@ class PlacaMaeDAO extends AbstractDAO
      		throw new EntradaDeDadosException();
      	}
      }
-     
-     
      /**
      * Método que retorna um array de objetos PlacaMae
      * sendo determinado pelo parâmetro $condicao

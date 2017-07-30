@@ -235,8 +235,12 @@ class ControladorFonte extends ControladorGeral
      */
     private function getSelects()
      {
-        $consulta = $this->model->queryTable('computador', 'computador, computador');
-        $lista = $this->model->getMapaSimplesDados($consulta, 'computador', 'computador');
+     	$pcDAO = new ComputadorDAO();
+     	$dados = $pcDAO->getLista();
+     	
+     	foreach ($dados as $item){
+     		$lista[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
+     	}
         $this->view->attValue('listaComputador', $lista);
 
     }

@@ -200,7 +200,7 @@ class ControladorProcessador extends ControladorGeral
                      $this->manter();
                      return ;
                  }else{
-                     $this->view->addMensagemErro($this->model->getErros());
+                     $this->view->addMensagemErro($this->model->getErro());
                  }
              }
         }catch (IOErro $e){ 
@@ -240,9 +240,24 @@ class ControladorProcessador extends ControladorGeral
      */
     private function getSelects()
      {
-        $consulta = $this->model->queryTable('computador', 'computador, computador');
-        $lista = $this->model->getMapaSimplesDados($consulta, 'computador', 'computador');
-        $this->view->attValue('listaComputador', $lista);
+        //$consulta = $this->model->queryTable('computador', 'computador, computador');
+        $pcDAO = new ComputadorDAO();
+        $dados = $pcDAO->getLista();
+        
+        foreach ($dados as $item){
+        	$lista[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
+        }
+        
+        //$lista = $this->model->getMapaSimplesDados($consulta, 'computador', 'computador');
+        /*function getComputerID(array $lista, $nome = 'computador'){
+        foreach($lista as $item){
+        	$arr[] = $item['id_'.$nome];
+        }
+        return $arr;
+        }*/
+        
+        
+        $this->view->attValue('listaComputador', /*getComputerID($lista));*/$lista);
 
     }
     private function addArquivos(Processador $obj, $editar = false)

@@ -80,6 +80,24 @@ class ProcessadorDAO extends AbstractDAO
              throw new EntradaDeDadosException();
         }
      }
+     
+     public function getByComputerID($id) {
+     	$processador = new Processador();
+     	$consulta = $this->queryTable($processador->getTable(),
+     			'id_processador as principal ,
+                                          nome,
+                                          frequencia,
+                                          socket,
+                                          descricao,
+                                          computador',
+     			'computador ='. $id );
+     	if ($consulta) {
+     		$processador = $this->setDados($consulta->fetch());
+     		return $processador;
+     	} else {
+     		throw new EntradaDeDadosException();
+     	}
+     }
      /**
      * Método que retorna um array de objetos Processador
      * sendo determinado pelo parâmetro $condicao

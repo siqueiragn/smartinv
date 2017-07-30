@@ -6,7 +6,7 @@
  *
  * @package app.control
  * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 30-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class ControladorPlacaMae extends ControladorGeral
@@ -43,12 +43,12 @@ class ControladorPlacaMae extends ControladorGeral
       */
     public function manter()
     {
-        $this->view->setTitle('Placa mae');
+        $this->view->setTitle('Placa Mãe');
 
         Componente::carregaComponente('TabelaManterDados'); 
         $tabela = new TabelaManterDados();
         $tabela->setDados(BASE_URL . '/placaMae/tabela');
-        $tabela->setTitulo('Placa mae');
+        $tabela->setTitulo('Placa Mãe');
         $tabela->addAcaoAdicionar(BASE_URL . 
         '/placaMae/criarNovo');
         $tabela->addAcaoEditar(BASE_URL . 
@@ -69,7 +69,7 @@ class ControladorPlacaMae extends ControladorGeral
 
         $tabelaColuna = new TabelaColuna('Socket', 'socket');
         $tabelaColuna->setLargura(20);
-        $tabelaColuna->setBuscaTipo('integer');
+        $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
@@ -112,14 +112,14 @@ class ControladorPlacaMae extends ControladorGeral
      {
         $placaMae = $obj == null ? new PlacaMae() : $obj;
 
-        $this->view->setTitle('Novo Placa mae');
+        $this->view->setTitle('Nova Placa Mãe');
 
         $this->view->attValue('placaMae', $placaMae);
 
         //Carrega os campos de seleção;
         $this->getSelects();
         $this->view->startForm(BASE_URL  . '/placaMae/criarNovoFim');
-        $this->view->addTemplate('forms/placa_mae');
+        $this->view->addTemplate('forms/placa_maeNew');
         $this->view->endForm();
     }
 
@@ -137,7 +137,7 @@ class ControladorPlacaMae extends ControladorGeral
             $placaMae = $obj;
         }
 
-        $this->view->setTitle('Editar Placa mae');
+        $this->view->setTitle('Editar Placa Mãe');
 
         $this->view->attValue('placaMae', $placaMae);
 
@@ -235,10 +235,34 @@ class ControladorPlacaMae extends ControladorGeral
      */
     private function getSelects()
      {
-        $consulta = $this->model->queryTable('computador', 'computador, computador');
-        $lista = $this->model->getMapaSimplesDados($consulta, 'computador', 'computador');
-        $this->view->attValue('listaComputador', $lista);
-
+    	
+     	$id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
+     	$placaMae = $this->model->getById($id);
+     	
+     	$pcDAO = new ComputadorDAO();
+     	$dados = $pcDAO->getLista();
+     	
+     	foreach ($dados as $item){
+     		$lista[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
+     	}
+     	$this->view->attValue('listaComputador', $lista);
+		unset($lista);
+     	$barramentoDAO = new BarramentoDAO();
+     	$dados = $barramentoDAO->getLista();
+     	
+     	foreach ($dados as $item){
+     		$lista[$item->getIdBarramento()] = $item->getNome();
+     	}
+     	$this->view->attValue('lista',$lista);
+     	unset($lista);
+     	$barramentoMoboDAO = new BarramentoPlacamaeDAO();
+     	$dados = $barramentoMoboDAO->getLista('id_placa_mae = '.$placaMae->getIdPlacaMae());
+     	foreach ($dados as $item){
+     		$lista[$item->getIdBarramentoPlacaMae()] = $barramentoDAO->getByID($item->getIdBarramento())->getNome();
+     	}
+     	
+     	$this->view->attValue('listaInt',$lista);
+     	unset($lista);
     }
     private function addArquivos(PlacaMae $obj, $editar = false)
     {

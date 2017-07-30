@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 13-06-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 28-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class Driver implements DTOInterface
@@ -14,10 +14,10 @@
 
     private $idDriver;
     private $nome;
+    private $velocidade;
     private $descricao;
+    private $barramento;
     private $computador;
-    private $idBarramento;
-    private $idComputador;
     private $isValid;
     private $table;
 
@@ -85,6 +85,32 @@
     }
 
     /**
+     * Método que retorna o valor da variável velocidade
+     *
+     * @return Inteiro - Valor da variável velocidade
+     */
+    public function getVelocidade()
+     {
+        return $this->velocidade;
+    }
+
+    /**
+     * Método que seta o valor da variável velocidade
+     *
+     * @param Inteiro $velocidade - Valor da variável velocidade
+     */
+    public function setVelocidade($velocidade)
+    {
+         $velocidade = trim($velocidade);
+          if(!(is_numeric($velocidade) && is_int($velocidade + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Velocidade é um número inteiro inválido!';
+                return false;
+          }
+          $this->velocidade = $velocidade;
+          return true;
+    }
+
+    /**
      * Método que retorna o valor da variável descricao
      *
      * @return String - Valor da variável descricao
@@ -107,6 +133,32 @@
     }
 
     /**
+     * Método que retorna o valor da variável barramento
+     *
+     * @return Inteiro - Valor da variável barramento
+     */
+    public function getBarramento()
+     {
+        return $this->barramento;
+    }
+
+    /**
+     * Método que seta o valor da variável barramento
+     *
+     * @param Inteiro $barramento - Valor da variável barramento
+     */
+    public function setBarramento($barramento)
+    {
+         $barramento = trim($barramento);
+          if(!(is_numeric($barramento) && is_int($barramento + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Barramento é um número inteiro inválido!';
+                return false;
+          }
+          $this->barramento = $barramento;
+          return true;
+    }
+
+    /**
      * Método que retorna o valor da variável computador
      *
      * @return Inteiro - Valor da variável computador
@@ -124,71 +176,11 @@
     public function setComputador($computador)
     {
          $computador = trim($computador);
-          if(empty($computador)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Computador não pode ser nulo!';
-                return false;
-          }
           if(!(is_numeric($computador) && is_int($computador + 0))){
                 $GLOBALS['ERROS'][] = 'O valor informado em Computador é um número inteiro inválido!';
                 return false;
           }
           $this->computador = $computador;
-          return true;
-    }
-
-    /**
-     * Método que retorna o valor da variável idBarramento
-     *
-     * @return Inteiro - Valor da variável idBarramento
-     */
-    public function getIdBarramento()
-     {
-        return $this->idBarramento;
-    }
-
-    /**
-     * Método que seta o valor da variável idBarramento
-     *
-     * @param Inteiro $idBarramento - Valor da variável idBarramento
-     */
-    public function setIdBarramento($idBarramento)
-    {
-         $idBarramento = trim($idBarramento);
-          if(empty($idBarramento)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento não pode ser nulo!';
-                return false;
-          }
-          if(!(is_numeric($idBarramento) && is_int($idBarramento + 0))){
-                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento é um número inteiro inválido!';
-                return false;
-          }
-          $this->idBarramento = $idBarramento;
-          return true;
-    }
-
-    /**
-     * Método que retorna o valor da variável idComputador
-     *
-     * @return Inteiro - Valor da variável idComputador
-     */
-    public function getIdComputador()
-     {
-        return $this->idComputador;
-    }
-
-    /**
-     * Método que seta o valor da variável idComputador
-     *
-     * @param Inteiro $idComputador - Valor da variável idComputador
-     */
-    public function setIdComputador($idComputador)
-    {
-         $idComputador = trim($idComputador);
-          if(!(is_numeric($idComputador) && is_int($idComputador + 0))){
-                $GLOBALS['ERROS'][] = 'O valor informado em Id computador é um número inteiro inválido!';
-                return false;
-          }
-          $this->idComputador = $idComputador;
           return true;
     }
 
@@ -218,10 +210,10 @@
         return array(
              $this->idDriver,
              $this->nome,
+             $this->velocidade,
              $this->descricao,
-             $this->computador,
-             $this->idBarramento,
-             $this->idComputador
+             $this->barramento,
+             $this->computador
         );
      }
 

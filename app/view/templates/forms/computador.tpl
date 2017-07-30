@@ -21,9 +21,14 @@
 				<label class="control-label col-sm-2" for="descricao">Componentes</label>
          
         <div class="col-sm-8">
-         <textarea id="descricao" name="DESC" class=" form-control" > {$placaMae->getNome()}</textarea>
+        <p style="display: {$exibirPM}"> Placa Mãe: {$placaMae->getID()} - {$placaMae->getNome()} - <strong>Socket:</strong> {$placaMae->getSocket()}</p>        
+		<p style="display: {$exibirP}"> Processador: {$processador->getID()} - {$processador->getNome()} - <strong>Socket:</strong> {$processador->getSocket()}</p>
+        <p style="display: {$exibirM}"> Memória: {$memoria->getID()} - {$memoria->getNome()} - <strong>Tipo: </strong> {$memoria->getTipo()} - <strong>Capacidade:</strong> {$memoria->getCapacidade()} - <strong>Frequência:</strong> {$memoria->getFrequencia()}</p>
+        <p style="display: {$exibirDR}"> Disco Rígido: {$discoRigido->getID()} - {$discoRigido->getNome()} - <strong>Capacidade:</strong> {$discoRigido->getCapacidade()} - <strong>RPM: </strong> {$discoRigido->getRPM()}</p>
+        <p style="display: {$exibirF}"> Fonte de Alimentação: {$fonte->getID()} - {$fonte->getNome()} - <strong>Potência:</strong> {$fonte->getPotencia()} </p>
+        <p style="display: {$exibirPV}"> Placa de Video: {$placaVideo->getID()} - {$placaVideo->getNome()} - <strong>Tipo: </strong> {$placaVideo->getTipo()} - <strong>Memória: </strong> {$placaVideo->getMemoria()} - <strong>Frequência: </strong> {$placaVideo->getFrequencia()}</p>
+        <p style="display: {$exibirD}"> Leitores/Gravadores: {$driver->getID()} - {$driver->getNome()} - <strong>Velocidade: </strong>{$driver->getVelocidade()}</p>
         
-         
          </div>
          </div>
 </fieldset>

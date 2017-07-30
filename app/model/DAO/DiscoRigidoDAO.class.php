@@ -6,7 +6,7 @@
  *
  * @package modulos.
  * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 25-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 28-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class DiscoRigidoDAO extends AbstractDAO 
@@ -39,6 +39,7 @@ class DiscoRigidoDAO extends AbstractDAO
                                           v_cache,
                                           rpm,
                                           descricao,
+                                          barramento,
                                           computador'
                                        );
         $resultado = array(
@@ -73,8 +74,29 @@ class DiscoRigidoDAO extends AbstractDAO
                                           v_cache,
                                           rpm,
                                           descricao,
+                                          barramento,
                                           computador',
                         'id_disco_rigido ='. $id );
+        if ($consulta) {
+            $discoRigido = $this->setDados($consulta->fetch());
+            return $discoRigido;
+        } else {
+             throw new EntradaDeDadosException();
+        }
+     }
+	 
+	 public function getByComputerID($id) {
+        $discoRigido = new DiscoRigido();
+        $consulta = $this->queryTable($discoRigido->getTable(),
+                                         'id_disco_rigido as principal ,
+                                          nome,
+                                          capacidade,
+                                          v_cache,
+                                          rpm,
+                                          descricao,
+                                          barramento,
+                                          computador',
+                        'computador ='. $id );
         if ($consulta) {
             $discoRigido = $this->setDados($consulta->fetch());
             return $discoRigido;
@@ -99,6 +121,7 @@ class DiscoRigidoDAO extends AbstractDAO
                                           v_cache,
                                           rpm,
                                           descricao,
+                                          barramento,
                                           computador',
             $condicao);
         foreach ($result as $linhaBanco) {
@@ -124,6 +147,7 @@ class DiscoRigidoDAO extends AbstractDAO
         $discoRigido->setVCache($dados['v_cache']);
         $discoRigido->setRpm($dados['rpm']);
         $discoRigido->setDescricao($dados['descricao']);
+        $discoRigido->setBarramento($dados['barramento']);
         $discoRigido->setComputador($dados['computador']);
         return $discoRigido;
     }

@@ -109,6 +109,7 @@ abstract class AbstractModel
                 $array[$linha[$indice]] = $linha[$valor];
             }
         }
+      //  array_unshift($array,'Nenhum'); 
         return $array;
     }
 

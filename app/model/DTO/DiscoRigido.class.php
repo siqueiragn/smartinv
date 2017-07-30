@@ -5,7 +5,7 @@
  *
  * @package app.model.dto
  * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 25-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 28-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class DiscoRigido implements DTOInterface
@@ -18,6 +18,7 @@
     private $vCache;
     private $rpm;
     private $descricao;
+    private $barramento;
     private $computador;
     private $isValid;
     private $table;
@@ -186,6 +187,32 @@
     }
 
     /**
+     * Método que retorna o valor da variável barramento
+     *
+     * @return Inteiro - Valor da variável barramento
+     */
+    public function getBarramento()
+     {
+        return $this->barramento;
+    }
+
+    /**
+     * Método que seta o valor da variável barramento
+     *
+     * @param Inteiro $barramento - Valor da variável barramento
+     */
+    public function setBarramento($barramento)
+    {
+         $barramento = trim($barramento);
+          if(!(is_numeric($barramento) && is_int($barramento + 0))){
+                $GLOBALS['ERROS'][] = 'O valor informado em Barramento é um número inteiro inválido!';
+                return false;
+          }
+          $this->barramento = $barramento;
+          return true;
+    }
+
+    /**
      * Método que retorna o valor da variável computador
      *
      * @return Inteiro - Valor da variável computador
@@ -241,6 +268,7 @@
              $this->vCache,
              $this->rpm,
              $this->descricao,
+             $this->barramento,
              $this->computador
         );
      }

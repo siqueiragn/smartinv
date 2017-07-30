@@ -21,6 +21,12 @@
               </div>
          </div>
          <div class="form-group">
+              <label class="control-label col-sm-2" for="tipo">Tipo</label>
+              <div class="col-sm-8">
+                 <input type="text" id="tipo" name="tipo" value="{$memoria->getTipo()}" class=" form-control"  />
+              </div>
+         </div>
+         <div class="form-group">
               <label class="control-label col-sm-2" for="descricao">Descrição</label>
               <div class="col-sm-8">
                  <textarea id="descricao" name="descricao" class=" form-control" >{$memoria->getDescricao()}</textarea>

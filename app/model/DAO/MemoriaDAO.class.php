@@ -6,7 +6,7 @@
  *
  * @package modulos.
  * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 25-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 28-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class MemoriaDAO extends AbstractDAO 
@@ -37,6 +37,7 @@ class MemoriaDAO extends AbstractDAO
                                           nome,
                                           frequencia,
                                           capacidade,
+                                          tipo,
                                           descricao,
                                           computador'
                                        );
@@ -70,6 +71,7 @@ class MemoriaDAO extends AbstractDAO
                                           nome,
                                           frequencia,
                                           capacidade,
+                                          tipo,
                                           descricao,
                                           computador',
                         'id_memoria ='. $id );
@@ -79,6 +81,26 @@ class MemoriaDAO extends AbstractDAO
         } else {
              throw new EntradaDeDadosException();
         }
+     }
+     
+     
+     public function getByComputerID($id) {
+     	$memoria = new Memoria();
+     	$consulta = $this->queryTable($memoria->getTable(),
+     			'id_memoria as principal ,
+                                          nome,
+                                          frequencia,
+                                          capacidade,
+                                          tipo,
+                                          descricao,
+                                          computador',
+     			'computador ='. $id );
+     	if ($consulta) {
+     		$memoria = $this->setDados($consulta->fetch());
+     		return $memoria;
+     	} else {
+     		throw new EntradaDeDadosException();
+     	}
      }
      /**
      * Método que retorna um array de objetos Memoria
@@ -95,6 +117,7 @@ class MemoriaDAO extends AbstractDAO
                                           nome,
                                           frequencia,
                                           capacidade,
+                                          tipo,
                                           descricao,
                                           computador',
             $condicao);
@@ -119,6 +142,7 @@ class MemoriaDAO extends AbstractDAO
         $memoria->setNome($dados['nome']);
         $memoria->setFrequencia($dados['frequencia']);
         $memoria->setCapacidade($dados['capacidade']);
+        $memoria->setTipo($dados['tipo']);
         $memoria->setDescricao($dados['descricao']);
         $memoria->setComputador($dados['computador']);
         return $memoria;

@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 25-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 30-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class BarramentoPlacamae implements DTOInterface
@@ -77,10 +77,6 @@
     public function setIdBarramento($idBarramento)
     {
          $idBarramento = trim($idBarramento);
-          if(empty($idBarramento)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Id barramento não pode ser nulo!';
-                return false;
-          }
           if(!(is_numeric($idBarramento) && is_int($idBarramento + 0))){
                 $GLOBALS['ERROS'][] = 'O valor informado em Id barramento é um número inteiro inválido!';
                 return false;
@@ -107,10 +103,6 @@
     public function setIdPlacaMae($idPlacaMae)
     {
          $idPlacaMae = trim($idPlacaMae);
-          if(empty($idPlacaMae)){
-                $GLOBALS['ERROS'][] = 'O valor informado em Id placa mae não pode ser nulo!';
-                return false;
-          }
           if(!(is_numeric($idPlacaMae) && is_int($idPlacaMae + 0))){
                 $GLOBALS['ERROS'][] = 'O valor informado em Id placa mae é um número inteiro inválido!';
                 return false;

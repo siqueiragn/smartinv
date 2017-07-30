@@ -24,8 +24,8 @@ class VisualizadorLogin extends AbstractView
         $this->addTemplate('rodapeLogin');
        /*  $this->addCSS('bootstrap-theme');
         $this->addCSS('style-responsive');
-        $this->addCSS('login'); */
-     /*    $this->addCSS('font-awesome.min');
+        $this->addCSS('login'); 
+        $this->addCSS('font-awesome.min');
         $this->addCSS('elegant-icons-style'); */
     }
 

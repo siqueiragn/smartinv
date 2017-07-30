@@ -11,7 +11,7 @@ descricao varchar
 CREATE TABLE placa_mae (
 id_placa_mae serial PRIMARY KEY,
 nome varchar,
-socket integer,
+socket varchar,
 --portas_usb integer,
 descricao varchar,
 computador integer,  
@@ -25,7 +25,9 @@ capacidade integer,
 v_cache integer,
 rpm integer,
 descricao varchar,
-computador integer,  
+barramento integer,
+computador integer,
+FOREIGN KEY (barramento) REFERENCES barramento(id_barramento),  
 FOREIGN KEY (computador) REFERENCES computador(id_computador)
 );
 
@@ -44,9 +46,11 @@ id_placa_video serial PRIMARY KEY,
 nome varchar,
 frequencia integer,
 memoria integer,
-barramento varchar,
+tipo varchar,
 descricao varchar,
-computador integer,  
+barramento integer,
+computador integer,
+FOREIGN KEY (barramento) REFERENCES barramento(id_barramento),  
 FOREIGN KEY (computador) REFERENCES computador(id_computador)
 );
 
@@ -63,6 +67,7 @@ id_memoria serial PRIMARY KEY,
 nome varchar,
 frequencia integer,
 capacidade integer,
+tipo varchar,
 descricao varchar,
 computador integer, 
 FOREIGN KEY (computador) REFERENCES computador(id_computador)
@@ -85,11 +90,24 @@ FOREIGN KEY (id_barramento) REFERENCES barramento(id_barramento),
 FOREIGN KEY (id_placa_mae) REFERENCES placa_mae(id_placa_mae)
 );
 
+CREATE TABLE driver (
+id_driver SERIAL PRIMARY KEY,
+nome varchar,
+velocidade integer,
+descricao varchar,
+barramento integer,
+computador integer,
+FOREIGN KEY (barramento) REFERENCES barramento(id_barramento),
+FOREIGN KEY (computador) REFERENCES computador(id_computador)
+);
+
 CREATE TABLE usuario (
 id_usuario SERIAL PRIMARY KEY,
 email VARCHAR,
 password VARCHAR
 );
+
+
 /*
 -- pcis
 FOREIGN KEY (processador) REFERENCES processador(id_processador),

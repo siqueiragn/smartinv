@@ -107,6 +107,21 @@ class ControladorComputador extends ControladorGeral
         $this->view->attValue('computador', $computador);
 
         //Carrega os campos de seleção;
+        $this->view->attValue('placaMae', new PlacaMae());
+        $this->view->attValue('processador', new Processador());
+        $this->view->attValue('memoria', new Memoria());
+        $this->view->attValue('discoRigido', new DiscoRigido());
+        $this->view->attValue('fonte', new Fonte());
+        $this->view->attValue('placaVideo', new PlacaVideo());
+        $this->view->attValue('driver', new Driver());
+        
+        $this->view->attValue('exibirPM', 'none');
+        $this->view->attValue('exibirF', 'none');
+        $this->view->attValue('exibirDR', 'none');
+        $this->view->attValue('exibirP', 'none');
+        $this->view->attValue('exibirM', 'none');
+        $this->view->attValue('exibirD', 'none');
+        $this->view->attValue('exibirPV', 'none');
         $this->getSelects();
         $this->view->startForm(BASE_URL  . '/computador/criarNovoFim');
         $this->view->addTemplate('forms/computador');
@@ -137,9 +152,68 @@ class ControladorComputador extends ControladorGeral
         $this->view->startForm(BASE_URL . '/computador/editarFim');
         
         $placaMaeDAO = new PlacaMaeDAO();
-        $placaMae = $placaMaeDAO->getByComputerID($computador->getIdComputador());
+        $placaMae = $placaMaeDAO->getByComputerID($computador->getID());
+        if($placaMae->getNome() == '')
+        	$this->view->attValue('exibirPM', 'none');
+       	else
+       		$this->view->attValue('exibirPM', 'block');
         $this->view->attValue('placaMae', $placaMae);
-        ds($placaMae);
+        		
+        $processadorDAO = new ProcessadorDAO();
+        $processador = $processadorDAO->getByComputerID($computador->getID());
+        if($processador->getNome() == '')
+        	$this->view->attValue('exibirP', 'none');
+        else
+        	$this->view->attValue('exibirP', 'block');
+        $this->view->attValue('processador', $processador);
+        	
+        
+        $memoriaDAO = new MemoriaDAO();
+        $memoria = $memoriaDAO->getByComputerID($computador->getID());
+        if($memoria->getNome() == '')
+        	$this->view->attValue('exibirM', 'none');
+        else 
+        	$this->view->attValue('exibirM', 'block');
+        $this->view->attValue('memoria', $memoria);
+        
+        
+        $discoRigidoDAO = new DiscoRigidoDAO();
+        $discoRigido = $discoRigidoDAO->getByComputerID($computador->getID());
+        if($discoRigido->getNome() == '')
+        	$this->view->attValue('exibirDR', 'none');
+       	else
+       		$this->view->attValue('exibirDR', 'block');
+        $this->view->attValue('discoRigido', $discoRigido);
+        
+        
+        $fonteDAO = new FonteDAO();
+        $fonte = $fonteDAO->getByComputerID($computador->getID());
+        if($fonte->getNome() == '')
+        	$this->view->attValue('exibirF', 'none');
+        else
+        	$this->view->attValue('exibirF', 'block');
+        $this->view->attValue('fonte', $fonte);
+        
+        
+        $placaVideoDAO = new PlacaVideoDAO();
+        $placaVideo = $placaVideoDAO->getByComputerID($computador->getID());
+        if($placaVideo->getNome()=='')
+        	$this->view->attValue('exibirPV', 'none');
+        else 
+        	$this->view->attValue('exibirPV', 'block');
+        $this->view->attValue('placaVideo', $placaVideo);
+        
+        
+        $driverDAO = new DriverDAO();
+        $driver = $driverDAO->getByComputerID($computador->getID());
+        if($driver->getNome()=='')
+        	$this->view->attValue('exibirD', 'none');
+        else
+        	$this->view->attValue('exibirD', 'block');
+        $this->view->attValue('driver', $driver);
+        
+        
+        //ds($placaMae);
         $this->view->addTemplate('forms/computador');
         $this->view->endForm();
     }

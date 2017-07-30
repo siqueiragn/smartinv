@@ -21,15 +21,24 @@
               </div>
          </div>
          <div class="form-group">
-              <label class="control-label col-sm-2" for="barramento">Barramento</label>
+              <label class="control-label col-sm-2" for="tipo">Tipo</label>
               <div class="col-sm-8">
-                 <input type="text" id="barramento" name="barramento" value="{$placaVideo->getBarramento()}" class=" form-control"  />
+                 <input type="text" id="tipo" name="tipo" value="{$placaVideo->getTipo()}" class=" form-control"  />
               </div>
          </div>
          <div class="form-group">
               <label class="control-label col-sm-2" for="descricao">Descrição</label>
               <div class="col-sm-8">
                  <textarea id="descricao" name="descricao" class=" form-control" >{$placaVideo->getDescricao()}</textarea>
+              </div>
+         </div>
+         <div class="form-group">
+              <label class="control-label col-sm-2" for="barramento">Barramento</label>
+              <div class="col-sm-8">
+                 <select id="barramento" name="barramento" class="form-control">
+    		{html_options options=$listaBarramento selected=$placaVideo->getBarramento()}
+             </select>
+
               </div>
          </div>
          <div class="form-group">

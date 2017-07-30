@@ -5,7 +5,7 @@
  *
  * @package app.model.dto
  * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 25-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 28-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class Memoria implements DTOInterface
@@ -16,6 +16,7 @@
     private $nome;
     private $frequencia;
     private $capacidade;
+    private $tipo;
     private $descricao;
     private $computador;
     private $isValid;
@@ -137,6 +138,28 @@
     }
 
     /**
+     * Método que retorna o valor da variável tipo
+     *
+     * @return String - Valor da variável tipo
+     */
+    public function getTipo()
+     {
+        return $this->tipo;
+    }
+
+    /**
+     * Método que seta o valor da variável tipo
+     *
+     * @param String $tipo - Valor da variável tipo
+     */
+    public function setTipo($tipo)
+    {
+         $tipo = trim($tipo);
+         $this->tipo = $tipo;
+         return true;
+    }
+
+    /**
      * Método que retorna o valor da variável descricao
      *
      * @return String - Valor da variável descricao
@@ -212,6 +235,7 @@
              $this->nome,
              $this->frequencia,
              $this->capacidade,
+             $this->tipo,
              $this->descricao,
              $this->computador
         );

@@ -78,6 +78,23 @@ class FonteDAO extends AbstractDAO
              throw new EntradaDeDadosException();
         }
      }
+     
+     public function getByComputerID($id) {
+     	$fonte = new Fonte();
+     	$consulta = $this->queryTable($fonte->getTable(),
+     			'id_fonte as principal ,
+                                          nome,
+                                          potencia,
+                                          descricao,
+                                          computador',
+     			'computador ='. $id );
+     	if ($consulta) {
+     		$fonte = $this->setDados($consulta->fetch());
+     		return $fonte;
+     	} else {
+     		throw new EntradaDeDadosException();
+     	}
+     }
      /**
      * Método que retorna um array de objetos Fonte
      * sendo determinado pelo parâmetro $condicao

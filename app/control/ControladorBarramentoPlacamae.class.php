@@ -6,7 +6,7 @@
  *
  * @package app.control
  * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 30-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class ControladorBarramentoPlacamae extends ControladorGeral
@@ -58,17 +58,17 @@ class ControladorBarramentoPlacamae extends ControladorGeral
 
          //Colunas da tabela
         $tabelaColuna = new TabelaColuna('Id barramento placamae', 'id_barramento_placamae');
-        $tabelaColuna->setLargura(40);
+        $tabelaColuna->setLargura(33);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Id barramento', 'id_barramento');
-        $tabelaColuna->setLargura(40);
+        $tabelaColuna->setLargura(33);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Id placa mae', 'id_placa_mae');
-        $tabelaColuna->setLargura(40);
+        $tabelaColuna->setLargura(33);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
