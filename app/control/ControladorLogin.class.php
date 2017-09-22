@@ -26,7 +26,7 @@ class ControladorLogin extends AbstractController
 
     public function paginaNaoEncontrada()
     {
-        $this->view->setTitle('Funcionalidade ainda nÃ£o implementada');
+        $this->view->setTitle('Funcionalidade ainda não implementada');
     }
 
     public function index()

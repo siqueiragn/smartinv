@@ -58,6 +58,37 @@ class ControladorGeral extends AbstractController
         /* $controlador = new ControladorGeral();
         $this->view = $controlador->getView(); */
     }
+    public function algoritmo()
+    {
+        $this->view = new VisualizadorGeral();
+        $this->view->setTitle('Configuração');
+        $this->view->addTemplate('forms/algoritmo');
+        
+        $placaMae = new PlacamaeDAO();
+        $processador = new ProcessadorDAO();
+        $dados = $placaMae->getLista();
+        $dadosProcessador = $processador->getLista();
+        foreach ($dados as $itemPlacaMae){
+            $processadorAtual = '';
+            if($processadorAtual == ''){
+                
+                foreach($dadosProcessador as $itemProcessador){
+                
+                    //echo $itemProcessador->getSocket() . ' ' . $itemPlacaMae->getSocket() .'<br>';
+                 
+                    if($itemProcessador->getSocket() == $itemPlacaMae->getSocket()){
+                    $arrayProcessadorCompativel[$itemProcessador->getIdProcessador()] = $itemProcessador->getFrequencia();                
+                    }
+
+                }
+                print_r($arrayProcessadorCompativel);
+            }
+        }
+        exit;
+        
+       // $this->view->attValue('listaInt',$lista);
+     
+    }
 
     public function contato()
     {
