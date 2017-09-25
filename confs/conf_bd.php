@@ -9,7 +9,7 @@
  */
 
 //Constante que define o servidor
-define('DB_SERVER', 'webacademico-old.canoas.ifrs.edu.br');
+define('DB_SERVER', '200.17.91.70');
 
 //Constante que define a porta do banco de dados
 define('DB_PORT', '5432');

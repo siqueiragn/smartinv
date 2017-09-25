@@ -63,8 +63,8 @@ class ControladorGeral extends AbstractController
         $this->view = new VisualizadorGeral();
         $this->view->setTitle('Configuração');
         $this->view->addTemplate('forms/algoritmo');
-        
-        $placaMae = new PlacamaeDAO();
+        $arrayProcessadorCompativel = [];
+        $placaMae = new PlacaMaeDAO();
         $processador = new ProcessadorDAO();
         $dados = $placaMae->getLista();
         $dadosProcessador = $processador->getLista();

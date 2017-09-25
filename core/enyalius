@@ -1,53 +1,164 @@
 #!/bin/bash
 #
-# Versão 1.0.0: Pede quais funcionalidades quer fazer e adicionado texto de ajuda
+# Versão 2.0.6: Deve estar no diretorio bin para ser global
 #
-# Marcio Bigolin, Setembro de 2014
+# Marcio Bigolin, Setembro de 2017
 #
 MENSAGEM_USO="
-Uso: $(basename "$0") [-h | -V | -i ]
+Uso: $(basename "$0") [-h | -V | -i | -g ]
 
 
   -h		Mostra esta tela de ajuda e sai.
   -i		Instala um projeto recem clonado.
+  -g | gulp	Inicia o gulp.
+  -m            Cria o básico de um projeto sem necessidade de rodar um geraProjeto.
+  -d            Inicia um ambiente de desenvolvimento a partir do projeto corrente, necessita uma pasta build no projeto.
+  require       Usa o composer ou o yarn dependendo do contexto para solicitar uma dependencia.
+  start         Inicia o ambiente de desenvolvimento do projeto ou o padrão
+  yarn          Executa o yarn com 2 args
+  composer      Executa composer com 2 args podendo ser install ou require
+  terminator    Abre o terminator com a tela de dev pronto
   --make_tools  Cria no projeto corrente a funcionalidade de tools. 
 "
-function init(){
-    cd ..
 
-    git submodule init
-    git submodule update
-    mkdir z_data
-    mkdir z_data/templates_c
+function verify(){
+    echo "Verificando se você tem tudo que o enyalius precisa."
+    if which docker >/dev/null; then
+        echo "Ok você tem o Docker instalado!"
+    else
+        sudo apt install docker.io
+    fi
+    if which git >/dev/null; then
+        echo "Ok você tem o git instalado!"
+    else
+        sudo apt install git
+    fi
+    if which terminator >/dev/null; then
+        echo "Que bom! Você tem até o terminator instalado! "
+    else
+        echo "Para versões futuras iremos configurar para você o terminator. Experimente"
+    fi
+    sudo usermod -aG docker $USER
+}
+
+
+function init(){
+    verify
+    mkdir -p z_data/templates_c
     chmod 777 z_data
-    composer update
+    docker run --rm -v $PWD:/app composer:1.4 install
+    #ver de executar um grunt gulp ou sei lá o que?
     
 }
 
-#function make_tools(){
-#}
+function yarn(){
+    echo "-----"
+    docker run --rm -v $PWD:/app enyalius/yarn yarn $1 $2
+}
+
+function composer(){
+    docker run --rm -v $PWD:/app composer $1 $2
+}
+
+function require(){
+    if [ -f ".composer.lock" ]
+    then
+        composer require $1
+    else
+        yarn add $1 
+    fi
+}
+
+function start(){
+    if [ -f "ambienteDev.sh" ]
+    then
+        ./ambienteDev.sh
+    else
+        dialog --backtitle "" --yesno "Você não está em um diretório do enyalius. Deseja criar "  10 0
+        if [ $? = 0 ]; then
+            echo "Bye =["
+        else
+            return "Ajude a desenvolver o enyalius realize essa feat"
+        fi
+    fi
+}
+
+function inicia_grunt(){
+  cd view/core_client/
+  grunt w
+}
+
+function inicia_gulp(){
+    docker run -v $PWD:/app enyalius/gulp gulp $1
+}
+
+function inicia_docker(){
+    if which docker-compose >/dev/null; then
+        echo 'O docker composer está instalado'
+    else
+        sudo apt update -yqq && sudo apt install docker-compose -y
+    fi
+    cd build
+    sudo docker-compose up --build 
+}
 
 # Tratamento das opções de linha de comando
 while test -n "$1"
 do
 case "$1" in
-	-h | --help)
+	-h | --help | help)
 		echo "$MENSAGEM_USO"
 		exit 0
 	;;
 
-	-v | -V | --version)
+	-v | -V | --version | version)
 		echo -n $(basename "$0")
 		# Extrai a versão diretamente dos cabeçalhos do programa
 		grep '^# Versão ' "$0" | tail -1 | cut -d : -f 1 | tr -d \#
+                echo '-------------------'
+                verify
 		exit 0
 	;;
 
-	-i | -I | --install)
+	-i | -I | --install | install)
                 init
     		exit 0
 	;;
 
+	-g | -G | --gulp | gulp)
+                inicia_gulp
+    		exit 0
+	;;
+
+	-d | -D | --docker | docker)
+                inicia_docker
+    		exit 0
+	;;
+
+        start)
+            start
+            exit 0
+	;;
+
+	-r | -R | --require | require)
+                require $2
+    		exit 0
+	;;
+
+	-y | -Y | --yarn | yarn)
+                yarn $2 $3
+    		exit 0
+	;;
+
+        -c | -C | --composer | composer)
+                composer $2 $3
+    		exit 0
+	;;
+
+        -t | -T | --terminator | terminator)
+                echo "Que tal implementar essa!! "
+    		exit 0
+	;;
 
 	*)
 		
