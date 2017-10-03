@@ -189,13 +189,25 @@ class ControladorPlacaMae extends ControladorGeral
         try {
              if($placaMae->setArrayDados($_POST) > 0){ 
                  $this->view->addErros($GLOBALS['ERROS']);
+				 
              }else{
+			 if($_POST['computador'] == null){
+					 echo "A";
+				 
+				 $placaMae->setComputador(null);
+				 echo $placaMae->getComputador();
+				
+				
+			 }
                  if($this->model->update($placaMae)){
                      $this->view->addMensagemSucesso('Dados alterados com sucesso!');
                      $this->manter();
-                     return ;
+					
+                     return true;
                  }else{
-                     $this->view->addMensagemErro($this->model->getErros());
+					
+                     $this->view->addMensagemErro($this->model->getErro());
+					
                  }
              }
         }catch (IOErro $e){ 
@@ -235,18 +247,22 @@ class ControladorPlacaMae extends ControladorGeral
      */
     private function getSelects()
      {
-    	
+    	$lista = [];
+		$lista2 = [];
+		$lista3 = [];
+
      	$id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
+		
      	$placaMae = $this->model->getById($id);
      	
      	$pcDAO = new ComputadorDAO();
      	$dados = $pcDAO->getLista();
-     	
+     	$lista3[''] = '';
      	foreach ($dados as $item){
-     		$lista[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
+     		$lista3[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
      	}
-     	$this->view->attValue('listaComputador', $lista);
-		unset($lista);
+     	$this->view->attValue('listaComputador', $lista3);
+		
      	$barramentoDAO = new BarramentoDAO();
      	$dados = $barramentoDAO->getLista();
      	
@@ -254,15 +270,16 @@ class ControladorPlacaMae extends ControladorGeral
      		$lista[$item->getIdBarramento()] = $item->getNome();
      	}
      	$this->view->attValue('lista',$lista);
-     	unset($lista);
+     
      	$barramentoMoboDAO = new BarramentoPlacamaeDAO();
      	$dados = $barramentoMoboDAO->getLista('id_placa_mae = '.$placaMae->getIdPlacaMae());
-     	foreach ($dados as $item){
-     		$lista[$item->getIdBarramentoPlacaMae()] = $barramentoDAO->getByID($item->getIdBarramento())->getNome();
+     	
+		foreach ($dados as $item){
+     		$lista2[$item->getIdBarramentoPlacaMae()] = $barramentoDAO->getByID($item->getIdBarramento())->getNome();
      	}
      	
-     	$this->view->attValue('listaInt',$lista);
-     	unset($lista);
+     	$this->view->attValue('listaInt',$lista2);
+    
     }
     private function addArquivos(PlacaMae $obj, $editar = false)
     {

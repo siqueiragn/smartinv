@@ -144,11 +144,11 @@
      */
     public function setComputador($computador)
     {
-         $computador = trim($computador);
-          if(!(is_numeric($computador) && is_int($computador + 0))){
+       //  $computador = trim($computador);
+         /* if(!(is_numeric($computador) && is_int($computador + 0))){
                 $GLOBALS['ERROS'][] = 'O valor informado em Computador é um número inteiro inválido!';
                 return false;
-          }
+          }*/
           $this->computador = $computador;
           return true;
     }
