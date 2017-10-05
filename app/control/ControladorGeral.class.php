@@ -61,17 +61,18 @@ class ControladorGeral extends AbstractController
     public function algoritmo()
     {
         $this->view = new VisualizadorGeral();
-        $this->view->setTitle('Configuração');
+        $this->view->setTitle('Algoritmo');
         $this->view->addTemplate('forms/algoritmo');
         $arrayProcessadorCompativel = [];
         $placaMae = new PlacaMaeDAO();
         $processador = new ProcessadorDAO();
         $dados = $placaMae->getLista();
         $dadosProcessador = $processador->getLista();
+$arrayPlacaMae = [];
         foreach ($dados as $itemPlacaMae){
             $processadorAtual = '';
             if($processadorAtual == ''){
-                
+                $arrayProcessadorCompativel = [];
                 foreach($dadosProcessador as $itemProcessador){
                 
                     //echo $itemProcessador->getSocket() . ' ' . $itemPlacaMae->getSocket() .'<br>';
@@ -79,14 +80,22 @@ class ControladorGeral extends AbstractController
                     if($itemProcessador->getSocket() == $itemPlacaMae->getSocket()){
                     $arrayProcessadorCompativel[$itemProcessador->getIdProcessador()] = $itemProcessador->getFrequencia();                
                     }
-
+		
                 }
-                print_r($arrayProcessadorCompativel);
+		$arrayPlacaMae[$itemPlacaMae->getIdPlacaMae()] = $arrayProcessadorCompativel;
+
             }
+	
+		
+	
         }
-        exit;
+$this->view->attValue('listaPM',$arrayPlacaMae);
+		
+		//print_r($arrayPlacaMae);
+exit;
+
+     
         
-       // $this->view->attValue('listaInt',$lista);
      
     }
 
