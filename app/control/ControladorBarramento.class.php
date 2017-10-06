@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package app.control
- * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 13-06-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 06-10-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class ControladorBarramento extends ControladorGeral
@@ -57,7 +57,7 @@ class ControladorBarramento extends ControladorGeral
         '/barramento/deletarFim');
 
          //Colunas da tabela
-        $tabelaColuna = new TabelaColuna('ID', 'id_barramento');
+        $tabelaColuna = new TabelaColuna('Id barramento', 'id_barramento');
         $tabelaColuna->setLargura(40);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);

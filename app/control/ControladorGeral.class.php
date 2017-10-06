@@ -63,33 +63,73 @@ class ControladorGeral extends AbstractController
         $this->view = new VisualizadorGeral();
         $this->view->setTitle('Algoritmo');
         $this->view->addTemplate('forms/algoritmo');
-        $arrayProcessadorCompativel = [];
+        
         $placaMae = new PlacaMaeDAO();
-        $processador = new ProcessadorDAO();
-        $dados = $placaMae->getLista();
-        $dadosProcessador = $processador->getLista();
-$arrayPlacaMae = [];
-        foreach ($dados as $itemPlacaMae){
-            $processadorAtual = '';
-            if($processadorAtual == ''){
-                $arrayProcessadorCompativel = [];
-                foreach($dadosProcessador as $itemProcessador){
-                
-                    //echo $itemProcessador->getSocket() . ' ' . $itemPlacaMae->getSocket() .'<br>';
-                 
-                    if($itemProcessador->getSocket() == $itemPlacaMae->getSocket()){
-                    $arrayProcessadorCompativel[$itemProcessador->getIdProcessador()] = $itemProcessador->getFrequencia();                
-                    }
-		
-                }
-		$arrayPlacaMae[$itemPlacaMae->getIdPlacaMae()] = $arrayProcessadorCompativel;
+        $dadosPlacaMae = $placaMae->getLista();
+        
+$processador = new ProcessadorDAO();
+$dadosProcessador = $processador->getLista();
+$arrayIDProcessadorExcept = [];
 
-            }
-	
-		
-	
+/*$memoria = new MemoriaDAO();
+$dadosMemoria = $memoria->getLista(); */
+$arrayIDMemoriaExcept = [];
+
+$contador = 0;
+$arrayComputador = [];
+       
+        foreach ($dadosPlacaMae as $itemPlacaMae){
+                $arrayComputador[]['placa_mae'] = $itemPlacaMae->getIdPlacaMae();
+              
+                $selectProcessor = new Processador();
+                foreach($dadosProcessador as $itemProcessador){
+                    if($itemProcessador->getSocket() == $itemPlacaMae->getSocket() && !in_array($itemProcessador->getIdProcessador(), $arrayIDProcessadorExcept)){
+                      
+                        if($itemProcessador->getFrequencia() > $selectProcessor->getFrequencia() && is_null($itemProcessador->getComputador())){
+                            $key = array_search($selectProcessor->getIdProcessador(), $arrayIDProcessadorExcept);
+                            if($key!==false){
+                                unset($arrayIDProcessadorExcept[$key]);
+                            }
+                            
+                            $selectProcessor = $itemProcessador;
+                            $arrayIDProcessadorExcept[] = $itemProcessador->getIdProcessador();
+                            $processadorAtual = $itemProcessador->getIdProcessador();
+                        }
+                        else {
+                            $processadorAtual = 'Não encontrado!';
+                        }
+                    }
+
+                }
+                
+               /*  $selectMemoria = new Memoria();
+                foreach($dadosMemoria as $itemMemoria){
+                    if($itemMemoria->getTipo() == $itemPlacaMae->getSlotMemoria() && !in_array($itemMemoria->getIdMemoria(), $arrayIDMemoriaExcept)){
+                        
+                        if($itemMemoria->getFrequencia() > $selectMemoria->getFrequencia()){
+                        $key = array_search($selectMemoria->getIdMemoria(), $arrayIDMemoriaExcept);
+                        if($key!==false){
+                            unset($arrayIDMemoriaExcept);
+                        }
+                        
+                        $selectMemoria = $itemMemoria;
+                        $arrayIDMemoriaExcept[] = $itemMemoria->getIdMemoria();
+                        $memoriaAtual = $itemMemoria->getIdMemoria();
+                    }
+                    else {
+                        $memoriaAtual = 'Não encontrado!';
+                        
+                    }
+                  }
+                } */
+                $arrayComputador[$contador]['placa_mae'] = $itemPlacaMae->getIdPlacaMae();
+		        $arrayComputador[$contador]['processador'] = $processadorAtual;
+            
+            $contador++;
         }
-$this->view->attValue('listaPM',$arrayPlacaMae);
+        print_r($arrayComputador);
+       
+$this->view->attValue('lista',$arrayComputador);
 		
 		//print_r($arrayPlacaMae);
 exit;

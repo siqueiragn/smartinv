@@ -57,8 +57,7 @@ FOREIGN KEY (computador) REFERENCES computador(id_computador)
 CREATE TABLE barramento (
 id_barramento serial PRIMARY KEY,
 nome varchar,
-descricao varchar,
-computador integer, 
+descricao varchar, 
 FOREIGN KEY (computador) REFERENCES computador(id_computador)
 );
 
@@ -107,7 +106,15 @@ email VARCHAR,
 password VARCHAR
 );
 
-
+CREATE TABLE algoritmo (
+id_algoritmo serial primary key,
+id_placa_mae int,
+id_processador int,
+id_fonte int,
+id_memoria int,
+id_disco_rigido int, 
+id_computador int
+);
 /*
 -- pcis
 FOREIGN KEY (processador) REFERENCES processador(id_processador),

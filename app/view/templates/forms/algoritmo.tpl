@@ -2,17 +2,15 @@
 
 
 
-{foreach name=outer item=placaMae key=key from=$listaPM}
-<h1> {$key} </h1>    
-<select id="processador" name="processador" class="form-control">
 
-{foreach key=key item=item from=$placaMae}
-{html_options options=$item selected=$selectP}  
+{foreach name=outer item=computador from=$lista}
+    
 
-  {/foreach}
-</select>
+<h1> Placa Mãe: {$computador['placa_mae']}</h1>
+<h1> Processador: {$computador['processador']}</h1>
+<hr >
 {/foreach}
-     <div>
+ 
 
 
 
