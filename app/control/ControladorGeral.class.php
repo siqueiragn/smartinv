@@ -102,7 +102,7 @@ $arrayComputador = [];
 
                 }
                 
-               /*  $selectMemoria = new Memoria();
+                 $selectMemoria = new Memoria();
                 foreach($dadosMemoria as $itemMemoria){
                     if($itemMemoria->getTipo() == $itemPlacaMae->getSlotMemoria() && !in_array($itemMemoria->getIdMemoria(), $arrayIDMemoriaExcept)){
                         
@@ -121,7 +121,7 @@ $arrayComputador = [];
                         
                     }
                   }
-                } */
+                } 
                 $arrayComputador[$contador]['placa_mae'] = $itemPlacaMae->getIdPlacaMae();
 		        $arrayComputador[$contador]['processador'] = $processadorAtual;
             

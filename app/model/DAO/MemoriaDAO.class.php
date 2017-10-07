@@ -6,7 +6,7 @@
  *
  * @package modulos.
  * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 28-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 06-10-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class MemoriaDAO extends AbstractDAO 
@@ -81,26 +81,6 @@ class MemoriaDAO extends AbstractDAO
         } else {
              throw new EntradaDeDadosException();
         }
-     }
-     
-     
-     public function getByComputerID($id) {
-     	$memoria = new Memoria();
-     	$consulta = $this->queryTable($memoria->getTable(),
-     			'id_memoria as principal ,
-                                          nome,
-                                          frequencia,
-                                          capacidade,
-                                          tipo,
-                                          descricao,
-                                          computador',
-     			'computador ='. $id );
-     	if ($consulta) {
-     		$memoria = $this->setDados($consulta->fetch());
-     		return $memoria;
-     	} else {
-     		throw new EntradaDeDadosException();
-     	}
      }
      /**
      * Método que retorna um array de objetos Memoria

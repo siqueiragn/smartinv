@@ -5,7 +5,7 @@
  *
  * @package app.model.dto
  * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 28-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 06-10-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class Memoria implements DTOInterface
