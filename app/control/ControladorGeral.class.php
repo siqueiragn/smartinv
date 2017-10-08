@@ -71,21 +71,28 @@ $processador = new ProcessadorDAO();
 $dadosProcessador = $processador->getLista();
 $arrayIDProcessadorExcept = [];
 
-/*$memoria = new MemoriaDAO();
-$dadosMemoria = $memoria->getLista(); */
+$memoria = new MemoriaDAO();
+$dadosMemoria = $memoria->getLista(); 
 $arrayIDMemoriaExcept = [];
+
+$discoRigido = new DiscoRigidoDAO();
+$dadosDRigido = $discoRigido->getLista();
+$arrayIDDiscoExcept = [];
 
 $contador = 0;
 $arrayComputador = [];
        
         foreach ($dadosPlacaMae as $itemPlacaMae){
                 $arrayComputador[]['placa_mae'] = $itemPlacaMae->getIdPlacaMae();
-              
+                $processadorAtual = 'Não encontrado!';
+                $memoriaAtual = 'Não encontrado!';
+                $hdAtual = 'Não encontrado!';
+                
                 $selectProcessor = new Processador();
                 foreach($dadosProcessador as $itemProcessador){
                     if($itemProcessador->getSocket() == $itemPlacaMae->getSocket() && !in_array($itemProcessador->getIdProcessador(), $arrayIDProcessadorExcept)){
                       
-                        if($itemProcessador->getFrequencia() > $selectProcessor->getFrequencia() && is_null($itemProcessador->getComputador())){
+                        if($itemProcessador->getFrequencia() >= $selectProcessor->getFrequencia() && is_null($itemProcessador->getComputador())){
                             $key = array_search($selectProcessor->getIdProcessador(), $arrayIDProcessadorExcept);
                             if($key!==false){
                                 unset($arrayIDProcessadorExcept[$key]);
@@ -95,36 +102,52 @@ $arrayComputador = [];
                             $arrayIDProcessadorExcept[] = $itemProcessador->getIdProcessador();
                             $processadorAtual = $itemProcessador->getIdProcessador();
                         }
-                        else {
-                            $processadorAtual = 'Não encontrado!';
-                        }
                     }
 
                 }
                 
                  $selectMemoria = new Memoria();
                 foreach($dadosMemoria as $itemMemoria){
-                    if($itemMemoria->getTipo() == $itemPlacaMae->getSlotMemoria() && !in_array($itemMemoria->getIdMemoria(), $arrayIDMemoriaExcept)){
-                        
-                        if($itemMemoria->getFrequencia() > $selectMemoria->getFrequencia()){
-                        $key = array_search($selectMemoria->getIdMemoria(), $arrayIDMemoriaExcept);
-                        if($key!==false){
-                            unset($arrayIDMemoriaExcept);
-                        }
-                        
-                        $selectMemoria = $itemMemoria;
-                        $arrayIDMemoriaExcept[] = $itemMemoria->getIdMemoria();
-                        $memoriaAtual = $itemMemoria->getIdMemoria();
-                    }
-                    else {
-                        $memoriaAtual = 'Não encontrado!';
-                        
-                    }
-                  }
-                } 
+                    
+                 //  echo $itemMemoria->getTipo() . " MEMORIA 1 MOBO " . $itemPlacaMae->getSlotMemoria() ."<br>";
+                    
+                    if($itemMemoria->getTipo() == $itemPlacaMae->getSlotMemoria() && !in_array($itemMemoria->getIdMemoria(), $arrayIDMemoriaExcept) && is_null($itemMemoria->getComputador())){
+                      
+                        if($itemMemoria->getFrequencia() >= $selectMemoria->getFrequencia()){
+                          if($itemMemoria->getCapacidade() >= $selectMemoria->getCapacidade()){
+                            $key = array_search($selectMemoria->getIdMemoria(), $arrayIDMemoriaExcept);
+                            if($key!==false){
+                                unset($arrayIDMemoriaExcept[$key]);
+                           }
+                            
+                            $selectMemoria = $itemMemoria;
+                            $arrayIDMemoriaExcept[] = $itemMemoria->getIdMemoria();
+                            $memoriaAtual = $itemMemoria->getIdMemoria();
+                         }
+            
+                            }
+                        else {
+                              echo $itemMemoria->getCapacidade() . " " . $selectMemoria->getCapacidade();
+                            
+                              if ($itemMemoria->getCapacidade() >= $selectMemoria->getCapacidade()){
+                                  $key = array_search($selectMemoria->getIdMemoria(), $arrayIDMemoriaExcept);
+                                  if($key!==false){
+                                      unset($arrayIDMemoriaExcept[$key]);
+                                  }
+                                  
+                                  $memoriaAtual = $itemMemoria->getIdMemoria();
+                                 $arrayIDMemoriaExcept[] = $itemMemoria->getIdMemoria();
+                                 $selectMemoria = $itemMemoria;
+                                 
+                              }
+                          }
+                  
+                }
+             
+                }
                 $arrayComputador[$contador]['placa_mae'] = $itemPlacaMae->getIdPlacaMae();
 		        $arrayComputador[$contador]['processador'] = $processadorAtual;
-            
+                $arrayComputador[$contador]['memoria'] = $memoriaAtual;
             $contador++;
         }
         print_r($arrayComputador);
@@ -132,7 +155,7 @@ $arrayComputador = [];
 $this->view->attValue('lista',$arrayComputador);
 		
 		//print_r($arrayPlacaMae);
-exit;
+
 
      
         

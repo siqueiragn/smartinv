@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package app.control
- * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 30-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 08-10-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class ControladorPlacaMae extends ControladorGeral
@@ -43,12 +43,12 @@ class ControladorPlacaMae extends ControladorGeral
       */
     public function manter()
     {
-        $this->view->setTitle('Placa Mãe');
+        $this->view->setTitle('Placa mae');
 
         Componente::carregaComponente('TabelaManterDados'); 
         $tabela = new TabelaManterDados();
         $tabela->setDados(BASE_URL . '/placaMae/tabela');
-        $tabela->setTitulo('Placa Mãe');
+        $tabela->setTitulo('Placa mae');
         $tabela->addAcaoAdicionar(BASE_URL . 
         '/placaMae/criarNovo');
         $tabela->addAcaoEditar(BASE_URL . 
@@ -57,29 +57,34 @@ class ControladorPlacaMae extends ControladorGeral
         '/placaMae/deletarFim');
 
          //Colunas da tabela
-        $tabelaColuna = new TabelaColuna('ID', 'id_placa_mae');
-        $tabelaColuna->setLargura(20);
+        $tabelaColuna = new TabelaColuna('Id placa mae', 'id_placa_mae');
+        $tabelaColuna->setLargura(40);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Nome', 'nome');
-        $tabelaColuna->setLargura(20);
+        $tabelaColuna->setLargura(60);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Socket', 'socket');
-        $tabelaColuna->setLargura(20);
+        $tabelaColuna->setLargura(60);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
-        $tabelaColuna->setLargura(20);
+        $tabelaColuna->setLargura(60);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Computador', 'computador');
-        $tabelaColuna->setLargura(20);
+        $tabelaColuna->setLargura(40);
         $tabelaColuna->setBuscaTipo('integer');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('Slot memoria', 'slot_memoria');
+        $tabelaColuna->setLargura(60);
+        $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $this->view->addComponente($tabela);
@@ -112,7 +117,7 @@ class ControladorPlacaMae extends ControladorGeral
      {
         $placaMae = $obj == null ? new PlacaMae() : $obj;
 
-        $this->view->setTitle('Nova Placa Mãe');
+        $this->view->setTitle('Criar Placa Mãe');
 
         $this->view->attValue('placaMae', $placaMae);
 
@@ -137,7 +142,7 @@ class ControladorPlacaMae extends ControladorGeral
             $placaMae = $obj;
         }
 
-        $this->view->setTitle('Editar Placa Mãe');
+        $this->view->setTitle('Editar Placa mae');
 
         $this->view->attValue('placaMae', $placaMae);
 
@@ -189,25 +194,13 @@ class ControladorPlacaMae extends ControladorGeral
         try {
              if($placaMae->setArrayDados($_POST) > 0){ 
                  $this->view->addErros($GLOBALS['ERROS']);
-				 
              }else{
-			 if($_POST['computador'] == null){
-					 echo "A";
-				 
-				 $placaMae->setComputador(null);
-				 echo $placaMae->getComputador();
-				
-				
-			 }
                  if($this->model->update($placaMae)){
                      $this->view->addMensagemSucesso('Dados alterados com sucesso!');
                      $this->manter();
-					
-                     return true;
+                     return ;
                  }else{
-					
-                     $this->view->addMensagemErro($this->model->getErro());
-					
+                     $this->view->addMensagemErro($this->model->getErros());
                  }
              }
         }catch (IOErro $e){ 
@@ -247,39 +240,43 @@ class ControladorPlacaMae extends ControladorGeral
      */
     private function getSelects()
      {
-    	$lista = [];
-		$lista2 = [];
-		$lista3 = [];
+         $lista = [];
+         $lista2 = [];
+         $lista3 = [];
+         
+         
+         if($this->view->getTitle()== 'Editar Placa mae'){
+         $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
+         
+         $placaMae = $this->model->getById($id);
+         
+         $barramentoDAO = new BarramentoDAO();
+         $dados = $barramentoDAO->getLista();
+         
+         foreach ($dados as $item){
+             $lista[$item->getIdBarramento()] = $item->getNome();
+         }
+         $this->view->attValue('lista',$lista);
+       
+         
+         $barramentoMoboDAO = new BarramentoPlacamaeDAO();
+         $dados = $barramentoMoboDAO->getLista('id_placa_mae = '.$placaMae->getIdPlacaMae());
+         
+         foreach ($dados as $item){
+             $lista2[$item->getIdBarramentoPlacaMae()] = $barramentoDAO->getByID($item->getIdBarramento())->getNome();
+         }
+         
+         $this->view->attValue('listaInt',$lista2);
+    }
+         $pcDAO = new ComputadorDAO();
+         $dados = $pcDAO->getLista();
+         $lista3[''] = '';
+         foreach ($dados as $item){
+             $lista3[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
+         }
+         $this->view->attValue('listaComputador', $lista3);
+         
 
-     	$id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
-		
-     	$placaMae = $this->model->getById($id);
-     	
-     	$pcDAO = new ComputadorDAO();
-     	$dados = $pcDAO->getLista();
-     	$lista3[''] = '';
-     	foreach ($dados as $item){
-     		$lista3[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
-     	}
-     	$this->view->attValue('listaComputador', $lista3);
-		
-     	$barramentoDAO = new BarramentoDAO();
-     	$dados = $barramentoDAO->getLista();
-     	
-     	foreach ($dados as $item){
-     		$lista[$item->getIdBarramento()] = $item->getNome();
-     	}
-     	$this->view->attValue('lista',$lista);
-     
-     	$barramentoMoboDAO = new BarramentoPlacamaeDAO();
-     	$dados = $barramentoMoboDAO->getLista('id_placa_mae = '.$placaMae->getIdPlacaMae());
-     	
-		foreach ($dados as $item){
-     		$lista2[$item->getIdBarramentoPlacaMae()] = $barramentoDAO->getByID($item->getIdBarramento())->getNome();
-     	}
-     	
-     	$this->view->attValue('listaInt',$lista2);
-    
     }
     private function addArquivos(PlacaMae $obj, $editar = false)
     {

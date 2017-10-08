@@ -4,8 +4,8 @@
  * camadas do sistema 
  *
  * @package app.model.dto
- * @author  Gabriel <gabrielndesiqueira@hotmail.com> 
- * @version 1.0.0 - 30-07-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
+ * @author  Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com> 
+ * @version 1.0.0 - 08-10-2017(Gerado Automaticamente com GC - 1.0 02/11/2015)
  */
 
  class PlacaMae implements DTOInterface
@@ -17,6 +17,7 @@
     private $socket;
     private $descricao;
     private $computador;
+    private $slotMemoria;
     private $isValid;
     private $table;
 
@@ -144,13 +145,35 @@
      */
     public function setComputador($computador)
     {
-       //  $computador = trim($computador);
-         /* if(!(is_numeric($computador) && is_int($computador + 0))){
+         $computador = trim($computador);
+          if(!(is_numeric($computador) && is_int($computador + 0))){
                 $GLOBALS['ERROS'][] = 'O valor informado em Computador é um número inteiro inválido!';
                 return false;
-          }*/
+          }
           $this->computador = $computador;
           return true;
+    }
+
+    /**
+     * Método que retorna o valor da variável slotMemoria
+     *
+     * @return String - Valor da variável slotMemoria
+     */
+    public function getSlotMemoria()
+     {
+        return $this->slotMemoria;
+    }
+
+    /**
+     * Método que seta o valor da variável slotMemoria
+     *
+     * @param String $slotMemoria - Valor da variável slotMemoria
+     */
+    public function setSlotMemoria($slotMemoria)
+    {
+         $slotMemoria = trim($slotMemoria);
+         $this->slotMemoria = $slotMemoria;
+         return true;
     }
 
     /**
@@ -181,7 +204,8 @@
              $this->nome,
              $this->socket,
              $this->descricao,
-             $this->computador
+             $this->computador,
+             $this->slotMemoria
         );
      }
 

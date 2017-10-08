@@ -5,8 +5,8 @@
  * a manutenção dos dados no sistema 
  *
  * @package modulos.
- * @author Gabriel <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 30-07-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
+ * @version 1.0.0 - 08-10-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
 class PlacaMaeDAO extends AbstractDAO 
@@ -37,7 +37,8 @@ class PlacaMaeDAO extends AbstractDAO
                                           nome,
                                           socket,
                                           descricao,
-                                          computador'
+                                          computador,
+                                          slot_memoria'
                                        );
         $resultado = array(
             'page' => $tabela->getPagina(),
@@ -69,7 +70,8 @@ class PlacaMaeDAO extends AbstractDAO
                                           nome,
                                           socket,
                                           descricao,
-                                          computador',
+                                          computador,
+                                          slot_memoria',
                         'id_placa_mae ='. $id );
         if ($consulta) {
             $placaMae = $this->setDados($consulta->fetch());
@@ -77,22 +79,6 @@ class PlacaMaeDAO extends AbstractDAO
         } else {
              throw new EntradaDeDadosException();
         }
-     }
-     public function getByComputerID($id) {
-     	$placaMae = new PlacaMae();
-     	$consulta = $this->queryTable($placaMae->getTable(),
-     			'id_placa_mae as principal ,
-                                          nome,
-                                          socket,
-                                          descricao,
-                                          computador',
-     			'computador ='. $id );
-     	if ($consulta) {
-     		$placaMae = $this->setDados($consulta->fetch());
-     		return $placaMae;
-     	} else {
-     		throw new EntradaDeDadosException();
-     	}
      }
      /**
      * Método que retorna um array de objetos PlacaMae
@@ -109,7 +95,8 @@ class PlacaMaeDAO extends AbstractDAO
                                           nome,
                                           socket,
                                           descricao,
-                                          computador',
+                                          computador,
+                                          slot_memoria',
             $condicao);
         foreach ($result as $linhaBanco) {
             $placaMae = $this->setDados($linhaBanco);
@@ -133,6 +120,7 @@ class PlacaMaeDAO extends AbstractDAO
         $placaMae->setSocket($dados['socket']);
         $placaMae->setDescricao($dados['descricao']);
         $placaMae->setComputador($dados['computador']);
+        $placaMae->setSlotMemoria($dados['slot_memoria']);
         return $placaMae;
     }
 

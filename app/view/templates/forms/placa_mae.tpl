@@ -20,13 +20,19 @@
                  <textarea id="descricao" name="descricao" class=" form-control" >{$placaMae->getDescricao()}</textarea>
               </div>
          </div>
-         <div class="form-group">
+           <div class="form-group">
               <label class="control-label col-sm-2" for="computador">Computador</label>
               <div class="col-sm-8">
                  <select id="computador" name="computador" class="form-control">
     		{html_options options=$listaComputador selected=$placaMae->getComputador()}
              </select>
 
+              </div>
+         </div>
+         <div class="form-group">
+              <label class="control-label col-sm-2" for="slotMemoria">Slot memoria</label>
+              <div class="col-sm-8">
+                 <input type="text" id="slotMemoria" name="slotMemoria" value="{$placaMae->getSlotMemoria()}" class=" form-control"  />
               </div>
          </div>
          <div class="form-group">
@@ -42,8 +48,12 @@
               <div class="form-group">
               <label class="control-label col-sm-2" for="interfaces">Lista de Interfaces</label>
               <div class="col-sm-8">
-              {html_options options=$listaInt}
+              {foreach item=item from=$listaInt}
+              <p> {$item} </p>
+              {/foreach}
               </div>
               </div>
+
+         
 </fieldset>
 
