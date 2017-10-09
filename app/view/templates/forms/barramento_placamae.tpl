@@ -1,6 +1,6 @@
 {*Gerado automaticamente com GC - 1.0 02/11/2015*}
 <fieldset class="formPadrao">
- <form class="form-horizontal" action="/barramentoPlacaMae/criarNovoFim" method="POST">
+ <form class="form-horizontal" action="/barramentoPlacamae/criarNovoFim" method="POST">
          <input type="hidden" id="idPlacaMae" name="idPlacaMae" value="{$placaMae->getIdPlacaMae()}" class=" form-control" required  />
          <div class="form-group">
               <label class="control-label col-sm-2" for="newInterface">Interfaces</label>

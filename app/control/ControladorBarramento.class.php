@@ -43,7 +43,7 @@ class ControladorBarramento extends ControladorGeral
       */
     public function manter()
     {
-        $this->view->setTitle('Barramento');
+        $this->view->setTitle('Interfaces');
 
         Componente::carregaComponente('TabelaManterDados'); 
         $tabela = new TabelaManterDados();
@@ -57,7 +57,7 @@ class ControladorBarramento extends ControladorGeral
         '/barramento/deletarFim');
 
          //Colunas da tabela
-        $tabelaColuna = new TabelaColuna('Id barramento', 'id_barramento');
+        $tabelaColuna = new TabelaColuna('ID', 'id_barramento');
         $tabelaColuna->setLargura(40);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);

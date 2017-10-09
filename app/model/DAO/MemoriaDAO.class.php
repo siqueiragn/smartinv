@@ -82,6 +82,27 @@ class MemoriaDAO extends AbstractDAO
              throw new EntradaDeDadosException();
         }
      }
+
+
+public function getByComputerID($id) {
+        $memoria = new Memoria();
+        $consulta = $this->queryTable($memoria->getTable(),
+                                         'id_memoria as principal ,
+                                          nome,
+                                          frequencia,
+                                          capacidade,
+                                          tipo,
+                                          descricao,
+                                          computador',
+                        'computador ='. $id );
+        if ($consulta) {
+            $memoria = $this->setDados($consulta->fetch());
+            return $memoria;
+        } else {
+             throw new EntradaDeDadosException();
+        }
+     }
+
      /**
      * Método que retorna um array de objetos Memoria
      * sendo determinado pelo parâmetro $condicao

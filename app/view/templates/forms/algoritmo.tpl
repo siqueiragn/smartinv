@@ -7,6 +7,7 @@
 <li> Processador: {$computador['processador']}</li>
 <li> Memória: {$computador['memoria']} </li>
 <li> Disco Rigido: {$computador['disco_rigido']} </li>
+<li> Fonte: {$computador['fonte']}</li>
 </ul>
 </li>
 <hr >

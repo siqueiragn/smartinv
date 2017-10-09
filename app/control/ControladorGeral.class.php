@@ -79,6 +79,10 @@ $discoRigido = new DiscoRigidoDAO();
 $dadosDRigido = $discoRigido->getLista(/* "ORDER BY id_disco_rigido DESC" */);
 $arrayIDDiscoExcept = [];
 
+$fonte = new FonteDAO();
+$dadosFonte = $fonte->getLista();
+$arrayIDFonteExcept = [];
+
 $contador = 0;
 $arrayComputador = [];
        
@@ -87,6 +91,7 @@ $arrayComputador = [];
                 $processadorAtual = 'Não encontrado!';
                 $memoriaAtual = 'Não encontrado!';
                 $discoAtual = 'Não encontrado!';
+		$fonteAtual = 'Não encontrado!';
                 
                 $selectProcessor = new Processador();
                 foreach($dadosProcessador as $itemProcessador){
@@ -193,10 +198,26 @@ $arrayComputador = [];
                          /* print_r($arrayInterfaces); */
                      } 
                  
+		$selectFonte = new Fonte();
+		foreach($dadosFonte as $itemFonte){
+		if(!in_array($itemFonte->getIdFonte(), $arrayIDFonteExcept) && is_null($itemFonte->getComputador())){
+			if($itemFonte->getPotencia()>$selectFonte->getPotencia()) {
+			$key = array_search($selectFonte->getIdFonte(), $arrayIDFonteExcept);
+			if($key !== false){
+				unset($arrayIDFonteExcept[$key]);			
+			}
+			$fonteAtual = $itemFonte->getIdFonte();
+			$arrayIDFonteExcept[] = $itemFonte->getIdFonte();
+			$selectFonte = $itemFonte;
+			}
+		}
+		}
+
                 $arrayComputador[$contador]['placa_mae'] = $itemPlacaMae->getIdPlacaMae();
-		        $arrayComputador[$contador]['processador'] = $processadorAtual;
+		$arrayComputador[$contador]['processador'] = $processadorAtual;
                 $arrayComputador[$contador]['memoria'] = $memoriaAtual;
                 $arrayComputador[$contador]['disco_rigido'] = $discoAtual;
+		$arrayComputador[$contador]['fonte'] = $fonteAtual;
             $contador++;
         }
         

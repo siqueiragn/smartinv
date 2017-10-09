@@ -120,7 +120,7 @@ class ControladorAlgoritmo extends ControladorGeral
       */
     public function criarNovo(Algoritmo $obj = null)
      {
-        $algoritmo = $obj == null ? new Algoritmo() : $obj;
+        /*$algoritmo = $obj == null ? new Algoritmo() : $obj;
 
         $this->view->setTitle('Novo Algoritmo');
 
@@ -130,7 +130,7 @@ class ControladorAlgoritmo extends ControladorGeral
         $this->getSelects();
         $this->view->startForm(BASE_URL  . '/algoritmo/criarNovoFim');
         $this->view->addTemplate('forms/algoritmo');
-        $this->view->endForm();
+        $this->view->endForm();*/
     }
 
     /**

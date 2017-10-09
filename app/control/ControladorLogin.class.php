@@ -31,7 +31,8 @@ class ControladorLogin extends AbstractController
 
     public function index()
     {
-    	
+    	if(isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == 'OK')
+		header('Location: /home');
         $this->view->setTitle('SMARTINV');
         $this->view->attValue('url', $_SERVER['HTTP_HOST']);
         //$this->view->addTemplate('nao_logado');
@@ -47,16 +48,16 @@ class ControladorLogin extends AbstractController
         $senha = filter_input(INPUT_POST, 'senha');
 
         $login = new LoginBanco(LOGIN_CHAVE, $this->modelo);
-        $this->modelo->DB()->debugOn();
-        $login->redirect($this, '/home');
+       $login->redirect($this, '/home');
         $result = $login->verificaLoginSenha($usuario, $senha, true);
         if ($result) {
             $login->redirect($this, '/home');
+		$_SESSION['autenticado'] = 'OK';
         } else {
             $this->view->addErro('Login e Senha incorreto');
             		$this->index();
         }
-
+ 
     }
 
     public function registrar()
