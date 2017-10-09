@@ -58,25 +58,25 @@ class ControladorGeral extends AbstractController
         /* $controlador = new ControladorGeral();
         $this->view = $controlador->getView(); */
     }
-    public function algoritmo()
+    public function iniciarAlgoritmo()
     {
         $this->view = new VisualizadorGeral();
         $this->view->setTitle('Algoritmo');
         $this->view->addTemplate('forms/algoritmo');
         
         $placaMae = new PlacaMaeDAO();
-        $dadosPlacaMae = $placaMae->getLista();
+        $dadosPlacaMae = $placaMae->getLista(/* "ORDER BY id_placa_mae DESC" */);
         
 $processador = new ProcessadorDAO();
-$dadosProcessador = $processador->getLista();
+$dadosProcessador = $processador->getLista(/* "ORDER BY id_processador DESC" */);
 $arrayIDProcessadorExcept = [];
 
 $memoria = new MemoriaDAO();
-$dadosMemoria = $memoria->getLista(); 
+$dadosMemoria = $memoria->getLista(/* "ORDER BY id_memoria DESC" */); 
 $arrayIDMemoriaExcept = [];
 
 $discoRigido = new DiscoRigidoDAO();
-$dadosDRigido = $discoRigido->getLista();
+$dadosDRigido = $discoRigido->getLista(/* "ORDER BY id_disco_rigido DESC" */);
 $arrayIDDiscoExcept = [];
 
 $contador = 0;
@@ -86,7 +86,7 @@ $arrayComputador = [];
                 $arrayComputador[]['placa_mae'] = $itemPlacaMae->getIdPlacaMae();
                 $processadorAtual = 'Não encontrado!';
                 $memoriaAtual = 'Não encontrado!';
-                $hdAtual = 'Não encontrado!';
+                $discoAtual = 'Não encontrado!';
                 
                 $selectProcessor = new Processador();
                 foreach($dadosProcessador as $itemProcessador){
@@ -127,7 +127,7 @@ $arrayComputador = [];
             
                             }
                         else {
-                              echo $itemMemoria->getCapacidade() . " " . $selectMemoria->getCapacidade();
+                              // echo $itemMemoria->getCapacidade() . " " . $selectMemoria->getCapacidade();
                             
                               if ($itemMemoria->getCapacidade() >= $selectMemoria->getCapacidade()){
                                   $key = array_search($selectMemoria->getIdMemoria(), $arrayIDMemoriaExcept);
@@ -145,12 +145,62 @@ $arrayComputador = [];
                 }
              
                 }
+                
+                // ================== CARREGA AS INTERFACES DA PLACA MÃE
+                $interfaces = new BarramentoPlacamaeDAO();
+                    $dadosInterface = $interfaces->getLista();
+                    $arrayInterfaces = [];
+                   
+                   foreach($dadosInterface as $item){
+                       if($item->getIdPlacaMae() == $itemPlacaMae->getIdPlacaMae()){
+                           $arrayInterfaces[] = $item->getIdBarramento();
+                       }
+                   }
+                
+                 /*    echo "<pre>";
+                   print_r($arrayInterfaces);
+                   echo "</pre>"; 
+                 */
+                // ========================================================
+                
+                $selectHD = new DiscoRigido();
+                 foreach($dadosDRigido as $itemDiscoRigido){
+                     
+                      /* echo $itemDiscoRigido->getBarramento()."<br>";
+                     echo array_search($itemDiscoRigido->getBarramento(), $arrayInterfaces)." ACHOU <br>";  */
+                     if(!in_array($itemDiscoRigido->getIdDiscoRigido(), $arrayIDDiscoExcept) && is_null($itemDiscoRigido->getComputador())){
+                         
+                        /*  if($itemDiscoRigido->getVCache() >= $selectHD->getVCache()){
+                             if($itemDiscoRigido->getRpm() >= $selectHD->getRpm()) { */
+                         if(array_search($itemDiscoRigido->getBarramento(), $arrayInterfaces) !== false){
+                         if($itemDiscoRigido->getCapacidade() >= $selectHD->getCapacidade()){
+                                 
+                                         $key = array_search($selectHD->getIdDiscoRigido(), $arrayIDDiscoExcept);
+                                         if($key !==false){
+                                             unset($arrayIDDiscoExcept[$key]);
+                                         }
+                                       
+                                         $discoAtual = $itemDiscoRigido->getIdDiscoRigido();
+                                         $arrayIDDiscoExcept[] = $itemDiscoRigido->getIdDiscoRigido();
+                                         $selectHD = $itemDiscoRigido;
+                                     }
+                                 }
+                            /*  }
+                       
+                             } */
+                               //  echo "Achou! ".$itemDiscoRigido->getBarramento()." ".$itemDiscoRigido->getNome()."<br>";
+                         }
+                         /* print_r($arrayInterfaces); */
+                     } 
+                 
                 $arrayComputador[$contador]['placa_mae'] = $itemPlacaMae->getIdPlacaMae();
 		        $arrayComputador[$contador]['processador'] = $processadorAtual;
                 $arrayComputador[$contador]['memoria'] = $memoriaAtual;
+                $arrayComputador[$contador]['disco_rigido'] = $discoAtual;
             $contador++;
         }
-        print_r($arrayComputador);
+        
+       // print_r($arrayComputador);
        
 $this->view->attValue('lista',$arrayComputador);
 		

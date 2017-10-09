@@ -1,30 +1,30 @@
 <?php
 
 /**
- * Classe controladora referente ao objeto Placa_mae para 
+ * Classe controladora referente ao objeto Algoritmo para 
  * a manutenção dos dados no sistema 
  *
  * @package app.control
  * @author Gabriel Nunes de Siqueira <gabrielndesiqueira@hotmail.com>
- * @version 1.0.0 - 08-10-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
+ * @version 1.0.0 - 09-10-2017(Gerado automaticamente - GC - 1.0 02/11/2015)
  */
 
-class ControladorPlacaMae extends ControladorGeral
+class ControladorAlgoritmo extends ControladorGeral
  {
 
     /**
-     * @var PlacaMaeDAO
+     * @var AlgoritmoDAO
      */
     protected $model;
 
      /**
-      * Construtor da classe Placa_mae, esse método inicializa o  
+      * Construtor da classe Algoritmo, esse método inicializa o  
       * modelo de dados 
       *
       */
     public function __construct() {
         parent::__construct();
-        $this->model = new PlacaMaeDAO();
+        $this->model = new AlgoritmoDAO();
     }
 
      /**
@@ -43,48 +43,53 @@ class ControladorPlacaMae extends ControladorGeral
       */
     public function manter()
     {
-        $this->view->setTitle('Placa mae');
+        $this->view->setTitle('Algoritmo');
 
         Componente::carregaComponente('TabelaManterDados'); 
         $tabela = new TabelaManterDados();
-        $tabela->setDados(BASE_URL . '/placaMae/tabela');
-        $tabela->setTitulo('Placa mae');
+        $tabela->setDados(BASE_URL . '/algoritmo/tabela');
+        $tabela->setTitulo('Algoritmo');
         $tabela->addAcaoAdicionar(BASE_URL . 
-        '/placaMae/criarNovo');
+        '/algoritmo/criarNovo');
         $tabela->addAcaoEditar(BASE_URL . 
-        '/placaMae/editar');
+        '/algoritmo/editar');
         $tabela->addAcaoDeletar(BASE_URL . 
-        '/placaMae/deletarFim');
+        '/algoritmo/deletarFim');
 
          //Colunas da tabela
-        $tabelaColuna = new TabelaColuna('Id placa mae', 'id_placa_mae');
-        $tabelaColuna->setLargura(40);
+        $tabelaColuna = new TabelaColuna('ID Configuração', 'id_algoritmo');
+        $tabelaColuna->setLargura(14);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Nome', 'nome');
-        $tabelaColuna->setLargura(60);
-        $tabelaColuna->setBuscaTipo('character varying');
-        $tabela->addColuna($tabelaColuna);
-
-        $tabelaColuna = new TabelaColuna('Socket', 'socket');
-        $tabelaColuna->setLargura(60);
-        $tabelaColuna->setBuscaTipo('character varying');
-        $tabela->addColuna($tabelaColuna);
-
-        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
-        $tabelaColuna->setLargura(60);
-        $tabelaColuna->setBuscaTipo('character varying');
-        $tabela->addColuna($tabelaColuna);
-
-        $tabelaColuna = new TabelaColuna('Computador', 'computador');
-        $tabelaColuna->setLargura(40);
+        $tabelaColuna = new TabelaColuna('ID Placa Mãe', 'id_placa_mae');
+        $tabelaColuna->setLargura(14);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Slot memoria', 'slot_memoria');
-        $tabelaColuna->setLargura(60);
-        $tabelaColuna->setBuscaTipo('character varying');
+        $tabelaColuna = new TabelaColuna('ID Processador', 'id_processador');
+        $tabelaColuna->setLargura(14);
+        $tabelaColuna->setBuscaTipo('integer');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('ID Fonte', 'id_fonte');
+        $tabelaColuna->setLargura(14);
+        $tabelaColuna->setBuscaTipo('integer');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('ID Memoria', 'id_memoria');
+        $tabelaColuna->setLargura(14);
+        $tabelaColuna->setBuscaTipo('integer');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('ID Disco Rígido', 'id_disco_rigido');
+        $tabelaColuna->setLargura(14);
+        $tabelaColuna->setBuscaTipo('integer');
+        $tabela->addColuna($tabelaColuna);
+
+        $tabelaColuna = new TabelaColuna('Computador', 'id_computador');
+        $tabelaColuna->setLargura(14);
+        $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
         $this->view->addComponente($tabela);
@@ -111,89 +116,47 @@ class ControladorPlacaMae extends ControladorGeral
      /**
       * Método que controla a inserção de um novo dado
       *
-      * @param PlacaMae $obj - Objeto DataTransfer com os dados da classe
+      * @param Algoritmo $obj - Objeto DataTransfer com os dados da classe
       */
-    public function criarNovo(PlacaMae $obj = null)
+    public function criarNovo(Algoritmo $obj = null)
      {
-        $placaMae = $obj == null ? new PlacaMae() : $obj;
+        $algoritmo = $obj == null ? new Algoritmo() : $obj;
 
-        $this->view->setTitle('Criar Placa Mãe');
+        $this->view->setTitle('Novo Algoritmo');
 
-        $this->view->attValue('placaMae', $placaMae);
+        $this->view->attValue('algoritmo', $algoritmo);
 
         //Carrega os campos de seleção;
         $this->getSelects();
-        $this->view->startForm(BASE_URL  . '/placaMae/criarNovoFim');
-        $this->view->addTemplate('forms/placa_maeNew');
+        $this->view->startForm(BASE_URL  . '/algoritmo/criarNovoFim');
+        $this->view->addTemplate('forms/algoritmo');
         $this->view->endForm();
     }
 
     /**
      * Método edita os dados da tabela ou objeto em questão 
      *
-     * @param PlacaMae $obj - Objeto para carregar os formulários 
+     * @param Algoritmo $obj - Objeto para carregar os formulários 
      */
-    public function editar(PlacaMae $obj = null) 
+    public function editar(Algoritmo $obj = null) 
     {
-        $id = null;
         if($obj == null){
             $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
-            $placaMae = $this->model->getById($id);
+            $algoritmo = $this->model->getById($id);
         }else{
-            $placaMae = $obj;
+            $algoritmo = $obj;
         }
 
-        $lista = [];
-        $lista2 = [];
-        $lista3 = [];
-            
-        if(!is_null($id)){
-            $placaMae = $this->model->getById($id);
-            
-            $barramentoDAO = new BarramentoDAO();
-            $dados = $barramentoDAO->getLista();
-            
-            foreach ($dados as $item){
-                $lista[$item->getIdBarramento()] = $item->getNome();
-            }
-            $this->view->attValue('lista',$lista);
-            
-            
-            $barramentoMoboDAO = new BarramentoPlacamaeDAO();
-            $dados = $barramentoMoboDAO->getLista('id_placa_mae = '.$placaMae->getIdPlacaMae());
-            
-            foreach ($dados as $item){
-                $lista2[$item->getIdBarramentoPlacaMae()] = $lista[$item->getIdBarramento()];
-                
-                
-            }
-        
-            $this->view->attValue('listaInt',$lista2);
-        }
-        $this->view->startForm(BASE_URL . '/placaMae/editarFim');
-        $this->view->addTemplate('forms/placa_mae');
-        $this->view->endForm();
-        
-        
-        $pcDAO = new ComputadorDAO();
-        $dados = $pcDAO->getLista();
-        $lista3[''] = '';
-        foreach ($dados as $item){
-            $lista3[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
-        }
-        $this->view->attValue('listaComputador', $lista3);
-        
-        $this->view->setTitle('Editar Placa mae');
+        $this->view->setTitle('Editar Algoritmo');
 
-        $this->view->attValue('placaMae', $placaMae);
+        $this->view->attValue('algoritmo', $algoritmo);
 
         //Carrega os campos de seleção;
         $this->getSelects();
 
-        
-        //$this->view->startForm(BASE_URL . '/barramentoPlacaMae/criarNovoFim');
-        $this->view->addTemplate('forms/barramento_placamae');
-        
+        $this->view->startForm(BASE_URL . '/algoritmo/editarFim');
+        $this->view->addTemplate('forms/algoritmo');
+        $this->view->endForm();
     }
 
     /**
@@ -202,13 +165,13 @@ class ControladorPlacaMae extends ControladorGeral
      */
     public function criarNovoFim()
      {
-        $placaMae = new PlacaMae();
+        $algoritmo = new Algoritmo();
         try {
-            unset($_POST['idPlacaMae']);
-            if($placaMae->setArrayDados($_POST) > 0){ 
+            unset($_POST['idAlgoritmo']);
+            if($algoritmo->setArrayDados($_POST) > 0){ 
                 $this->view->addErros($GLOBALS['ERROS']);
             }else{
-                if($this->model->create($placaMae)){
+                if($this->model->create($algoritmo)){
                     $this->view->addMensagemSucesso('Dados inseridos com sucesso!');
                     $this->manter();
                     return ;
@@ -221,7 +184,7 @@ class ControladorPlacaMae extends ControladorGeral
              $erro .= 'sistema e solucionado o mais breve possível.';
              $this->view->addMensagemErro($erro);
         }
-        $this->criarNovo($placaMae);
+        $this->criarNovo($algoritmo);
     }
 
     /**
@@ -230,16 +193,14 @@ class ControladorPlacaMae extends ControladorGeral
      */
     public function editarFim()
      {
-        
-       
-        $placaMae = new PlacaMae();
-        $id = ValidatorUtil::variavelInt($_POST['idPlacaMae']);
-        $placaMae->setIdPlacaMae($id);
+        $algoritmo = new Algoritmo();
+        $id = ValidatorUtil::variavelInt($_POST['idAlgoritmo']);
+        $algoritmo->setIdAlgoritmo($id);
         try {
-             if($placaMae->setArrayDados($_POST) > 0){ 
+             if($algoritmo->setArrayDados($_POST) > 0){ 
                  $this->view->addErros($GLOBALS['ERROS']);
              }else{
-                 if($this->model->update($placaMae)){
+                 if($this->model->update($algoritmo)){
                      $this->view->addMensagemSucesso('Dados alterados com sucesso!');
                      $this->manter();
                      return ;
@@ -252,8 +213,7 @@ class ControladorPlacaMae extends ControladorGeral
              $erro .= 'sistema e solucionado o mais breve possível.';
              $this->view->addMensagemErro($erro);
         }
-        $this->editar($placaMae);
-        header('Location: /placaMae');
+        $this->editar($algoritmo);
     }
 
     /**
@@ -262,11 +222,11 @@ class ControladorPlacaMae extends ControladorGeral
      */
     public function deletarFim()
     {
-        $placaMae = new PlacaMae();
+        $algoritmo = new Algoritmo();
         $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
-        $placaMae->setIdPlacaMae($id);
+        $algoritmo->setIdAlgoritmo($id);
         try {
-             if($this->model->delete($placaMae) !== false){
+             if($this->model->delete($algoritmo) !== false){
                   $this->view->addMensagemSucesso('Dado removido com sucesso!');
              }else{
                   $this->view->addMensagemErro($this->model->getErro());
@@ -285,10 +245,8 @@ class ControladorPlacaMae extends ControladorGeral
      */
     private function getSelects()
      {
-       
-
     }
-    private function addArquivos(PlacaMae $obj, $editar = false)
+    private function addArquivos(Algoritmo $obj, $editar = false)
     {
     }
   private function salvarImagem(ArquivoUpload $arquivo,  Noticia $noticia, $editar = false)

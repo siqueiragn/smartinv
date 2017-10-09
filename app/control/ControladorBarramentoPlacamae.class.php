@@ -108,9 +108,9 @@ class ControladorBarramentoPlacamae extends ControladorGeral
 
         //Carrega os campos de seleção;
         $this->getSelects();
-        $this->view->startForm(BASE_URL  . '/barramentoPlacamae/criarNovoFim');
+       /*  $this->view->startForm(BASE_URL  . '/barramentoPlacamae/criarNovoFim');
         $this->view->addTemplate('forms/barramento_placamae');
-        $this->view->endForm();
+        $this->view->endForm(); */
     }
 
     /**
@@ -146,6 +146,12 @@ class ControladorBarramentoPlacamae extends ControladorGeral
     public function criarNovoFim()
      {
         $barramentoPlacamae = new BarramentoPlacamae();
+        $placaMaeDAO = new PlacaMaeDAO();
+        $placaMae = $placaMaeDAO->getByID($_POST['idPlacaMae']);
+        
+
+        
+        
         try {
             unset($_POST['idBarramentoPlacamae']);
             if($barramentoPlacamae->setArrayDados($_POST) > 0){ 
@@ -154,6 +160,7 @@ class ControladorBarramentoPlacamae extends ControladorGeral
                 if($this->model->create($barramentoPlacamae)){
                     $this->view->addMensagemSucesso('Dados inseridos com sucesso!');
                     $this->manter();
+                    header('Location: /placaMae/editar/'.$placaMae->getID());
                     return ;
                 }else{
                     $this->view->addMensagemErro('Erro ao inserir seus dados tente novamente mais tarde.');
@@ -165,6 +172,8 @@ class ControladorBarramentoPlacamae extends ControladorGeral
              $this->view->addMensagemErro($erro);
         }
         $this->criarNovo($barramentoPlacamae);
+        
+       
     }
 
     /**
@@ -202,12 +211,14 @@ class ControladorBarramentoPlacamae extends ControladorGeral
      */
     public function deletarFim()
     {
+        
         $barramentoPlacamae = new BarramentoPlacamae();
-        $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
-        $barramentoPlacamae->setIdBarramentoPlacamae($id);
+       /*  $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]); */
+        $barramentoPlacamae->setIdBarramentoPlacamae($_GET['idPMB']);
         try {
              if($this->model->delete($barramentoPlacamae) !== false){
                   $this->view->addMensagemSucesso('Dado removido com sucesso!');
+                  header('Location: /placaMae/editar/'.$_GET['idMOBO']);
              }else{
                   $this->view->addMensagemErro($this->model->getErro());
              }

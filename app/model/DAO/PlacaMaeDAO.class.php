@@ -80,6 +80,25 @@ class PlacaMaeDAO extends AbstractDAO
              throw new EntradaDeDadosException();
         }
      }
+     
+     public function getByComputerID($id) {
+         $placaMae = new PlacaMae();
+         $consulta = $this->queryTable($placaMae->getTable(),
+             'id_placa_mae as principal ,
+                                          nome,
+                                          socket,
+                                          descricao,
+                                          computador,
+                                          slot_memoria',
+             'computador ='. $id );
+         if ($consulta) {
+             $placaMae = $this->setDados($consulta->fetch());
+             return $placaMae;
+         } else {
+             throw new EntradaDeDadosException();
+         }
+     }
+     
      /**
      * Método que retorna um array de objetos PlacaMae
      * sendo determinado pelo parâmetro $condicao

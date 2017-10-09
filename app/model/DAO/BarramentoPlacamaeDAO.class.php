@@ -74,6 +74,22 @@ class BarramentoPlacamaeDAO extends AbstractDAO
              throw new EntradaDeDadosException();
         }
      }
+     
+     public function getByPlacaMaeID($id) {
+         $barramentoPlacamae = new BarramentoPlacamae();
+         $consulta = $this->queryTable($barramentoPlacamae->getTable(),
+             'id_barramento_placamae as principal ,
+                                          id_barramento,
+                                          id_placa_mae',
+             'id_placa_mae ='. $id );
+         if ($consulta) {
+             $barramentoPlacamae = $this->setDados($consulta->fetch());
+             return $barramentoPlacamae;
+         } else {
+             throw new EntradaDeDadosException();
+         }
+     }
+     
      /**
      * Método que retorna um array de objetos BarramentoPlacamae
      * sendo determinado pelo parâmetro $condicao

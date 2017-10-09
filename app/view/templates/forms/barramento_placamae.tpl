@@ -1,24 +1,31 @@
 {*Gerado automaticamente com GC - 1.0 02/11/2015*}
 <fieldset class="formPadrao">
-     <legend>Barramento placamae</legend>
-             <input type="hidden" id="idBarramentoPlacamae" name="idBarramentoPlacamae" value="{$barramentoPlacamae->getIdBarramentoPlacamae()}" class=" form-control" required  />
+ <form class="form-horizontal" action="/barramentoPlacaMae/criarNovoFim" method="POST">
+         <input type="hidden" id="idPlacaMae" name="idPlacaMae" value="{$placaMae->getIdPlacaMae()}" class=" form-control" required  />
          <div class="form-group">
-              <label class="control-label col-sm-2" for="idBarramento">Id barramento</label>
+              <label class="control-label col-sm-2" for="newInterface">Interfaces</label>
               <div class="col-sm-8">
-                 <select id="idBarramento" name="idBarramento" class="form-control">
-    		{html_options options=$listaBarramento selected=$barramentoPlacamae->getIdBarramento()}
+                 <select id="interface" name="idBarramento" class="form-control">
+    		{html_options options=$lista}
              </select>
-
+           
+             </div>
+               <button style="margin-top: 3px" type="submit">
+           <span class="glyphicon glyphicon-plus"></span>
+           </button>
               </div>
-         </div>
-         <div class="form-group">
-              <label class="control-label col-sm-2" for="idPlacaMae">Id placa mae</label>
+              
+              
+              
+              
+              <div class="form-group">
+              <label class="control-label col-sm-2" for="interfaces">Lista de Interfaces</label>
               <div class="col-sm-8">
-                 <select id="idPlacaMae" name="idPlacaMae" class="form-control">
-    		{html_options options=$listaPlacaMae selected=$barramentoPlacamae->getIdPlacaMae()}
-             </select>
-
+              {foreach key=key item=item from=$listaInt}
+              <p> {$item} <a style="color: black" href="/BarramentoPlacamae/deletarFim/?idPMB={$key}&idMOBO={$placaMae->getIdPlacaMae()}"><span class="glyphicon glyphicon-remove" </span></a> </p>
+              {/foreach}
               </div>
-         </div>
+              </div></form>
+
 </fieldset>
 
