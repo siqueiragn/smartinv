@@ -111,7 +111,7 @@ class DiscoRigidoDAO extends AbstractDAO
      * @param String $condicao - Condição da consulta
      * @return Array de objetos DiscoRigido
      */
-    public function getLista($condicao = false)
+    public function getLista($condicao = false, $order = false)
     {
         $dados = array();
         $result = $this->queryTable(  'public.disco_rigido ', 
@@ -123,7 +123,7 @@ class DiscoRigidoDAO extends AbstractDAO
                                           descricao,
                                           barramento,
                                           computador',
-            $condicao);
+            $condicao, $order);
         foreach ($result as $linhaBanco) {
             $discoRigido = $this->setDados($linhaBanco);
             $dados[] = $discoRigido;

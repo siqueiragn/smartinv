@@ -102,7 +102,7 @@ class FonteDAO extends AbstractDAO
      * @param String $condicao - Condição da consulta
      * @return Array de objetos Fonte
      */
-    public function getLista($condicao = false)
+    public function getLista($condicao = false, $order = false)
     {
         $dados = array();
         $result = $this->queryTable(  'public.fonte ', 
@@ -111,7 +111,7 @@ class FonteDAO extends AbstractDAO
                                           potencia,
                                           descricao,
                                           computador',
-            $condicao);
+            $condicao, $order);
         foreach ($result as $linhaBanco) {
             $fonte = $this->setDados($linhaBanco);
             $dados[] = $fonte;

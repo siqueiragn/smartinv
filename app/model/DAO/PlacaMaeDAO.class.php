@@ -106,7 +106,7 @@ class PlacaMaeDAO extends AbstractDAO
      * @param String $condicao - Condição da consulta
      * @return Array de objetos PlacaMae
      */
-    public function getLista($condicao = false)
+    public function getLista($condicao = false, $order = false)
     {
         $dados = array();
         $result = $this->queryTable(  'public.placa_mae ', 
@@ -116,7 +116,7 @@ class PlacaMaeDAO extends AbstractDAO
                                           descricao,
                                           computador,
                                           slot_memoria',
-            $condicao);
+            $condicao, $order);
         foreach ($result as $linhaBanco) {
             $placaMae = $this->setDados($linhaBanco);
             $dados[] = $placaMae;

@@ -137,13 +137,8 @@ abstract class Login
      */
     public function redirect(\AbstractController $c, $redirect)
     {
-        if (isset($_SESSION['LOGIN_REDIRECTION'])){
-            $r = $_SESSION['LOGIN_REDIRECTION'];
-            unset($_SESSION['LOGIN_REDIRECTION']);
-            $c->redirect($r);
-        } else {
-            $c->redirect($redirect);
-        }
+        $c->redirect($redirect);
+
     }
 
     /**

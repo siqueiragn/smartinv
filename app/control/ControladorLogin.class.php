@@ -26,13 +26,14 @@ class ControladorLogin extends AbstractController
 
     public function paginaNaoEncontrada()
     {
-        $this->view->setTitle('Funcionalidade ainda não implementada');
+        $this->view->setTitle('Funcionalidade ainda nï¿½o implementada');
     }
 
     public function index()
     {
+	//ds($_SESSION);
     	if(isset($_SESSION['autenticado']) && $_SESSION['autenticado'] == 'OK')
-		header('Location: /home');
+		$this->redirect("/home");
         $this->view->setTitle('SMARTINV');
         $this->view->attValue('url', $_SERVER['HTTP_HOST']);
         //$this->view->addTemplate('nao_logado');
@@ -48,22 +49,21 @@ class ControladorLogin extends AbstractController
         $senha = filter_input(INPUT_POST, 'senha');
 
         $login = new LoginBanco(LOGIN_CHAVE, $this->modelo);
-       $login->redirect($this, '/home');
+
         $result = $login->verificaLoginSenha($usuario, $senha, true);
         if ($result) {
+	    $_SESSION['autenticado'] = 'OK';
+            // dd("login correto");
             $login->redirect($this, '/home');
-		$_SESSION['autenticado'] = 'OK';
+		
         } else {
+            //dd("login incorreto");
             $this->view->addErro('Login e Senha incorreto');
             		$this->index();
         }
  
     }
 
-    public function registrar()
-    {
-        
-    }
 
     public function getTemplateCadastro()
     {

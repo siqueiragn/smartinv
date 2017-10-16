@@ -65,22 +65,22 @@ class ControladorGeral extends AbstractController
         $this->view->addTemplate('forms/algoritmo');
         
         $placaMae = new PlacaMaeDAO();
-        $dadosPlacaMae = $placaMae->getLista(/* "ORDER BY id_placa_mae DESC" */);
+        $dadosPlacaMae = $placaMae->getLista(null, "id_placa_mae ASC");
         
 $processador = new ProcessadorDAO();
-$dadosProcessador = $processador->getLista(/* "ORDER BY id_processador DESC" */);
+$dadosProcessador = $processador->getLista(null, "id_processador ASC");
 $arrayIDProcessadorExcept = [];
 
 $memoria = new MemoriaDAO();
-$dadosMemoria = $memoria->getLista(/* "ORDER BY id_memoria DESC" */); 
+$dadosMemoria = $memoria->getLista(null, "id_memoria ASC"); 
 $arrayIDMemoriaExcept = [];
 
 $discoRigido = new DiscoRigidoDAO();
-$dadosDRigido = $discoRigido->getLista(/* "ORDER BY id_disco_rigido DESC" */);
+$dadosDRigido = $discoRigido->getLista(null, "id_disco_rigido ASC");
 $arrayIDDiscoExcept = [];
 
 $fonte = new FonteDAO();
-$dadosFonte = $fonte->getLista();
+$dadosFonte = $fonte->getLista(null, "id_fonte ASC");
 $arrayIDFonteExcept = [];
 
 $contador = 0;

@@ -110,7 +110,7 @@ public function getByComputerID($id) {
      * @param String $condicao - Condição da consulta
      * @return Array de objetos Memoria
      */
-    public function getLista($condicao = false)
+    public function getLista($condicao = false, $order = false)
     {
         $dados = array();
         $result = $this->queryTable(  'public.memoria ', 
@@ -121,7 +121,7 @@ public function getByComputerID($id) {
                                           tipo,
                                           descricao,
                                           computador',
-            $condicao);
+            $condicao, $order);
         foreach ($result as $linhaBanco) {
             $memoria = $this->setDados($linhaBanco);
             $dados[] = $memoria;
