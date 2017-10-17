@@ -147,7 +147,7 @@ class ControladorBarramento extends ControladorGeral
      {
         $barramento = new Barramento();
         try {
-            unset($_POST['idBarramento']);
+            unset( ['idBarramento']);
             if($barramento->setArrayDados($_POST) > 0){ 
                 $this->view->addErros($GLOBALS['ERROS']);
             }else{

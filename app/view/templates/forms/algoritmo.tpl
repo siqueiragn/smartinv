@@ -14,5 +14,10 @@
 {/foreach}
 </ol>
 
-<h1> Gerado. </h1>
+
+<form method="POST">
+    
+    <input type="submit">
+    
+</form>
 </fieldset>

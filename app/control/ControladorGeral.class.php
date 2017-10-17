@@ -60,6 +60,11 @@ class ControladorGeral extends AbstractController
     }
     public function iniciarAlgoritmo()
     {
+        $this->view->addTemplate('configurar');
+        
+        if(isset($_POST['iniciar'])){
+        $this->modelo->DB()->delete('algoritmo', '1=1');
+        
         $this->view = new VisualizadorGeral();
         $this->view->setTitle('Algoritmo');
         $this->view->addTemplate('forms/algoritmo');
@@ -226,9 +231,9 @@ $arrayComputador = [];
 $this->view->attValue('lista',$arrayComputador);
 		
 		//print_r($arrayPlacaMae);
-
-
-     
+                
+                    
+        }
         
      
     }
