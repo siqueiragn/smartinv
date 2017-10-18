@@ -82,6 +82,19 @@ class AlgoritmoDAO extends AbstractDAO
              throw new EntradaDeDadosException();
         }
      }
+     
+     public function getMenorID() {
+        $algoritmo = new Algoritmo();
+        $consulta = $this->queryTable($algoritmo->getTable(),
+                                         'MIN(id_algoritmo)');
+        if ($consulta) {
+            $algoritmo = $consulta->fetch();
+            return $algoritmo;
+        } else {
+             throw new EntradaDeDadosException();
+        }
+     }
+     
      /**
      * Método que retorna um array de objetos Algoritmo
      * sendo determinado pelo parâmetro $condicao
@@ -145,5 +158,17 @@ class AlgoritmoDAO extends AbstractDAO
     } else {
         return false;
     }
+   }
+   
+   public function inserirMultiplos(array $algoritmo){
+     
+       foreach ($algoritmo as $item){
+           $query = "INSERT INTO Algoritmo (id_placa_mae,id_processador,id_fonte,id_memoria,id_disco_rigido) VALUES ";
+           $query .= "(".$item['id_placa_mae'].",".$item['id_processador'].",".$item['id_fonte'].",".$item['id_memoria'].",".$item['id_disco_rigido'].")";
+           $this->DB()->query($query);
+       }
+     
+
+       
    }
 }

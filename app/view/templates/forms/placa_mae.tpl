@@ -30,7 +30,7 @@
               </div>
          </div>
          <div class="form-group">
-              <label class="control-label col-sm-2" for="slotMemoria">Slot memoria</label>
+              <label class="control-label col-sm-2" for="slotMemoria">Slot Memória RAM</label>
               <div class="col-sm-8">
                  <input type="text" id="slotMemoria" name="slotMemoria" value="{$placaMae->getSlotMemoria()}" class=" form-control"  />
               </div>

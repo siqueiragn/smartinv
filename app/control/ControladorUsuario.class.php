@@ -33,6 +33,9 @@ class ControladorUsuario extends ControladorGeral
       */
     public function index()
     {
+if($_SESSION['idUsuario'] != 1){
+$this->redirect('/usuario/editar/'.$_SESSION['idUsuario']);
+}
         $this->manter();
     }
 
@@ -105,6 +108,9 @@ class ControladorUsuario extends ControladorGeral
       */
     public function criarNovo(Usuario $obj = null)
      {
+        if($_SESSION['idUsuario'] != 1){
+$this->redirect('/usuario/editar/'.$_SESSION['idUsuario']);
+}
         $usuario = $obj == null ? new Usuario() : $obj;
 
         $this->view->setTitle('Novo Usuário');
@@ -125,6 +131,10 @@ class ControladorUsuario extends ControladorGeral
      */
     public function editar(Usuario $obj = null) 
     {
+       if($_SESSION['idUsuario']!=1)
+        if($_SESSION['idUsuario'] != substr($_SERVER['REQUEST_URI'],strripos($_SERVER['REQUEST_URI'], '/')+1)){
+$this->redirect('/usuario/editar/'.$_SESSION['idUsuario']);
+}
         if($obj == null){
             $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
             $usuario = $this->model->getById($id);
@@ -150,6 +160,9 @@ class ControladorUsuario extends ControladorGeral
      */
     public function criarNovoFim()
      {
+        if($_SESSION['idUsuario'] != 1){
+$this->redirect('/usuario/editar/'.$_SESSION['idUsuario']);
+}else{
         $usuario = new Usuario();
         try {
             unset($_POST['idUsuario']);
@@ -161,7 +174,8 @@ class ControladorUsuario extends ControladorGeral
             	$usuario->setPassword($l->criptografaSenha($_POST['password']));
                 if($this->model->create($usuario)){
                     $this->view->addMensagemSucesso('Dados inseridos com sucesso!');
-                    $this->manter();
+                   // $this->manter();
+                    
                     return ;
                 }else{
                     $this->view->addMensagemErro('Erro ao inserir seus dados tente novamente mais tarde.');
@@ -174,6 +188,7 @@ class ControladorUsuario extends ControladorGeral
         }
         $this->criarNovo($usuario);
     }
+     }
 
     /**
      * Método que controla a atualização na tabela 
@@ -181,6 +196,7 @@ class ControladorUsuario extends ControladorGeral
      */
     public function editarFim()
      {
+        
         $usuario = new Usuario();
         $id = ValidatorUtil::variavelInt($_POST['idUsuario']);
         $usuario->setIdUsuario($id);
@@ -188,13 +204,19 @@ class ControladorUsuario extends ControladorGeral
              if($usuario->setArrayDados($_POST) > 0){ 
                  $this->view->addErros($GLOBALS['ERROS']);
              }else{
+		$l = $this->login;
+                //if($usuario->getPassword() != $_POST['password'])
+		$usuario->setPassword($l->criptografaSenha($_POST['password']));
                  if($this->model->update($usuario)){
                      $this->view->addMensagemSucesso('Dados alterados com sucesso!');
-                     $this->manter();
+                     //$this->manter();
+                     $this->redirect('/usuario');
                      return ;
+                     
                  }else{
                      $this->view->addMensagemErro($this->model->getErros());
                  }
+                   
              }
         }catch (IOErro $e){ 
              $erro  = 'Ocorreu um erro pouco comum. O mesmo será cadastrado no ';
@@ -202,6 +224,7 @@ class ControladorUsuario extends ControladorGeral
              $this->view->addMensagemErro($erro);
         }
         $this->editar($usuario);
+        
     }
 
     /**
@@ -210,6 +233,10 @@ class ControladorUsuario extends ControladorGeral
      */
     public function deletarFim()
     {
+         if($_SESSION['idUsuario']!=1){
+$this->redirect('/usuario/editar/'.$_SESSION['idUsuario']);
+}
+else {
         $usuario = new Usuario();
         $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
         $usuario->setIdUsuario($id);
@@ -225,8 +252,9 @@ class ControladorUsuario extends ControladorGeral
              $this->view->addMensagemErro($erro);
         }
         $this->manter();
+        $this->redirect('/usuario');
     }
-
+    }
     /**
      * Método que cria os select 
      *

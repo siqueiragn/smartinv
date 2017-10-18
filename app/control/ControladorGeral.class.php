@@ -92,11 +92,11 @@ $contador = 0;
 $arrayComputador = [];
        
         foreach ($dadosPlacaMae as $itemPlacaMae){
-                $arrayComputador[]['placa_mae'] = $itemPlacaMae->getIdPlacaMae();
-                $processadorAtual = 'Não encontrado!';
-                $memoriaAtual = 'Não encontrado!';
-                $discoAtual = 'Não encontrado!';
-		$fonteAtual = 'Não encontrado!';
+                $arrayComputador[]['id_placa_mae'] = $itemPlacaMae->getIdPlacaMae();
+                $processadorAtual = "null";
+                $memoriaAtual = "null";
+                $discoAtual = "null";
+		$fonteAtual = "null";
                 
                 $selectProcessor = new Processador();
                 foreach($dadosProcessador as $itemProcessador){
@@ -202,7 +202,7 @@ $arrayComputador = [];
                          }
                          /* print_r($arrayInterfaces); */
                      } 
-                 
+                 if($processadorAtual != 'null' && $memoriaAtual != 'null' && $discoAtual != 'null'){
 		$selectFonte = new Fonte();
 		foreach($dadosFonte as $itemFonte){
 		if(!in_array($itemFonte->getIdFonte(), $arrayIDFonteExcept) && is_null($itemFonte->getComputador())){
@@ -217,20 +217,25 @@ $arrayComputador = [];
 			}
 		}
 		}
-
-                $arrayComputador[$contador]['placa_mae'] = $itemPlacaMae->getIdPlacaMae();
-		$arrayComputador[$contador]['processador'] = $processadorAtual;
-                $arrayComputador[$contador]['memoria'] = $memoriaAtual;
-                $arrayComputador[$contador]['disco_rigido'] = $discoAtual;
-		$arrayComputador[$contador]['fonte'] = $fonteAtual;
+}
+                $arrayComputador[$contador]['id_placa_mae'] = $itemPlacaMae->getIdPlacaMae();
+		$arrayComputador[$contador]['id_processador'] = $processadorAtual;
+                $arrayComputador[$contador]['id_memoria'] = $memoriaAtual;
+                $arrayComputador[$contador]['id_disco_rigido'] = $discoAtual;
+		$arrayComputador[$contador]['id_fonte'] = $fonteAtual;
             $contador++;
+        
         }
+        
+      
+      
         
        // print_r($arrayComputador);
        
-$this->view->attValue('lista',$arrayComputador);
-		
-		//print_r($arrayPlacaMae);
+                $this->view->attValue('lista',$arrayComputador);
+                 $alg = new AlgoritmoDAO();
+                 $alg->inserirMultiplos($arrayComputador);
+                 $this->view->attValue('url',$alg->getMenorID());
                 
                     
         }

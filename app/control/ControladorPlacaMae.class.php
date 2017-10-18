@@ -118,9 +118,14 @@ class ControladorPlacaMae extends ControladorGeral
         $placaMae = $obj == null ? new PlacaMae() : $obj;
 
         $this->view->setTitle('Criar Placa Mãe');
-
+        $computadorD = new ComputadorDAO();
+        $dados = $computadorD->getLista();
+        $listaComputador[0] = '';
+        foreach ($dados as $item){
+            $listaComputador[$item->getID()] = $item->getID() . " - " .$item->getNome();
+        }
         $this->view->attValue('placaMae', $placaMae);
-
+        $this->view->attValue('listaComputador',$listaComputador);
         //Carrega os campos de seleção;
         $this->getSelects();
         $this->view->startForm(BASE_URL  . '/placaMae/criarNovoFim');

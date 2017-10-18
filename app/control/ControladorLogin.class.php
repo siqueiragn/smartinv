@@ -52,8 +52,10 @@ class ControladorLogin extends AbstractController
 
         $result = $login->verificaLoginSenha($usuario, $senha, true);
         if ($result) {
+            
 	    $_SESSION['autenticado'] = 'OK';
             // dd("login correto");
+
             $login->redirect($this, '/home');
 		
         } else {

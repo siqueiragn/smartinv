@@ -1,13 +1,13 @@
 <fieldset class="formPadrao">
 <ol>
-{foreach name=outer item=computador from=$lista}
+{foreach item=computador from=$lista}
 <li> Computador
 	<ul>
-<li> Placa Mãe: {$computador['placa_mae']}</li>
-<li> Processador: {$computador['processador']}</li>
-<li> Memória: {$computador['memoria']} </li>
-<li> Disco Rigido: {$computador['disco_rigido']} </li>
-<li> Fonte: {$computador['fonte']}</li>
+<li> Placa Mãe: {$computador['id_placa_mae']}</li>
+<li> Processador: {$computador['id_processador']}</li>
+<li> Memória: {$computador['id_memoria']} </li>
+<li> Disco Rigido: {$computador['id_disco_rigido']} </li>
+<li> Fonte: {$computador['id_fonte']}</li>
 </ul>
 </li>
 <hr >
@@ -15,9 +15,12 @@
 </ol>
 
 
-<form method="POST">
+<form method="POST" action="algoritmo/editar/{$url['min']}">
     
-    <input type="submit">
+<button style="margin-top: 3px" type="submit">
+           Prosseguir
+           </button>
+    
     
 </form>
 </fieldset>

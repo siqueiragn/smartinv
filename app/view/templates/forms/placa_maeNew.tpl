@@ -15,6 +15,13 @@
               </div>
          </div>
          <div class="form-group">
+              <label class="control-label col-sm-2" for="slotMemoria">Slot Memória RAM</label>
+              <div class="col-sm-8">
+                 <input type="text" id="slotMemoria" name="slotMemoria" value="{$placaMae->getSlotMemoria()}" class=" form-control"  />
+              </div>
+         </div>
+              
+         <div class="form-group">
               <label class="control-label col-sm-2" for="descricao">Descrição</label>
               <div class="col-sm-8">
                  <textarea id="descricao" name="descricao" class=" form-control" >{$placaMae->getDescricao()}</textarea>
@@ -24,7 +31,7 @@
               <label class="control-label col-sm-2" for="computador">Computador</label>
               <div class="col-sm-8">
                  <select id="computador" name="computador" class="form-control">
-    		{html_options options=$listaComputador selected=$placaMae->getComputador()}
+    		{html_options options=$listaComputador selected=0}
              </select>
 
               </div>

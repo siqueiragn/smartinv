@@ -88,6 +88,8 @@ class LoginBanco extends Login{
                 $this->userObject->addExtra('id', $resultado[0][$this->campoIdUsuario]);
                 $this->nivel = 0;                 
                 $_SESSION['user'] = serialize($this->userObject);
+                $_SESSION['idUsuario'] = $resultado[0][$this->campoIdUsuario];
+               
                 return true; //Autenticação OK
             }
         } else if ($resultQtd > 1) {
