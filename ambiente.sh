@@ -29,4 +29,4 @@ else
 	echo "Pronto para iniciar o ambiente."
 	touch .ready
 fi
-sudo docker run -e "WEBAPP_ROOT=public_html" -v $PWD:/app -e WEBAPP_USER_ID=$(id -u) -p 80:80 enyalius/dev:latest
+sudo docker run -e "WEBAPP_ROOT=public_html" -v $PWD:/app -v /tmp:/tmp -e WEBAPP_USER_ID=$(id -u) -p 80:80 enyalius/dev:latest

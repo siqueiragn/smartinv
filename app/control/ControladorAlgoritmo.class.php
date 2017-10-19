@@ -155,7 +155,7 @@ class ControladorAlgoritmo extends ControladorGeral
         $this->getSelects();
 
         $this->view->startForm(BASE_URL . '/algoritmo/editarFim');
-        $this->view->addTemplate('forms/algoritmo');
+        $this->view->addTemplate('forms/algoritmoVer');
         $this->view->endForm();
     }
 
