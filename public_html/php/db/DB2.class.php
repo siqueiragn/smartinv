@@ -26,10 +26,10 @@ class DB2
     */
     private $database;
 
-    public function __construct( $user = 'root',
-                                  $password = '',
-                                  $dbName = 'test',
-                                  $dbServer = 'localhost')
+    public function __construct( $user = 'gnunes',
+                                  $password = '9818',
+                                  $dbName = 'gnunes',
+                                  $dbServer = '200.17.91.82')
     {
         $str = 'mysql:host=' . $dbServer . ';dbname=' . $dbName;
         try {

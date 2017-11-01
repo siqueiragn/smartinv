@@ -29,7 +29,7 @@ class DB
     public function __construct( $user = 'gabriel_nunes',
                                   $password = 98187625,
                                   $dbName = 'smartinv',
-                                  $dbServer = 'webacademico-old.canoas.ifrs.edu.br')
+                                  $dbServer = '200.17.91.70')
     {
         $str = 'pgsql:host=' . $dbServer . ';dbname=' . $dbName;
         try {
