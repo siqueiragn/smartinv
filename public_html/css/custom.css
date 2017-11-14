@@ -32,6 +32,10 @@ body {
 	color: white;
 	text-decoration: none;
 }
+.dropdown.open #lnk{
+color: black;
+}
+
 
 #lnk:hover {
 	color: black;

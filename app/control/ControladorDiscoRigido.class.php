@@ -265,10 +265,10 @@ class ControladorDiscoRigido extends ControladorGeral
         $dados = $pcDAO->getLista();
         
         foreach ($dados as $item){
-        	$lista[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
+        	$lista2[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
         }     	
         
-        $this->view->attValue('listaComputador', $lista);
+        $this->view->attValue('listaComputador', $lista2);
 
     }
     private function addArquivos(DiscoRigido $obj, $editar = false)
