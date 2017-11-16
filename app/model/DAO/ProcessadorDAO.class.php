@@ -123,6 +123,26 @@ class ProcessadorDAO extends AbstractDAO
         return $dados;
     }
 
+    
+    public function getAll()
+    {
+        $dados = array();
+        $result = $this->queryTable(  'public.processador ',
+            'id_processador as principal ,
+                                          nome,
+                                          frequencia,
+                                          socket,
+                                          descricao,
+                                          computador');
+        foreach ($result as $linhaBanco) {
+            $processador = $this->setDados($linhaBanco);
+            $dados[] = $processador;
+        }
+        return $dados;
+    }
+    
+    
+    
     /**
      * Método Private que retorna um objeto setado Processador
      * com objetivo de servir as funções getTabela, getLista e getProcessador

@@ -123,6 +123,23 @@ class PlacaMaeDAO extends AbstractDAO
        }
         return $dados;
     }
+    
+    public function getAll()
+    {
+        $dados = array();
+        $result = $this->queryTable(  'public.placa_mae ',
+            'id_placa_mae as principal ,
+                                          nome,
+                                          socket,
+                                          descricao,
+                                          computador,
+                                          slot_memoria');
+        foreach ($result as $linhaBanco) {
+            $placaMae = $this->setDados($linhaBanco);
+            $dados[] = $placaMae;
+        }
+        return $dados;
+    }
 
     /**
      * Método Private que retorna um objeto setado PlacaMae

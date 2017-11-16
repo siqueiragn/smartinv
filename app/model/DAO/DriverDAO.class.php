@@ -124,6 +124,23 @@ class DriverDAO extends AbstractDAO
         return $dados;
     }
 
+    public function getAll()
+    {
+        $dados = array();
+        $result = $this->queryTable(  'public.driver ',
+            'id_driver as principal ,
+                                          nome,
+                                          velocidade,
+                                          descricao,
+                                          barramento,
+                                          computador');
+        foreach ($result as $linhaBanco) {
+            $driver = $this->setDados($linhaBanco);
+            $dados[] = $driver;
+        }
+        return $dados;
+    }
+    
     /**
      * Método Private que retorna um objeto setado Driver
      * com objetivo de servir as funções getTabela, getLista e getDriver

@@ -129,6 +129,25 @@ public function getByComputerID($id) {
         return $dados;
     }
 
+    public function getAll()
+    {
+        $dados = array();
+        $result = $this->queryTable(  'public.memoria ',
+            'id_memoria as principal ,
+                                          nome,
+                                          frequencia,
+                                          capacidade,
+                                          tipo,
+                                          descricao,
+                                          computador');
+        foreach ($result as $linhaBanco) {
+            $memoria = $this->setDados($linhaBanco);
+            $dados[] = $memoria;
+        }
+        return $dados;
+    }
+    
+    
     /**
      * Método Private que retorna um objeto setado Memoria
      * com objetivo de servir as funções getTabela, getLista e getMemoria

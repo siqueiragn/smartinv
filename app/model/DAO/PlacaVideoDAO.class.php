@@ -131,6 +131,27 @@ class PlacaVideoDAO extends AbstractDAO
         return $dados;
     }
 
+    public function getAll()
+    {
+        $dados = array();
+        $result = $this->queryTable(  'public.placa_video ',
+            'id_placa_video as principal ,
+                                          nome,
+                                          frequencia,
+                                          memoria,
+                                          tipo,
+                                          descricao,
+                                          barramento,
+                                          computador');
+        foreach ($result as $linhaBanco) {
+            $placaVideo = $this->setDados($linhaBanco);
+            $dados[] = $placaVideo;
+        }
+        return $dados;
+    }
+    
+    
+    
     /**
      * Método Private que retorna um objeto setado PlacaVideo
      * com objetivo de servir as funções getTabela, getLista e getPlacaVideo

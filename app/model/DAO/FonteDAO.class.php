@@ -119,6 +119,23 @@ class FonteDAO extends AbstractDAO
         return $dados;
     }
 
+    
+    public function getAll()
+    {
+        $dados = array();
+        $result = $this->queryTable(  'public.fonte ',
+            'id_fonte as principal ,
+                                          nome,
+                                          potencia,
+                                          descricao,
+                                          computador');
+        foreach ($result as $linhaBanco) {
+            $fonte = $this->setDados($linhaBanco);
+            $dados[] = $fonte;
+        }
+        return $dados;
+    }
+    
     /**
      * Método Private que retorna um objeto setado Fonte
      * com objetivo de servir as funções getTabela, getLista e getFonte

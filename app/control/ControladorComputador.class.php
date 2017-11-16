@@ -282,14 +282,7 @@ class ControladorComputador extends ControladorGeral
     public function deletarFim()
     {
         
-        
-        $placaMaeDAO = new PlacaMaeDAO();
-        $placaMae = $placaMaeDAO->getByComputerID($computador->getID());
-        if($placaMae->getNome != ''){
-            $placaMae->setComputador(0);
-            $placaMaeDAO->update ($placaMae);
-        }
-        
+             
         $computador = new Computador();
         $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
         $computador->setIdComputador($id);

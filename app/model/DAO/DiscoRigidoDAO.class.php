@@ -130,6 +130,26 @@ class DiscoRigidoDAO extends AbstractDAO
        }
         return $dados;
     }
+    
+    
+    public function getAll()
+    {
+        $dados = array();
+        $result = $this->queryTable(  'public.disco_rigido ',
+            'id_disco_rigido as principal ,
+                                          nome,
+                                          capacidade,
+                                          v_cache,
+                                          rpm,
+                                          descricao,
+                                          barramento,
+                                          computador');
+        foreach ($result as $linhaBanco) {
+            $discoRigido = $this->setDados($linhaBanco);
+            $dados[] = $discoRigido;
+        }
+        return $dados;
+    }
 
     /**
      * Método Private que retorna um objeto setado DiscoRigido

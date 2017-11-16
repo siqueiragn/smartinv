@@ -250,27 +250,109 @@ $arrayComputador = [];
         $this->view->addTemplate('paginas/contato');
         $this->view->endForm();
     }
-
-    public function contatoFim()
-    {
-        extract($_POST);
-        $mensagem = "==============================================================================" . PHP_EOL;
-        $mensagem.="NOME: " . $nome . PHP_EOL;
-        $mensagem.="E_MAIL: " . $email . PHP_EOL;
-        $mensagem.="==============================================================================" . PHP_EOL;
-        $mensagem.="MENSAGEM:" . PHP_EOL;
-        $mensagem.=$texto . PHP_EOL;
-        $mensagem.="==============================================================================" . PHP_EOL;
-        if (MailUtil::sendMail(MAIL_USER, "marcio.bigolinn@gmail.com", "[" . $assunto . "] Email de " . $nome, $mensagem)) {
-            $this->view->setTitle('Sucesso ao enviar sua mensagem!');
-            $this->view->addMensagemSucesso('Sua mensagem foi enviada com sucesso, em breve retornaremos.');
-        } else {
-            $this->view->setTitle('Ocorreu um erro ao enviar sua mensagem!');
-            $this->view->addMensagemErro('Estamos passando por dificuldades técnicas tente novamente mais tarde.');
-        }
+    
+    public function relatorioComponentes(){
+        $placaMaeDAO = new PlacaMaeDAO();
+        $placaMae = $placaMaeDAO->getAll();
+        $contPlacaMae = count($placaMae);
+        
+        $processadorDAO = new ProcessadorDAO();
+        $processador = $processadorDAO->getAll();
+        $contProcessador = count($processador);
+        
+        $memoriaDAO = new MemoriaDAO();
+        $memoria = $memoriaDAO->getAll();
+        $contMemoria = count($memoria);
+        
+        $discoRigidoDAO = new DiscoRigidoDAO();
+        $discoRigido = $discoRigidoDAO->getAll();
+        $contDiscoRigido = count($discoRigido);
+        
+        $placaVideoDAO = new PlacaVideoDAO();
+        $placaVideo = $placaVideoDAO->getAll();
+        $contPlacaVideo = count($placaVideo);
+        
+        $driverDAO = new DriverDAO();
+        $driver = $driverDAO->getAll();
+        $contDriver = count($driver);
+        
+        $fonteDAO = new FonteDAO();
+        $fonte = $fonteDAO->getAll();
+        $contFonte = count($fonte);
+        
+        $this->view->attValue('cPlacaMae',$contPlacaMae);
+        $this->view->attValue('cProcessador',$contProcessador);
+        $this->view->attValue('cMemoria',$contMemoria);
+        $this->view->attValue('cDiscoRigido',$contDiscoRigido);
+        $this->view->attValue('cPlacaVideo',$contPlacaVideo);
+        $this->view->attValue('cDriver',$contDriver);
+        $this->view->attValue('cFonte',$contFonte);
+        
+        $this->view->attValue('placaMae',$placaMae);
+        $this->view->attValue('processador',$processador);
+        $this->view->attValue('memoria',$memoria);
+        $this->view->attValue('discoRigido',$discoRigido);
+        $this->view->attValue('placaVideo',$placaVideo);
+        $this->view->attValue('driver',$driver);
+        $this->view->attValue('fonte',$fonte);
+        
+        $this->view->addCSS('custom');
+        $this->view->addTemplate('relatorioComponentes');
+        
+       
     }
     
+    public function relatorioComputador()
+    {
+        $computadorDAO = new ComputadorDAO();
+       
+        $dadosComputador = $computadorDAO->getLista();
+       
+     foreach ($dadosComputador as $computador){
+         
+         $placaMaeDAO = new PlacaMaeDAO();
+         $placaMae = $placaMaeDAO->getByComputerID($computador->getID());
+        // if($placaMae->getNome() != '')
+             $arrayComputador[$computador->getID()]['placa_mae'] = $placaMae->getID() . ' - ' .$placaMae->getNome();
 
+         $processadorDAO = new ProcessadorDAO();
+         $processador = $processadorDAO->getByComputerID($computador->getID());
+      //   if($processador->getNome() != '')
+             $arrayComputador[$computador->getID()]['processador'] = $processador->getID().' - '.$processador->getNome();
+                        
+         $memoriaDAO = new MemoriaDAO();
+         $memoria = $memoriaDAO->getByComputerID($computador->getID());
+       //  if($memoria->getNome() != '')
+             $arrayComputador[$computador->getID()]['memoria'] = $memoria->getID() . ' - ' . $memoria->getNome();
+        
+         $discoRigidoDAO = new DiscoRigidoDAO();
+         $discoRigido = $discoRigidoDAO->getByComputerID($computador->getID());
+      //   if($discoRigido->getNome() != '')
+             $arrayComputador[$computador->getID()]['disco_rigido'] = $discoRigido->getID() . ' - ' .$discoRigido->getNome();
+                                          
+         $fonteDAO = new FonteDAO();
+         $fonte = $fonteDAO->getByComputerID($computador->getID());
+      //   if($fonte->getNome() != '')
+             $arrayComputador[$computador->getID()]['fonte'] = $fonte->getID() . ' - ' . $fonte->getNome();                      
+                                  
+         $placaVideoDAO = new PlacaVideoDAO();
+         $placaVideo = $placaVideoDAO->getByComputerID($computador->getID());
+      //   if($placaVideo->getNome()!='')
+             $arrayComputador[$computador->getID()]['placa_video'] = $placaVideo->getID() . ' - ' .$placaVideo->getNome();
+         
+         $driverDAO = new DriverDAO();
+         $driver = $driverDAO->getByComputerID($computador->getID());
+      //   if($driver->getNome()!='')
+            $arrayComputador[$computador->getID()]['driver'] = $driver->getID() . ' - ' .$driver->getNome();
+                           
+     }
+     
+    
+     $this->view->attValue('lista', $arrayComputador);
+     $this->view->addTemplate('relatorioComputador');
+     
+    }
+    
     public function __destruct()
     {
     	if(get_class($this->view)=='VisualizadorRegistro' ||   $this->view->getTitle() == 'Home')
