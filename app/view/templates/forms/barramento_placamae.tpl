@@ -10,7 +10,7 @@
              </select>
            
              </div>
-               <button style="margin-top: 3px" type="submit">
+               <button class="btn btn-default btn-success" type="submit">
            <span class="glyphicon glyphicon-plus"></span>
            </button>
               </div>

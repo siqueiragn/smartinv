@@ -269,7 +269,8 @@
              $this->rpm,
              $this->descricao,
              $this->barramento,
-             $this->computador
+             empty($this->computador) ? '' : "<a href='/computador/editar/".$this->computador."'>Ver (".$this->computador.")</a>"
+            
         );
      }
 

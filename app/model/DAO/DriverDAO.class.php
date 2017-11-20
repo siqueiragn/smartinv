@@ -91,7 +91,7 @@ class DriverDAO extends AbstractDAO
                                           descricao,
                                           barramento,
                                           computador',
-                        'id_driver ='. $id );
+                        'computador ='. $id );
         if ($consulta) {
             $driver = $this->setDados($consulta->fetch());
             return $driver;

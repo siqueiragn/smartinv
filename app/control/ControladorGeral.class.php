@@ -313,42 +313,42 @@ $arrayComputador = [];
          $placaMaeDAO = new PlacaMaeDAO();
          $placaMae = $placaMaeDAO->getByComputerID($computador->getID());
         // if($placaMae->getNome() != '')
-             $arrayComputador[$computador->getID()]['placa_mae'] = $placaMae->getID() . ' - ' .$placaMae->getNome();
+             $arrayComputador[$computador->getNome()]['placa_mae'] = $placaMae->getID() . ' - ' .$placaMae->getNome();
 
          $processadorDAO = new ProcessadorDAO();
          $processador = $processadorDAO->getByComputerID($computador->getID());
       //   if($processador->getNome() != '')
-             $arrayComputador[$computador->getID()]['processador'] = $processador->getID().' - '.$processador->getNome();
+             $arrayComputador[$computador->getNome()]['processador'] = $processador->getID().' - '.$processador->getNome();
                         
          $memoriaDAO = new MemoriaDAO();
          $memoria = $memoriaDAO->getByComputerID($computador->getID());
        //  if($memoria->getNome() != '')
-             $arrayComputador[$computador->getID()]['memoria'] = $memoria->getID() . ' - ' . $memoria->getNome();
+             $arrayComputador[$computador->getNome()]['memoria'] = $memoria->getID() . ' - ' . $memoria->getNome();
         
          $discoRigidoDAO = new DiscoRigidoDAO();
          $discoRigido = $discoRigidoDAO->getByComputerID($computador->getID());
       //   if($discoRigido->getNome() != '')
-             $arrayComputador[$computador->getID()]['disco_rigido'] = $discoRigido->getID() . ' - ' .$discoRigido->getNome();
+             $arrayComputador[$computador->getNome()]['disco_rigido'] = $discoRigido->getID() . ' - ' .$discoRigido->getNome();
                                           
          $fonteDAO = new FonteDAO();
          $fonte = $fonteDAO->getByComputerID($computador->getID());
       //   if($fonte->getNome() != '')
-             $arrayComputador[$computador->getID()]['fonte'] = $fonte->getID() . ' - ' . $fonte->getNome();                      
+             $arrayComputador[$computador->getNome()]['fonte'] = $fonte->getID() . ' - ' . $fonte->getNome();                      
                                   
          $placaVideoDAO = new PlacaVideoDAO();
          $placaVideo = $placaVideoDAO->getByComputerID($computador->getID());
       //   if($placaVideo->getNome()!='')
-             $arrayComputador[$computador->getID()]['placa_video'] = $placaVideo->getID() . ' - ' .$placaVideo->getNome();
+             $arrayComputador[$computador->getNome()]['placa_video'] = $placaVideo->getID() . ' - ' .$placaVideo->getNome();
          
          $driverDAO = new DriverDAO();
          $driver = $driverDAO->getByComputerID($computador->getID());
       //   if($driver->getNome()!='')
-            $arrayComputador[$computador->getID()]['driver'] = $driver->getID() . ' - ' .$driver->getNome();
+            $arrayComputador[$computador->getNome()]['driver'] = $driver->getID() . ' - ' .$driver->getNome();
                            
      }
      
     
-     $this->view->attValue('lista', $arrayComputador);
+     $this->view->attValue('lista', isset($arrayComputador)?$arrayComputador:null);
      $this->view->addTemplate('relatorioComputador');
      
     }

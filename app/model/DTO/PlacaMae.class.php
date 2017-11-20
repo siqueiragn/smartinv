@@ -205,7 +205,8 @@
              $this->socket,
              $this->descricao,
              $this->computador,
-             $this->slotMemoria
+             empty($this->computador) ? '' : "<a href='/computador/editar/".$this->computador."'>Ver (".$this->computador.")</a>"
+            
         );
      }
 

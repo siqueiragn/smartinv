@@ -67,7 +67,7 @@ class ControladorComputador extends ControladorGeral
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Descri��o', 'descricao');
+        $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
         $tabelaColuna->setLargura(33);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);

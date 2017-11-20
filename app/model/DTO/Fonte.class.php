@@ -185,7 +185,8 @@
              $this->nome,
              $this->potencia,
              $this->descricao,
-             $this->computador
+            empty($this->computador) ? '' : "<a href='/computador/editar/".$this->computador."'>Ver (".$this->computador.")</a>"
+            
         );
      }
 

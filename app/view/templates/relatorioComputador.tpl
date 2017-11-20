@@ -1,6 +1,6 @@
 <ol>
 {foreach item=computador key=key from=$lista}
-<li> Computador {$key}
+<li> {$key}
 	<ul>
 <li> Placa Mãe: {$computador['placa_mae']}</li>
 <li> Processador: {$computador['processador']}</li>

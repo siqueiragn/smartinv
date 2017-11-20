@@ -147,7 +147,7 @@ class ControladorAlgoritmo extends ControladorGeral
             $algoritmo = $obj;
         }
 
-        $this->view->setTitle('Editar Algoritmo');
+        $this->view->setTitle('Editar Resultados');
 
         $this->view->attValue('algoritmo', $algoritmo);
 
@@ -156,7 +156,7 @@ class ControladorAlgoritmo extends ControladorGeral
 
         $this->view->startForm(BASE_URL . '/algoritmo/editarFim');
         $this->view->addTemplate('forms/algoritmoVer');
-        $this->view->endForm();
+        $this->view->attValue('id', $id);
     }
 
     /**
@@ -221,7 +221,9 @@ class ControladorAlgoritmo extends ControladorGeral
                      $this->model->query($query);
                      $query = 'UPDATE disco_rigido SET computador = '.$resultMax['maior'].'WHERE id_disco_rigido ='.$algoritmo->getIdDiscoRigido();
                      $this->model->query($query);
-                     
+
+                     $this->model = new AlgoritmoDAO();
+                     $this->redirect('deletarFim/'.$id);
                      $this->view->addMensagemSucesso('Dados alterados com sucesso!');
                      $this->manter();
                      return ;
@@ -249,6 +251,7 @@ class ControladorAlgoritmo extends ControladorGeral
         try {
              if($this->model->delete($algoritmo) !== false){
                   $this->view->addMensagemSucesso('Dado removido com sucesso!');
+                  
              }else{
                   $this->view->addMensagemErro($this->model->getErro());
              }

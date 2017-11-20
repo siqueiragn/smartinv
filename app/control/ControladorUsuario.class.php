@@ -210,7 +210,7 @@ $this->redirect('/usuario/editar/'.$_SESSION['idUsuario']);
                  if($this->model->update($usuario)){
                      $this->view->addMensagemSucesso('Dados alterados com sucesso!');
                      //$this->manter();
-                     $this->redirect('/usuario');
+                     $this->redirect('/home');
                      return ;
                      
                  }else{
@@ -224,6 +224,7 @@ $this->redirect('/usuario/editar/'.$_SESSION['idUsuario']);
              $this->view->addMensagemErro($erro);
         }
         $this->editar($usuario);
+       
         
     }
 

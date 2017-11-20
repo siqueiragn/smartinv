@@ -213,7 +213,7 @@
              $this->velocidade,
              $this->descricao,
              $this->barramento,
-             empty($this->computador) ? '' : "<a href='computador/editar/".$this->computador."'>Ver</a>"
+             empty($this->computador) ? '' : "<a href='/computador/editar/".$this->computador."'>Ver (".$this->computador.")</a>"
             
         );
      }
