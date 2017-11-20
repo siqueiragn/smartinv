@@ -139,10 +139,16 @@ class BDHelper
         if (is_array($data)) {
             $sql .= '(';
             $values = '';
+            
+            // ACRÉSCIMO PARA POSSIBILITAR INSERÇÃO NULA
+            if(isset($data['computador']) && $data['computador'] ==0){
+                $data['computador'] = null;
+            }
             //Acrescenta o nome dos campos
             foreach ($data as $name => $value) {
                 $sql .= $name . ',';
                 $values .= '?,';
+               
             }
 
             //Retira a última vírgula, para não ser necessário fazer um contador
@@ -166,6 +172,11 @@ class BDHelper
         //Verifica se é objeto ou array para percorrer com foreach
         if (is_array($data)) {
             //Percorre os campos e os valores
+            
+            // ACRÉSCIMO PARA POSSIBILITAR UPDATE NULO
+            if(isset($data['computador']) && $data['computador'] ==0){
+                $data['computador'] = null;
+            }
             foreach ($data as $name => $value) {
                 if (is_object($value)) {
                     unset($data[$name]);

@@ -200,7 +200,28 @@ class ControladorAlgoritmo extends ControladorGeral
              if($algoritmo->setArrayDados($_POST) > 0){ 
                  $this->view->addErros($GLOBALS['ERROS']);
              }else{
+         
                  if($this->model->update($algoritmo)){
+                     
+                     $this->model = new ComputadorDAO();
+                     $computador = new Computador();
+                     $computador->setNome('('.$id.') Computador Gerado');
+                     $this->model->create($computador);
+                     $resultMax = $this->model->getMaxID();
+        
+                
+                     
+                     $query = 'UPDATE placa_mae SET computador = '.$resultMax['maior'].'WHERE id_placa_mae ='.$algoritmo->getIdPlacaMae();
+                     $this->model->query($query);
+                     $query = 'UPDATE processador SET computador = '.$resultMax['maior'].'WHERE id_processador ='.$algoritmo->getIdProcessador();
+                     $this->model->query($query);
+                     $query = 'UPDATE memoria SET computador = '.$resultMax['maior'].'WHERE id_memoria ='.$algoritmo->getIdMemoria();
+                     $this->model->query($query);
+                     $query = 'UPDATE fonte SET computador = '.$resultMax['maior'].'WHERE id_fonte ='.$algoritmo->getIdFonte();
+                     $this->model->query($query);
+                     $query = 'UPDATE disco_rigido SET computador = '.$resultMax['maior'].'WHERE id_disco_rigido ='.$algoritmo->getIdDiscoRigido();
+                     $this->model->query($query);
+                     
                      $this->view->addMensagemSucesso('Dados alterados com sucesso!');
                      $this->manter();
                      return ;

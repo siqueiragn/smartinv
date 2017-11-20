@@ -243,21 +243,11 @@ class ControladorProcessador extends ControladorGeral
         //$consulta = $this->model->queryTable('computador', 'computador, computador');
         $pcDAO = new ComputadorDAO();
         $dados = $pcDAO->getLista();
-        
+        $lista2[0] = '';
         foreach ($dados as $item){
-        	$lista[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
-        }
-        
-        //$lista = $this->model->getMapaSimplesDados($consulta, 'computador', 'computador');
-        /*function getComputerID(array $lista, $nome = 'computador'){
-        foreach($lista as $item){
-        	$arr[] = $item['id_'.$nome];
-        }
-        return $arr;
-        }*/
-        
-        
-        $this->view->attValue('listaComputador', /*getComputerID($lista));*/$lista);
+        	$lista2[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
+        }     
+        $this->view->attValue('listaComputador', $lista2);
 
     }
     private function addArquivos(Processador $obj, $editar = false)

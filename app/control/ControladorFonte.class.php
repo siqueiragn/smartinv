@@ -237,7 +237,7 @@ class ControladorFonte extends ControladorGeral
      {
      	$pcDAO = new ComputadorDAO();
      	$dados = $pcDAO->getLista();
-     	
+     	$lista[0] = '';
      	foreach ($dados as $item){
      		$lista[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
      	}

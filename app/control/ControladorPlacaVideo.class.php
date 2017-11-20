@@ -263,12 +263,12 @@ class ControladorPlacaVideo extends ControladorGeral
      	//$lista = $this->model->getMapaSimplesDados($consulta, 'computador', 'computador');
      	$pcDAO = new ComputadorDAO();
      	$dados = $pcDAO->getLista();
-     	
+     	$lista2[0] ='';
      	foreach ($dados as $item){
-     		$lista[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
+     		$lista2[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
      	}
      	
-     	$this->view->attValue('listaComputador', $lista);
+     	$this->view->attValue('listaComputador', $lista2);
      	
 
     }

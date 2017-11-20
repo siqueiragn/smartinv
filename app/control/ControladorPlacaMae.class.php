@@ -118,14 +118,8 @@ class ControladorPlacaMae extends ControladorGeral
         $placaMae = $obj == null ? new PlacaMae() : $obj;
 
         $this->view->setTitle('Criar Placa Mãe');
-        $computadorD = new ComputadorDAO();
-        $dados = $computadorD->getLista();
-        $listaComputador[0] = '';
-        foreach ($dados as $item){
-            $listaComputador[$item->getID()] = $item->getID() . " - " .$item->getNome();
-        }
-        $this->view->attValue('placaMae', $placaMae);
-        $this->view->attValue('listaComputador',$listaComputador);
+    
+           $this->view->attValue('placaMae', $placaMae);
         //Carrega os campos de seleção;
         $this->getSelects();
         $this->view->startForm(BASE_URL  . '/placaMae/criarNovoFim');
@@ -210,6 +204,8 @@ class ControladorPlacaMae extends ControladorGeral
         $placaMae = new PlacaMae();
         try {
             unset($_POST['idPlacaMae']);
+
+            
             if($placaMae->setArrayDados($_POST) > 0){ 
                 $this->view->addErros($GLOBALS['ERROS']);
             }else{
@@ -218,6 +214,7 @@ class ControladorPlacaMae extends ControladorGeral
                     $this->manter();
                     return ;
                 }else{
+                
                     $this->view->addMensagemErro('Erro ao inserir seus dados tente novamente mais tarde.');
                 }
             }
@@ -236,17 +233,20 @@ class ControladorPlacaMae extends ControladorGeral
     public function editarFim()
      {
         
-       
+
         $placaMae = new PlacaMae();
         $id = ValidatorUtil::variavelInt($_POST['idPlacaMae']);
         $placaMae->setIdPlacaMae($id);
+
         try {
              if($placaMae->setArrayDados($_POST) > 0){ 
                  $this->view->addErros($GLOBALS['ERROS']);
              }else{
                  if($this->model->update($placaMae)){
                      $this->view->addMensagemSucesso('Dados alterados com sucesso!');
+                   
                      $this->manter();
+                     
                      return ;
                  }else{
                      $this->view->addMensagemErro($this->model->getErros());
@@ -258,7 +258,7 @@ class ControladorPlacaMae extends ControladorGeral
              $this->view->addMensagemErro($erro);
         }
         $this->editar($placaMae);
-        header('Location: /placaMae');
+        //header('Location: /placaMae');
     }
 
     /**
@@ -290,7 +290,14 @@ class ControladorPlacaMae extends ControladorGeral
      */
     private function getSelects()
      {
-       
+           $computadorD = new ComputadorDAO();
+        $dados = $computadorD->getLista();
+        $listaComputador[0] = '';
+        foreach ($dados as $item){
+            $listaComputador[$item->getID()] = $item->getID() . " - " .$item->getNome();
+        }
+     
+        $this->view->attValue('listaComputador',$listaComputador);
 
     }
     private function addArquivos(PlacaMae $obj, $editar = false)

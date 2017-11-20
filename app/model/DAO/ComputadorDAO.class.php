@@ -74,6 +74,23 @@ class ComputadorDAO extends AbstractDAO
              throw new EntradaDeDadosException();
         }
      }
+     
+     
+       public function getMaxID() {
+        $computador = new Computador();
+        $consulta = $this->queryTable($computador->getTable(),
+                                         'MAX(id_computador) as maior ');
+                        
+        if ($consulta) {
+            $maior = $consulta->fetch();
+            return $maior;
+        } else {
+             throw new EntradaDeDadosException();
+        }
+     }
+     
+     
+     
      /**
      * Método que retorna um array de objetos Computador
      * sendo determinado pelo parâmetro $condicao

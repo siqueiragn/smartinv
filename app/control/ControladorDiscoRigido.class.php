@@ -263,7 +263,7 @@ class ControladorDiscoRigido extends ControladorGeral
         //$lista = $this->model->getMapaSimplesDados($consulta, 'computador', 'computador');
         $pcDAO = new ComputadorDAO();
         $dados = $pcDAO->getLista();
-        
+        $lista2[0] = '';
         foreach ($dados as $item){
         	$lista2[$item->getIdComputador()] = $item->getIdComputador(). ' - '. $item->getNome();
         }     	
