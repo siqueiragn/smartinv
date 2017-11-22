@@ -251,7 +251,7 @@ ALTER TABLE public.barramento_placamae
 	ADD CONSTRAINT barramento_placamae_id_placa_mae_fkey FOREIGN KEY (id_placa_mae)
 	REFERENCES public.placa_mae (id_placa_mae)
 	ON UPDATE NO ACTION
-	ON DELETE NO ACTION
+	ON DELETE SET NULL
 ;
 
 

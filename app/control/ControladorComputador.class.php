@@ -109,7 +109,7 @@ class ControladorComputador extends ControladorGeral
         //Carrega os campos de seleção;
         $this->view->attValue('placaMae', new PlacaMae());
         $this->view->attValue('processador', new Processador());
-        $this->view->attValue('memoria', new Memoria());
+        $this->view->attValue('listaMemoria', array(new Memoria()));
         $this->view->attValue('listaDisco', array(new DiscoRigido()));
         $this->view->attValue('fonte', new Fonte());
         $this->view->attValue('placaVideo', new PlacaVideo());
