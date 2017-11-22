@@ -70,7 +70,7 @@ class ControladorGeral extends AbstractController
         $this->view->addTemplate('forms/algoritmo');
         
         $placaMae = new PlacaMaeDAO();
-        $dadosPlacaMae = $placaMae->getLista(null, "id_placa_mae ASC");
+        $dadosPlacaMae = $placaMae->getLista('computador IS NULL', "id_placa_mae ASC");
         
 $processador = new ProcessadorDAO();
 $dadosProcessador = $processador->getLista(null, "id_processador ASC");
@@ -97,7 +97,7 @@ $arrayComputador = [];
                 $memoriaAtual = "null";
                 $discoAtual = "null";
 		$fonteAtual = "null";
-                
+               
                 $selectProcessor = new Processador();
                 foreach($dadosProcessador as $itemProcessador){
                     if($itemProcessador->getSocket() == $itemPlacaMae->getSocket() && !in_array($itemProcessador->getIdProcessador(), $arrayIDProcessadorExcept)){
@@ -118,9 +118,7 @@ $arrayComputador = [];
                 
                  $selectMemoria = new Memoria();
                 foreach($dadosMemoria as $itemMemoria){
-                    
-                 //  echo $itemMemoria->getTipo() . " MEMORIA 1 MOBO " . $itemPlacaMae->getSlotMemoria() ."<br>";
-                    
+    
                     if($itemMemoria->getTipo() == $itemPlacaMae->getSlotMemoria() && !in_array($itemMemoria->getIdMemoria(), $arrayIDMemoriaExcept) && is_null($itemMemoria->getComputador())){
                       
                         if($itemMemoria->getFrequencia() >= $selectMemoria->getFrequencia()){
@@ -153,7 +151,7 @@ $arrayComputador = [];
                           }
                   
                 }
-             
+       
                 }
                 
                 // ================== CARREGA AS INTERFACES DA PLACA MÃE
@@ -218,26 +216,28 @@ $arrayComputador = [];
 		}
 		}
 }
+        //if($processadorAtual != 'null' && $memoriaAtual != 'null' && $itemPlacaMae->getID() != 'null'){
                 $arrayComputador[$contador]['id_placa_mae'] = $itemPlacaMae->getIdPlacaMae();
 		$arrayComputador[$contador]['id_processador'] = $processadorAtual;
                 $arrayComputador[$contador]['id_memoria'] = $memoriaAtual;
                 $arrayComputador[$contador]['id_disco_rigido'] = $discoAtual;
 		$arrayComputador[$contador]['id_fonte'] = $fonteAtual;
             $contador++;
-        
+       // }
+       
         }
         
       
       
         
        // print_r($arrayComputador);
-       
+                
                 $this->view->attValue('lista',$arrayComputador);
                  $alg = new AlgoritmoDAO();
                  $alg->inserirMultiplos($arrayComputador);
                  $this->view->attValue('url',$alg->getMenorID());
                 
-                    
+           
         }
         
      

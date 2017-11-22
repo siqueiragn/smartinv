@@ -135,6 +135,7 @@ class ControladorComputador extends ControladorGeral
      */
     public function editar(Computador $obj = null) 
     {
+       
         if($obj == null){
             $id = ValidatorUtil::variavelInt($GLOBALS['ARGS'][0]);
             $computador = $this->model->getById($id);
@@ -169,24 +170,38 @@ class ControladorComputador extends ControladorGeral
         	
         
         $memoriaDAO = new MemoriaDAO();
+        
+        $listaMemoriaController = $memoriaDAO->getLista('computador = ' .$computador->getID().'--');
+        
+        $listaMemoria = [];
         $memoria = $memoriaDAO->getByComputerID($computador->getID());
+        foreach($listaMemoriaController as $memoria){
+        
         if($memoria->getNome() == '')
         	$this->view->attValue('exibirM', 'none');
         else 
         	$this->view->attValue('exibirM', 'block');
-        $this->view->attValue('memoria', $memoria);
+                $listaMemoria[] = $memoria;
+
+        }
+        $this->view->attValue('listaMemoria', $listaMemoria);
         
         
         $discoRigidoDAO = new DiscoRigidoDAO();
-        $listaDiscoController = $discoRigidoDAO->getLista('computador ='. $computador->getID());
+
+        $listaDiscoController = $discoRigidoDAO->getLista('computador = ' .$computador->getIdComputador().'--');
+        
+    
+        $listaDisco = [];
         foreach($listaDiscoController as $discoRigido){
         if($discoRigido->getNome() == '')
         	$this->view->attValue('exibirDR', 'none');
        	else
        		$this->view->attValue('exibirDR', 'block');
         $listaDisco[] = $discoRigido;
-        $this->view->attValue('listaDisco', $listaDisco);
+   
         }
+         $this->view->attValue('listaDisco', $listaDisco);
         
         $fonteDAO = new FonteDAO();
         $fonte = $fonteDAO->getByComputerID($computador->getID());

@@ -22,8 +22,10 @@
          
         <div class="col-sm-8">
         <p style="display: {$exibirPM}"> Placa Mãe: {$placaMae->getID()} - {$placaMae->getNome()} - <strong>Socket:</strong> {$placaMae->getSocket()}</p>        
-		<p style="display: {$exibirP}"> Processador: {$processador->getID()} - {$processador->getNome()} - <strong>Socket:</strong> {$processador->getSocket()}</p>
+        <p style="display: {$exibirP}"> Processador: {$processador->getID()} - {$processador->getNome()} - <strong>Socket:</strong> {$processador->getSocket()}</p>
+        {foreach item=memoria from=$listaMemoria}
         <p style="display: {$exibirM}"> Memória: {$memoria->getID()} - {$memoria->getNome()} - <strong>Tipo: </strong> {$memoria->getTipo()} - <strong>Capacidade:</strong> {$memoria->getCapacidade()} - <strong>Frequência:</strong> {$memoria->getFrequencia()}</p>
+        {/foreach}
         {foreach item=discoRigido from=$listaDisco}
         <p style="display: {$exibirDR}"> Disco Rígido: {$discoRigido->getID()} - {$discoRigido->getNome()} - <strong>Capacidade:</strong> {$discoRigido->getCapacidade()} - <strong>RPM: </strong> {$discoRigido->getRPM()}</p>
         {/foreach}
