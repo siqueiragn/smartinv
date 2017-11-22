@@ -110,7 +110,7 @@ class ControladorComputador extends ControladorGeral
         $this->view->attValue('placaMae', new PlacaMae());
         $this->view->attValue('processador', new Processador());
         $this->view->attValue('memoria', new Memoria());
-        $this->view->attValue('discoRigido', new DiscoRigido());
+        $this->view->attValue('listaDisco', array(new DiscoRigido()));
         $this->view->attValue('fonte', new Fonte());
         $this->view->attValue('placaVideo', new PlacaVideo());
         $this->view->attValue('driver', new Driver());
@@ -178,13 +178,15 @@ class ControladorComputador extends ControladorGeral
         
         
         $discoRigidoDAO = new DiscoRigidoDAO();
-        $discoRigido = $discoRigidoDAO->getByComputerID($computador->getID());
+        $listaDiscoController = $discoRigidoDAO->getLista('computador ='. $computador->getID());
+        foreach($listaDiscoController as $discoRigido){
         if($discoRigido->getNome() == '')
         	$this->view->attValue('exibirDR', 'none');
        	else
        		$this->view->attValue('exibirDR', 'block');
-        $this->view->attValue('discoRigido', $discoRigido);
-        
+        $listaDisco[] = $discoRigido;
+        $this->view->attValue('listaDisco', $listaDisco);
+        }
         
         $fonteDAO = new FonteDAO();
         $fonte = $fonteDAO->getByComputerID($computador->getID());
