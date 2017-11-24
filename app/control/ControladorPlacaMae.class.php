@@ -57,33 +57,33 @@ class ControladorPlacaMae extends ControladorGeral
         '/placaMae/deletarFim');
 
          //Colunas da tabela
-        $tabelaColuna = new TabelaColuna('Id placa mae', 'id_placa_mae');
-        $tabelaColuna->setLargura(40);
+        $tabelaColuna = new TabelaColuna('ID', 'id_placa_mae');
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Nome', 'nome');
-        $tabelaColuna->setLargura(60);
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Socket', 'socket');
-        $tabelaColuna->setLargura(60);
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Descrição', 'descricao');
-        $tabelaColuna->setLargura(60);
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
         $tabelaColuna = new TabelaColuna('Computador', 'computador');
-        $tabelaColuna->setLargura(40);
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('integer');
         $tabela->addColuna($tabelaColuna);
 
-        $tabelaColuna = new TabelaColuna('Slot memoria', 'slot_memoria');
-        $tabelaColuna->setLargura(60);
+        $tabelaColuna = new TabelaColuna('Slot RAM', 'slot_memoria');
+        $tabelaColuna->setLargura(16);
         $tabelaColuna->setBuscaTipo('character varying');
         $tabela->addColuna($tabelaColuna);
 
