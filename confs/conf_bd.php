@@ -8,22 +8,12 @@
  * @package
  */
 
-//Constante que define o servidor
-define('DB_SERVER', '200.17.91.70');
-
-//Constante que define a porta do banco de dados
-define('DB_PORT', '5432');
-
-//Constante que define o usuário do banco de dados
-//define('DB_USER', 'gabriel_nunes');
-define('DB_USER', 'ifrs_admin');
-//Constante que define o usuário do banco de dados
-//define('DB_PASSWORD', '98187625');
-define('DB_PASSWORD','pmfb4gxgqw');
-//Constante que define o usuário do banco de dados
-define('DB_NAME', 'smartinv');
-
-define('DB_TYPE', 'pgsql');
+define('DB_SERVER', 'INSIRA O ENDEREÇO DA DB AQUI');
+define('DB_PORT', 'INSIRA PORTA AQUI');
+define('DB_USER', 'INSIRA USUARIO AQUI');
+define('DB_PASSWORD','INSIRA SENHA AQUI');
+define('DB_NAME', 'INSIRA O NOME DA DB AQUI');
+define('DB_TYPE', 'INSIRA O TIPO DE BANCO DE DADOS (mysql, pgsql, etc)');
 
 
 

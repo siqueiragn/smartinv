@@ -8,8 +8,8 @@
  * @package
  */
 
-define('MAIL_SERVER', 'smtpi.kinghost.net');
-define('MAIL_PORT', '587');
-define('MAIL_USER', 'ifrs_admin@khonsu');
-define('MAIL_PASS', 'pmfb4gxgqw');
+define('MAIL_SERVER', 'SERVER');
+define('MAIL_PORT', 'PORTA');
+define('MAIL_USER', 'USUARIO');
+define('MAIL_PASS', 'SENHA');
 
